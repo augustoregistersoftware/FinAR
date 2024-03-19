@@ -125,8 +125,7 @@ class Produto extends CI_Controller {
 		}else{
 			echo"<p style='color: #f00;'>Erro/p>";
 		}
-	}
-
+	}	
 
 	public function editar($id)
 	{
@@ -138,6 +137,20 @@ class Produto extends CI_Controller {
 		$this->load->view('pages/cadastro_produto',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
+	}
+
+	public function update($id)
+	{
+        $produto_info['descricao'] = $_POST['descricao'];
+		$produto_info['cod_barras'] = $_POST['cod_barra'];
+		$produto_info['cod_aux'] = $_POST['cod_aux'];
+		$produto_info['custo'] = $_POST['custo'];
+		$produto_info['preco_venda'] = $_POST['preco_venda'];
+		$produto_info['estoque_atual'] = $_POST['estoque_atual'];
+		$produto_info['estoque_minimo'] = $_POST['estoque_minimo'];
+		$this->produtos_model->update_produto($id,$produto_info);
+
+		redirect("produto");
 	}
 
 	public function inativa($id)

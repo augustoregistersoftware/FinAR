@@ -167,6 +167,12 @@ class Produtos_model extends CI_Model {
         return $this->db->update("produto",$data);
     }
 
+    public function update_produto($id,$produto_info)
+    {
+        $this->db->where("id_produto",$id);
+        return $this->db->update("produto",$produto_info);
+    }
+
 
     public function delete_foto($id)
     {
