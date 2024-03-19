@@ -127,6 +127,19 @@ class Produto extends CI_Controller {
 		}
 	}
 
+
+	public function editar($id)
+	{
+		$data["produto_editar"] =  $this->produtos_model->select_editar($id);
+		$data["title"] = "Editar Produto - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/cadastro_produto',$data);
+        $this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
 	public function inativa($id)
 	{
         $data['status'] = "F";

@@ -132,6 +132,17 @@ function goAtiva(id) {
         return false;
     }
 }
+
+
+function goEdit(id) {
+    var baseUrl = '<?php echo base_url(); ?>'; 
+    var myUrl = baseUrl + 'produto/editar/' + id;
+    if (confirm("Deseja realmente editar esse produto?")) {
+        window.location.href = myUrl;
+    } else {
+        return false;
+    }
+}
 </script>
 
 

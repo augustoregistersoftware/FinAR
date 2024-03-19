@@ -125,17 +125,24 @@ class Produtos_model extends CI_Model {
         historico_produto.quantidade_atual - historico_produto.quantidade_antiga AS "Movimento"
     FROM historico_produto
     INNER JOIN produto ON produto.id_produto = historico_produto.id_produto
-    WHERE historico_produto.id_produto = ' .$this->db->escape($id). '
-        ')->result_array();
+    WHERE historico_produto.id_produto = ' .$this->db->escape($id). '')->result_array();
     }
 
     public function select_localizacao()
     {
-        return $this->db->query("SELECT
+        return $this->db->query('SELECT
         id_localizacao,
         nome
         FROM localizacao;
-        ")->result_array();
+        ')->result_array();
+    }        
+
+    public function select_editar($id)
+    {
+        return $this->db->query('SELECT
+        *
+        FROM produto
+        WHERE id_produto = ' .$this->db->escape($id).'')->row_array();
     }
 
     public function inserte($data)
