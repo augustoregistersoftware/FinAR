@@ -1,0 +1,5 @@
+sites:
+https://fontawesome.com/icons/pencil?f=classic&s=solid
+https://icons8.com/illustrations
+https://icon-icons.com/pt/
+bootstrap buttons
