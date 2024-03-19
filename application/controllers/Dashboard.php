@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller {
 	//Função Construct para trazer o carregamento da modal
     public function __construct()
     {
+		
 		parent::__construct();
 		$this->load->model("produtos_model");
 		$this->load->model("clientes_model");
