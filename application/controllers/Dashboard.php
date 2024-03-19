@@ -28,6 +28,9 @@ class Dashboard extends CI_Controller {
 		$this->load->view('pages/dashboard',$data);
 		$this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
+
+
+		
 	}
 
 }
