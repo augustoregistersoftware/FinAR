@@ -1,0 +1,4 @@
+Fornecedor -
+botões: inativar; ativar;atualizar;ver os produtos vinculados a esse fornecedor;ver as compras;documentos
+Compras - 
+botões: receber;cancelar recebimento;produtos;documentos
