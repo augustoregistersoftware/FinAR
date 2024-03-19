@@ -1,0 +1,17 @@
+{
+    "name": "celke/celke",
+    "autoload": {
+        "psr-4": {
+            "Celke\\Celke\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Celke",
+            "email": "cesar@celke.com.br"
+        }
+    ],
+    "require": {
+        "chillerlan/php-qrcode": "^4.3"
+    }
+}
