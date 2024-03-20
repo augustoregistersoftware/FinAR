@@ -82,18 +82,18 @@ class Fornecedor extends CI_Controller {
 
     public function ativa($id)
 	{
-        $empresa_info['situacao'] = "T";
-		$this->empresa_model->update_empresa_ativa($id,$empresa_info);
+        $fornecedor_info['status'] = "T";
+		$this->fornecedor_model->update_fornecedor_ativa($id,$fornecedor_info);
 
-		redirect("empresa");
+		redirect("fornecedor");
 	}
 
     public function inativa($id)
 	{
-        $empresa_info['situacao'] = "F";
-		$this->empresa_model->update_empresa_inativa($id,$empresa_info);
+        $fornecedor_info['status'] = "F";
+		$this->fornecedor_model->update_fornecedor_inativa($id,$fornecedor_info);
 
-		redirect("empresa");
+		redirect("fornecedor");
 	}
 
     public function update($id)

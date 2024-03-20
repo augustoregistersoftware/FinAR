@@ -66,17 +66,19 @@
                     <td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff; padding: 8px 10px; margin-top: 5px;">Desativado</span></td>
                     <?php endif ; ?>
                     <td>
-                        <?php if($fornecedor['status'] == 'T') : ?>
-                            <a title="Inativar Fornecedor" href="javascript:goInativa(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>
-                        <?php else :?>
-                            <a title="Ativar Fornecedor" href="javascript:goAtiva(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-primary btn-sm btn-success"><i class="fa-solid fa-check"></i></i></a>
-                        <?php endif ; ?>    
+                    <?php if($fornecedor['status'] == 'T') : ?>
+                        <a title="Inativar Fornecedor" href="javascript:goInativa(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
-                        <a title ="Produtos Vinculado" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                         <a title="Documento Fornecedor" href="javascript:goFoto(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
-                        <a title="Pedido De Compra" href="javascript:goFoto(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
-                    </td>
-                    </td>
+                        <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
+                    <?php else :?>
+                        <a title="Ativar Fornecedor" href="javascript:goAtiva(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
+                        <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
+                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                        <a title="Documento Fornecedor" href="javascript:goFoto(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
+                        <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
+                    <?php endif ; ?>    
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -139,8 +141,18 @@ function goFoto(id){
 
 function goInativa(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/inativa/' + id;
-    if (confirm("Deseja realmente inativar esse produto?")) {
+    var myUrl = baseUrl + 'fornecedor/inativa/' + id;
+    if (confirm("Deseja realmente inativar esse fornecedor?")) {
+        window.location.href = myUrl;
+    } else {
+        return false;
+    }
+}
+
+function goAtiva(id) {
+    var baseUrl = '<?php echo base_url(); ?>'; 
+    var myUrl = baseUrl + 'fornecedor/ativa/' + id;
+    if (confirm("Deseja realmente ativar esse fornecedor?")) {
         window.location.href = myUrl;
     } else {
         return false;
@@ -153,15 +165,6 @@ function goHistorico(id) {
     window.location.href = myUrl;
 }
 
-function goAtiva(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/ativa/' + id;
-    if (confirm("Deseja realmente ativar esse produto?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
-}
 
 $(document).ready(function(){
     $("body").on("click", ".btn.btn-primary.btn-sm.btn-primary", function(e){

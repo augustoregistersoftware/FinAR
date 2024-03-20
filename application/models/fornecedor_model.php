@@ -36,4 +36,16 @@ class Fornecedor_model extends CI_Model {
         WHERE id_fornecedor = '.$this->db->escape($id).'');
         return $query->result_array();
     }
+
+    public function update_fornecedor_ativa($id,$fornecedor_info)
+    {
+        $this->db->where("id_fornecedor",$id);
+        return $this->db->update("fornecedor",$fornecedor_info);
+    }
+
+    public function update_fornecedor_inativa($id,$fornecedor_info)
+    {
+        $this->db->where("id_fornecedor",$id);
+        return $this->db->update("fornecedor",$fornecedor_info);
+    }
 }
