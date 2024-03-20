@@ -37,6 +37,18 @@ class Fornecedor_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function select_documentos($id)
+    {
+        return $this->db->query('SELECT
+        documentos_fornecedor.id_documento_fornc,
+        documentos_fornecedor.nome,
+        documentos_fornecedor.arquivo,
+        fornecedor.nome as razao_social
+        FROM documentos_fornecedor
+        INNER JOIN fornecedor on fornecedor.id_fornecedor = documentos_fornecedor.id_fornecedor
+        WHERE documentos_fornecedor.id_fornecedor = '.$this->db->escape($id).'')->result_array();
+    }
+
     public function update_fornecedor_ativa($id,$fornecedor_info)
     {
         $this->db->where("id_fornecedor",$id);

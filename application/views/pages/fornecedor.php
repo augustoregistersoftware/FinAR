@@ -70,13 +70,13 @@
                         <a title="Inativar Fornecedor" href="javascript:goInativa(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
-                        <a title="Documento Fornecedor" href="javascript:goFoto(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
+                        <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
                         <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
                     <?php else :?>
                         <a title="Ativar Fornecedor" href="javascript:goAtiva(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
-                        <a title="Documento Fornecedor" href="javascript:goFoto(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
+                        <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
                         <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
                     <?php endif ; ?>    
                 </tr>
@@ -132,11 +132,10 @@ function goEmpresa(id) {
     window.location.href = myUrl;
 }
 
-function goFoto(id){
-	var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/fotos_produto/' + id;
-
-	window.location.href =myUrl;
+function goDocumentos(id) {
+    var baseUrl = '<?php echo base_url(); ?>'; 
+    var myUrl = baseUrl + 'fornecedor/documentos/' + id;
+    window.location.href = myUrl;
 }
 
 function goInativa(id) {

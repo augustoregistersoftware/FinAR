@@ -80,6 +80,18 @@ class Fornecedor extends CI_Controller {
 		redirect("empresa");
 	}
 
+	public function documentos($id)
+	{
+		$data["documentos"] =  $this->fornecedor_model->select_documentos($id);
+		$data["title"] = "Documentos Fornecedor - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/documentos_fornecedor',$data);
+		$this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
     public function ativa($id)
 	{
         $fornecedor_info['status'] = "T";

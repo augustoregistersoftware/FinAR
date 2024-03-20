@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Cadastros de Documentos</h1>
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>localizacao/new_documentos" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Documento</a>
+            <a href="<?= base_url() ?>fornecedor/new_documentos" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Documento</a>
         </div>
     </div>
 
@@ -13,19 +13,19 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome Documento</th>
-                    <th>Localização</th>
+                    <th>Fornecedor</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($documentos as $documentos) : ?>   
                 <tr>
-                    <th><?= $documentos['id_documento_loc']?></th>
+                    <th><?= $documentos['id_documento_fornc']?></th>
                     <td><?= $documentos['nome_documento']?></td>
-                    <td><?= $documentos['nome_loc']?></td>
+                    <td><?= $documentos['razao_social']?></td>
                     <td> 
-                        <a title="Abrir Documento" href="javascript:goAbrir(<?= $documentos['id_documento_loc']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-folder-open"></i></a>
-                        <a title="Deletar Documento" href="javascript:goDelete(<?= $documentos['id_documento_loc']?>)" class="btn btn-danger btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
+                        <a title="Abrir Documento" href="javascript:goAbrir(<?= $documentos['id_documento_fornc']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-folder-open"></i></a>
+                        <a title="Deletar Documento" href="javascript:goDelete(<?= $documentos['id_documento_fornc']?>)" class="btn btn-danger btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -33,7 +33,7 @@
     </div>
     <div class="col-md-6">
 		<div class="form-group">
-			<a href="<?= base_url() ?>localizacao" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
+			<a href="<?= base_url() ?>fornecedor" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
 		</div>			
 	</div>
 
