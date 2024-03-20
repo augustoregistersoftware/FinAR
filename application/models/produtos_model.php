@@ -27,6 +27,30 @@ class Produtos_model extends CI_Model {
         ')->row_array();
     }
 
+    public function select_form_edit_fornecedor($id)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        fornecedor.id_fornecedor as id_fornecedor,
+        fornecedor.nome as nome_fornecedor
+        FROM produto
+        INNER JOIN fornecedor on fornecedor.id_fornecedor = produto.id_fornecedor
+        WHERE produto.id_produto = ' .$this->db->escape($id) . '
+        ')->row_array();
+    }
+
+    public function select_form_edit_empresa($id)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        empresa.id_empresa as id_empresa,
+        empresa.razao_social as nome_empresa
+        FROM produto
+        INNER JOIN empresa on empresa.id_empresa = produto.id_empresa
+        WHERE produto.id_produto = ' .$this->db->escape($id) . '
+        ')->row_array();
+    }
+
     public function select_produto_por_empresa($id)
     {
         return $this->db->query('SELECT
@@ -174,6 +198,18 @@ class Produtos_model extends CI_Model {
     }
 
     public function update_localizacao($id,$produto_info)
+    {
+        $this->db->where("id_produto",$id);
+        return $this->db->update("produto",$produto_info);
+    }
+
+    public function update_fornecedor($id,$produto_info)
+    {
+        $this->db->where("id_produto",$id);
+        return $this->db->update("produto",$produto_info);
+    }
+
+    public function update_empresa($id,$produto_info)
     {
         $this->db->where("id_produto",$id);
         return $this->db->update("produto",$produto_info);

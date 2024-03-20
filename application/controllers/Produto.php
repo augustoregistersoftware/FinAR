@@ -166,10 +166,52 @@ class Produto extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
+	public function form_update_fornecedor($id)
+	{
+		$data["produto_fornecedor_editar"] =  $this->produtos_model->select_form_edit_fornecedor($id);
+		$data["fornecedor"] =  $this->produtos_model->select_fornecedor();
+		$data["title"] = "Editar Fornecedor Produto - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/atualizacao_produto_fornecedor',$data);
+        $this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
+	public function form_update_empresa($id)
+	{
+		$data["produto_empresa_editar"] =  $this->produtos_model->select_form_edit_empresa($id);
+		$data["empresa"] =  $this->produtos_model->select_empresas();
+		$data["title"] = "Editar Empresa Produto - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/atualizacao_produto_empresa',$data);
+        $this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
 	public function update_localizacao($id)
 	{
 		$produto_info['id_localizacao'] = $_POST['localizacao'];
 		$this->produtos_model->update_localizacao($id,$produto_info);
+
+		redirect("produto");
+	}
+
+	public function update_fornecedor($id)
+	{
+		$produto_info['id_fornecedor'] = $_POST['fornecedor'];
+		$this->produtos_model->update_fornecedor($id,$produto_info);
+
+		redirect("produto");
+	}
+
+	public function update_empresa($id)
+	{
+		$produto_info['id_empresa'] = $_POST['empresa'];
+		$this->produtos_model->update_empresa($id,$produto_info);
 
 		redirect("produto");
 	}
