@@ -21,7 +21,7 @@
                 <?php foreach($documentos as $documentos) : ?>   
                 <tr>
                     <th><?= $documentos['id_documento_fornc']?></th>
-                    <td><?= $documentos['nome_documento']?></td>
+                    <td><?= $documentos['nome']?></td>
                     <td><?= $documentos['razao_social']?></td>
                     <td> 
                         <a title="Abrir Documento" href="javascript:goAbrir(<?= $documentos['id_documento_fornc']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-folder-open"></i></a>

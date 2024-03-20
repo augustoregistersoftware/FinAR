@@ -60,4 +60,9 @@ class Fornecedor_model extends CI_Model {
         $this->db->where("id_fornecedor",$id);
         return $this->db->update("fornecedor",$fornecedor_info);
     }
+
+    public function inserte_documentos($fornecedor)
+    {
+        $this->db->insert("documentos_fornecedor", $fornecedor);
+    }
 }

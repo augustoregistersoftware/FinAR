@@ -92,6 +92,29 @@ class Fornecedor extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
+	public function new_documentos()
+	{
+		$data["fornecedor"] =  $this->fornecedor_model->index();
+		$data["title"] = "Cadastro De Documentos Fornecedor - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/cadastro_documento_fornecedor',$data);
+		$this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
+	public function inserte_documentos()
+	{
+        $fornecedor["nome"] = $_POST["nome_documento"];
+        $fornecedor["id_fornecedor"] = $_POST["fornecedor"];
+        $arquivo_pdf = $_FILES['file'];
+        $fornecedor["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
+		$this->fornecedor_model->inserte_documentos($fornecedor);
+
+		redirect("fornecedor");
+	}
+
     public function ativa($id)
 	{
         $fornecedor_info['status'] = "T";
