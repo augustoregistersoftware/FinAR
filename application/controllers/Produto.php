@@ -153,6 +153,27 @@ class Produto extends CI_Controller {
 		redirect("produto");
 	}
 
+	public function form_update_localizacao($id)
+	{
+		$data["produto_localizacao_editar"] =  $this->produtos_model->select_form_edit_localizacao($id);
+		$data["localizacao"] =  $this->produtos_model->select_localizacao();
+		$data["title"] = "Editar Localização Produto - FinAR";
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/atualizacao_produto_localizacao',$data);
+        $this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
+	}
+
+	public function update_localizacao($id)
+	{
+		$produto_info['id_localizacao'] = $_POST['localizacao'];
+		$this->produtos_model->update_localizacao($id,$produto_info);
+
+		redirect("produto");
+	}
+
 	public function inativa($id)
 	{
         $data['status'] = "F";

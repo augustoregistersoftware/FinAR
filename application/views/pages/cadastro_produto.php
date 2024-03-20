@@ -123,7 +123,7 @@
 						<div class="form-group">
 						<?php if(isset($produto_editar)) : ?>
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
-							<a href="<?= base_url() ?>produto" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Editar Localização</a>
+							<a href="<?= base_url() ?>produto/form_update_localizacao/<?= $produto_editar['id_produto'] ?>" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Editar Localização</a>
 							<a href="<?= base_url() ?>produto" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Editar Fornecedor</a>
 							<a href="<?= base_url() ?>produto" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Editar Empresa</a>
 							<a href="<?= base_url() ?>produto" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>

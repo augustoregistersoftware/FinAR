@@ -15,6 +15,18 @@ class Produtos_model extends CI_Model {
         WHERE produto.id_empresa = 1")->result_array();
     }
 
+    public function select_form_edit_localizacao($id)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        localizacao.id_localizacao as id_localizacao,
+        localizacao.nome as nome_localizacao
+        FROM produto
+        INNER JOIN localizacao on localizacao.id_localizacao = produto.id_localizacao
+        WHERE produto.id_produto = ' .$this->db->escape($id) . '
+        ')->row_array();
+    }
+
     public function select_produto_por_empresa($id)
     {
         return $this->db->query('SELECT
@@ -159,6 +171,12 @@ class Produtos_model extends CI_Model {
     {
         $this->db->where("id_produto",$id);
         return $this->db->update("produto",$data);
+    }
+
+    public function update_localizacao($id,$produto_info)
+    {
+        $this->db->where("id_produto",$id);
+        return $this->db->update("produto",$produto_info);
     }
 
     public function update_produto_ativa($id,$data)
