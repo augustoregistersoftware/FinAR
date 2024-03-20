@@ -1,0 +1,1 @@
+CREATE TABLE `finar`.`documentos_fornecedor` ( `id_documento_fornc` INT NOT NULL AUTO_INCREMENT , `arquivo` MEDIUMBLOB NOT NULL , `id_fornecedor` INT NOT NULL , `nome` VARCHAR(30) NOT NULL , PRIMARY KEY (`id_documento_fornc`)) ENGINE = InnoDB;
