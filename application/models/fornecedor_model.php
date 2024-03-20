@@ -57,6 +57,12 @@ class Fornecedor_model extends CI_Model {
         WHERE id_documento_fornc = '.$this->db->escape($id).'')->row_array();
     }
 
+    public function delete_documento($id)
+    {
+        $this->db->where("id_documento_fornc",$id);
+        return $this->db->delete("documentos_fornecedor");
+    }
+
     public function update_fornecedor_ativa($id,$fornecedor_info)
     {
         $this->db->where("id_fornecedor",$id);

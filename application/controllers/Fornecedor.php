@@ -52,11 +52,11 @@ class Fornecedor extends CI_Controller {
 
     public function new()
 	{
-		$data["title"] = "Cadastrar Empresa - FinAR";
+		$data["title"] = "Cadastrar Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_empresa',$data);
+		$this->load->view('pages/cadastro_fornecedor',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
@@ -127,6 +127,13 @@ class Fornecedor extends CI_Controller {
             echo "Arquivo não encontrado.";
         }
     }
+
+	public function delete_documento($id)
+	{
+		$this->fornecedor_model->delete_documento($id);
+
+		redirect("fornecedor");
+	}
 
     public function ativa($id)
 	{

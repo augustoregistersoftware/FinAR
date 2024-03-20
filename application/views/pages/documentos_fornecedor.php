@@ -59,7 +59,7 @@ function goAbrir(id) {
 
 function goDelete(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/delete_documento/' + id;
+    var myUrl = baseUrl + 'fornecedor/delete_documento/' + id;
     if (confirm("Deseja realmente Deletar esse documento?")) {
         window.location.href = myUrl;
     } else {

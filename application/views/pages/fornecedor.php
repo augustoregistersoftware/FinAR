@@ -9,7 +9,7 @@
         <h1 class="h2">Cadastros de Fornecedor</h1>
         
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>empresa/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Fornecedor</a>
+            <a href="<?= base_url() ?>fornecedor/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Fornecedor</a>
             <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
         </div>
     </div>
