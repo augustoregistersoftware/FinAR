@@ -49,7 +49,7 @@
 
 function goAbrir(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/abir_documento/' + id;
+    var myUrl = baseUrl + 'fornecedor/abir_documento/' + id;
     if (confirm("Deseja realmente Abrir esse documento?")) {
         window.location.href = myUrl;
     } else {
