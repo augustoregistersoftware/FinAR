@@ -49,6 +49,14 @@ class Fornecedor_model extends CI_Model {
         WHERE documentos_fornecedor.id_fornecedor = '.$this->db->escape($id).'')->result_array();
     }
 
+    public function select_arquivo($id)
+    {
+        return $this->db->query('SELECT
+        arquivo
+        FROM documentos_fornecedor
+        WHERE id_documento_fornc = '.$this->db->escape($id).'')->row_array();
+    }
+
     public function update_fornecedor_ativa($id,$fornecedor_info)
     {
         $this->db->where("id_fornecedor",$id);

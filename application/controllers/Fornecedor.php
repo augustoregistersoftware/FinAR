@@ -115,6 +115,19 @@ class Fornecedor extends CI_Controller {
 		redirect("fornecedor");
 	}
 
+	public function abir_documento($id)
+    {
+        $result_arquivo = $this->fornecedor_model->select_arquivo($id);
+    
+        if ($result_arquivo) {
+            extract($result_arquivo);
+            header("Content-Type: application/pdf");
+            echo $result_arquivo["arquivo"];
+        } else {
+            echo "Arquivo não encontrado.";
+        }
+    }
+
     public function ativa($id)
 	{
         $fornecedor_info['status'] = "T";
