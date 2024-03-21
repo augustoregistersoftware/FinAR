@@ -49,6 +49,14 @@ class Fornecedor_model extends CI_Model {
         WHERE documentos_fornecedor.id_fornecedor = '.$this->db->escape($id).'')->result_array();
     }
 
+    public function select_editar($id)
+    {
+        return $this->db->query('SELECT
+        *
+        FROM fornecedor
+        WHERE id_fornecedor = '.$this->db->escape($id).'')->row_array();
+    }
+
     public function select_arquivo($id)
     {
         return $this->db->query('SELECT
@@ -75,8 +83,19 @@ class Fornecedor_model extends CI_Model {
         return $this->db->update("fornecedor",$fornecedor_info);
     }
 
+    public function update_fornecedor($id,$fornecedor_info)
+    {
+        $this->db->where("id_fornecedor",$id);
+        return $this->db->update("fornecedor",$fornecedor_info);
+    }
+
     public function inserte_documentos($fornecedor)
     {
         $this->db->insert("documentos_fornecedor", $fornecedor);
+    }
+
+    public function inserte_fornecedor($fornecedor_info)
+    {
+        $this->db->insert("fornecedor", $fornecedor_info);
     }
 }

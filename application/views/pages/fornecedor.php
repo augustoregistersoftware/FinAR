@@ -132,6 +132,16 @@ function goEmpresa(id) {
     window.location.href = myUrl;
 }
 
+function goEdit(id) {
+    var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+    var myUrl = baseUrl + 'fornecedor/editar/' + id;
+    if (confirm("Deseja realmente Editar?")) {
+        window.location.href = myUrl;
+    } else {
+        return false;
+    }
+}
+
 function goDocumentos(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
     var myUrl = baseUrl + 'fornecedor/documentos/' + id;

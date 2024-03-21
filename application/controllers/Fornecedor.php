@@ -40,12 +40,12 @@ class Fornecedor extends CI_Controller {
 
     public function editar($id)
 	{
-		$data["empresa_editar"] =  $this->empresa_model->select_editar($id);
-		$data["title"] = "Editar Empresa - FinAR";
+		$data["fornecedor_editar"] =  $this->fornecedor_model->select_editar($id);
+		$data["title"] = "Editar Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_empresa',$data);
+		$this->load->view('pages/cadastro_fornecedor',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
@@ -53,6 +53,7 @@ class Fornecedor extends CI_Controller {
     public function new()
 	{
 		$data["title"] = "Cadastrar Fornecedor - FinAR";
+		$data["empresa"] =  $this->fornecedor_model->select_empresas();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
@@ -63,21 +64,22 @@ class Fornecedor extends CI_Controller {
 
     public function inserte()
 	{
-        $empresa_info["razao_social"] = $_POST["razao_social"];
-        $empresa_info["nome_fantasia"] = $_POST["nome_fantasia"];
-        $empresa_info["cnpj"] = $_POST["cnpj"];
-        $empresa_info["cep"] = $_POST["cep"];
-        $empresa_info["endereco"] = $_POST["endereco"];
-        $empresa_info["numero"] = $_POST["numero"];
-        $empresa_info["bairro"] = $_POST["bairro"];
-        $empresa_info["complemento"] = $_POST["complemento"];
-        $empresa_info["cidade"] = $_POST["cidade"];
-        $empresa_info["uf"] = $_POST["uf"];
-        $empresa_info["telefone"] = $_POST["telefone"];
-        $empresa_info["situacao"] = "T";
-		$this->empresa_model->inserte_empresa($empresa_info);
+        $fornecedor_info["nome"] = $_POST["nome_fornecedor"];
+        $fornecedor_info["cnpj"] = $_POST["cnpj"];
+        $fornecedor_info["cep"] = $_POST["cep"];
+        $fornecedor_info["endereco"] = $_POST["endereco"];
+        $fornecedor_info["bairro"] = $_POST["bairro"];
+        $fornecedor_info["complemento"] = $_POST["complemento"];
+        $fornecedor_info["cidade"] = $_POST["cidade"];
+        $fornecedor_info["numero"] = $_POST["numero"];
+        $fornecedor_info["ie"] = $_POST["ie"];
+        $fornecedor_info["telefone"] = $_POST["telefone"];
+        $fornecedor_info["email"] = $_POST["email"];
+        $fornecedor_info["id_empresa"] = $_POST["empresa"];
+        $fornecedor_info["status"] = "T";
+		$this->fornecedor_model->inserte_fornecedor($fornecedor_info);
 
-		redirect("empresa");
+		redirect("fornecedor");
 	}
 
 	public function documentos($id)
@@ -153,10 +155,20 @@ class Fornecedor extends CI_Controller {
 
     public function update($id)
 	{
-        $empresa_info = $_POST;
-		$this->empresa_model->update_empresa($id,$empresa_info);
+        $fornecedor_info["nome"] = $_POST["nome_fornecedor"];
+        $fornecedor_info["cnpj"] = $_POST["cnpj"];
+        $fornecedor_info["cep"] = $_POST["cep"];
+        $fornecedor_info["endereco"] = $_POST["endereco"];
+        $fornecedor_info["bairro"] = $_POST["bairro"];
+        $fornecedor_info["complemento"] = $_POST["complemento"];
+        $fornecedor_info["cidade"] = $_POST["cidade"];
+        $fornecedor_info["numero"] = $_POST["numero"];
+        $fornecedor_info["ie"] = $_POST["ie"];
+        $fornecedor_info["telefone"] = $_POST["telefone"];
+        $fornecedor_info["email"] = $_POST["email"];
+		$this->fornecedor_model->update_fornecedor($id,$fornecedor_info);
 
-		redirect("empresa");
+		redirect("fornecedor");
 	}
 
 }
