@@ -1,2 +1,3 @@
 ALTER TABLE `solicitacao_compra` ADD `data_pedido` DATE NOT NULL AFTER `id_fornecedor`, ADD `data_entrega` DATE NOT NULL AFTER `data_pedido`;
 ALTER TABLE `solicitacao_compra` ADD `status` CHAR(1) NOT NULL AFTER `valor`;
+ALTER TABLE `solicitacao_compra` ADD `id_forma_pgto` INT NOT NULL AFTER `status`;
