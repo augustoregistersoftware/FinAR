@@ -13,7 +13,7 @@ class Compra_model extends CI_Model {
         formas.nome as nome_pagamento,
         banco.nome_banco as nome_banco,
         CASE 
-        WHEN solicitacao_compra.data_entrega > CURDATE() THEN
+        WHEN solicitacao_compra.data_entrega < CURRENT_DATE() THEN
         'Atrasado'
         ELSE
         'Normal'
