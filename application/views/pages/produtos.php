@@ -109,13 +109,26 @@ function goFoto(id){
 }
 
 function goInativa(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/inativa/' + id;
-    if (confirm("Deseja realmente inativar esse produto?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    swal({
+        title: "Deseja Realmente Inativar Esse Produto?",
+        text: "Essa Ação terá impacto em outras situações",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("Feito, Produto Desativado !", {
+                icon: "success",
+            }).then(() => {
+                var baseUrl = '<?php echo base_url(); ?>';
+                var myUrl = baseUrl + 'produto/inativa/' + id;
+                window.location.href = myUrl;
+            });
+        } else {
+            return false;
+        }
+    });
+    
 }
 
 function goHistorico(id) {
