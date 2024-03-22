@@ -36,9 +36,23 @@
                     <th><?= $compra['id_solicitacao']?></th>
                     <td><?= $compra['descricao']?></td>
                     <td><?= $compra['data_pedido']?></td>
-                    <td><?= $compra['data_entrega']?></td>
+					<?php if($compra['situacao'] == 'Atrasado') : ?>
+                    	<td><?= $compra['data_entrega']?>-<p style="color: #e81515;">Atrasado</p></td>
+					<?php else : ?>
+						<td><?= $compra['data_entrega']?></td>
+					<?php endif; ?>
                     <th>R$ <?= number_format($compra['valor'],2,",",".")?></th>
-                    <td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?></td>
+					<?php if($compra['nome_pagamento'] == 'Pix') : ?>
+						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\pix_logo_icon_248846.png"></td>
+					<?php elseif($compra['nome_pagamento'] == 'Boleto') : ?>
+						<td>><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\barcode_icon_138897.png"</td>
+					<?php elseif($compra['nome_pagamento'] == 'Cartão') : ?>
+						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\1495815230-jd11_84589.png"></td>
+					<?php elseif($compra['nome_pagamento'] == 'Cheque') : ?>
+						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\Bank_Check_27026.png"></td>
+					<?php else : ?>
+						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\cash_40532.png"></td>
+					<?php endif; ?>
                     <?php if($compra['status'] == 'F') : ?>
 				        <td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff;     padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>
 			        <?php else :?>

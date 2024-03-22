@@ -8,9 +8,9 @@ class Compra_model extends CI_Model {
         solicitacao_compra.descricao,
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_pedido, '%Y-%m-%d'), '%d/%m/%Y') as data_pedido,
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d'), '%d/%m/%Y') as data_entrega,
-        solicitacao_compra.valor,
         solicitacao_compra.status,
         formas.nome as nome_pagamento,
+        SUM(produtos_compra.quantidade * produto.custo) as valor,
         banco.nome_banco as nome_banco,
         CASE 
         WHEN solicitacao_compra.data_entrega < CURRENT_DATE() THEN
@@ -23,7 +23,9 @@ class Compra_model extends CI_Model {
         INNER JOIN fornecedor on fornecedor.id_fornecedor = solicitacao_compra.id_fornecedor
         INNER JOIN forma_pagamento on forma_pagamento.id_forma_pagto = solicitacao_compra.id_forma_pgto
         INNER JOIN formas on formas.id_forma = forma_pagamento.nome
-        INNER JOIN banco on banco.id_banco = forma_pagamento.id_banco")->result_array();
+        INNER JOIN banco on banco.id_banco = forma_pagamento.id_banco
+        INNER JOIN produtos_compra on produtos_compra.id_pedido = solicitacao_compra.id_solicitacao
+        INNER JOIN produto on produto.id_produto = produtos_compra.id_produto")->result_array();
     }
 
     public function select_fornecedor_por_empresa($id)
