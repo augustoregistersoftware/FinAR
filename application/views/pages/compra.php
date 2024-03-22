@@ -35,7 +35,7 @@
 					<?php elseif($compra['situacao'] == 'Cancelado') : ?>
                         <a title="Pedido Cancelado" onclick="controleDialog4()" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>	
                     <?php else : ?>
-                        <a title="Pedido em Dia" id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
+                        <a id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
                     <?php endif; ?>
                     <th><?= $compra['id_solicitacao']?></th>
                     <td><?= $compra['descricao']?></td>
@@ -139,12 +139,12 @@ function goDocumentos(id) {
 </script>
 
 <script>
- function controleDialog(){
-	swal("Ai Sim!!", "Seu Pedido esta em dia!!", "info");
+  function controleDialog(){
+    swal("Ebaa!!", "Seu Pedido esta normal =)", "info");
 	}
 
 	function controleDialog2(){
-		swal("Opss...", "Seu Pedido esta atrasado =(", "warning");
+		swal("Opss...", "Seu Produto esta com estoque abaixo =(", "warning");
 	}
 
 	function controleDialog3(){
@@ -154,5 +154,5 @@ function goDocumentos(id) {
 	function controleDialog4(){
 		swal("Cancelado", "Seu Pedido esta cancelado !!", "error");
 	}
-
+</script>
 
