@@ -54,7 +54,7 @@
                 <a class="nav-link" href="<?= base_url()?>fornecedor">Cadastro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?= base_url()?>email">Compras</a>
+                <a class="nav-link" href="<?= base_url()?>compra">Compras</a>
               </li>
              </ul>
           <li class="nav-item">
