@@ -10,22 +10,24 @@ class Compra_model extends CI_Model {
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d'), '%d/%m/%Y') as data_entrega,
         solicitacao_compra.status,
         formas.nome as nome_pagamento,
-        SUM(produtos_compra.quantidade * produto.custo) as valor,
+        produtos_compra.quantidade * produto.custo as valor,
         banco.nome_banco as nome_banco,
         CASE 
-        WHEN solicitacao_compra.data_entrega < CURRENT_DATE() THEN
-        'Atrasado'
-        ELSE
-        'Normal'
+            WHEN STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d') < CURRENT_DATE() AND solicitacao_compra.status = 'F' THEN 'Atrasado'
+            WHEN solicitacao_compra.status = 'T' THEN 'Finalizado'
+            WHEN solicitacao_compra.status = 'C' THEN 'Cancelado'
+            ELSE 'Normal'
         END as situacao,
         fornecedor.nome as nome_fornecedor
-        FROM solicitacao_compra
-        INNER JOIN fornecedor on fornecedor.id_fornecedor = solicitacao_compra.id_fornecedor
-        INNER JOIN forma_pagamento on forma_pagamento.id_forma_pagto = solicitacao_compra.id_forma_pgto
-        INNER JOIN formas on formas.id_forma = forma_pagamento.nome
-        INNER JOIN banco on banco.id_banco = forma_pagamento.id_banco
-        INNER JOIN produtos_compra on produtos_compra.id_pedido = solicitacao_compra.id_solicitacao
-        INNER JOIN produto on produto.id_produto = produtos_compra.id_produto")->result_array();
+        FROM 
+            solicitacao_compra
+        INNER JOIN fornecedor ON fornecedor.id_fornecedor = solicitacao_compra.id_fornecedor
+        INNER JOIN forma_pagamento ON forma_pagamento.id_forma_pagto = solicitacao_compra.id_forma_pgto
+        INNER JOIN formas ON formas.id_forma = forma_pagamento.nome
+        INNER JOIN banco ON banco.id_banco = forma_pagamento.id_banco
+        INNER JOIN produtos_compra ON produtos_compra.id_pedido = solicitacao_compra.id_solicitacao
+        INNER JOIN produto ON produto.id_produto = produtos_compra.id_produto;
+        ")->result_array();
     }
 
     public function select_fornecedor_por_empresa($id)

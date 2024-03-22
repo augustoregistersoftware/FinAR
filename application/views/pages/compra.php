@@ -29,9 +29,13 @@
                 <tr>
                     <td>
                     <?php if($compra['situacao'] == 'Atrasado') : ?>
-                        <a onclick="controleDialog2()" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-circle-exclamation"></i></a>
+                        <a title="Pedido Atrasado" onclick="controleDialog2()" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-circle-exclamation"></i></a>
+					<?php elseif($compra['situacao'] == 'Finalizado') : ?>
+                        <a title="Pedido Finalizado" onclick="controleDialog3()" class="btn btn-primary btn-sm btn-primary"><i class="fa-solid fa-check-double"></i></a>
+					<?php elseif($compra['situacao'] == 'Cancelado') : ?>
+                        <a title="Pedido Cancelado" onclick="controleDialog4()" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>	
                     <?php else : ?>
-                        <a id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
+                        <a title="Pedido em Dia" id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
                     <?php endif; ?>
                     <th><?= $compra['id_solicitacao']?></th>
                     <td><?= $compra['descricao']?></td>
@@ -55,6 +59,8 @@
 					<?php endif; ?>
                     <?php if($compra['status'] == 'F') : ?>
 				        <td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff;     padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>
+					<?php elseif($compra['status'] == 'C') : ?>
+				        <td><span class="badge badge-pill pull-right" style="background-color: #ea0000; color: #fff;     padding: 8px 10px; margin-top: 5px;">Cancelado</span></td>
 			        <?php else :?>
 				        <td><span class="badge badge-pill pull-right" style="background-color: #03ab14; color: #fff;     padding: 8px 10px; margin-top: 5px;">Fechado</span></td>
 			        <?php endif ; ?>
@@ -64,10 +70,16 @@
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                             <a title="Fechar Solicitação" href="javascript:goAtiva(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>    
+                            <a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
+						<?php elseif($compra['status'] == 'C') : ?>
+                            <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                            <a title="Abrir Solicitação" href="javascript:goAtiva(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
+                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a> 	
                         <?php else :?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                             <a title="Abrir Solicitação" href="javascript:goInativa(<?= $compra['id_solicitacao']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>
+							<a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
                         <?php endif ; ?>
                     </td>
                 </tr>
@@ -78,42 +90,13 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         new DataTable('#compras')
     </script>
     
 </main>
 
-<!-- Aqui começa a montagem da modal -->
-<dialog id="d1">
-<div class="popup center">
-	<div class="icon2">
-	<i class="fa-solid fa-check"></i>		
-	</div>
-			<h3>Pedido Em Dia!!</h3>
-			<p>Seu Pedido Ainda esta em dia com a data</p>
-			<div class="dismiss-btn">	
-			<button id="dismiss-popup-btn" onclick="fecharDialog()">
-				OK
-			</button>
-			</div>
-	</div>
-</dialog>
-
-<dialog id="d2">
-<div class="popup center">
-	<div class="icon">
-	<i class="fa-solid fa-x"></i>		
-	</div>
-			<h3>Pedido Atrasado!!</h3>
-			<p>Seu Pedido esta atrasado entre em contato</p>
-			<div class="dismiss-btn">	
-			<button id="dismiss-popup-btn" onclick="fecharDialog2()">
-				OK
-			</button>
-			</div>
-	</div>
-</dialog>
 
 <script>
 function goEdit(id) {
@@ -157,25 +140,19 @@ function goDocumentos(id) {
 
 <script>
  function controleDialog(){
-		const button = document.getElementById("btn_dialog")
-		const modal = document.querySelector("dialog")
-		modal.showModal()
-	}
-
-	function fecharDialog(){
-		const modal =document.querySelector("dialog")
-		modal.close()
+	swal("Ai Sim!!", "Seu Pedido esta em dia!!", "info");
 	}
 
 	function controleDialog2(){
-		const button = document.getElementById("btn_dialog")
-		const modal = document.getElementById("d2")
-		modal.showModal()
+		swal("Opss...", "Seu Pedido esta atrasado =(", "warning");
 	}
 
-	function fecharDialog2(){
-		const modal = document.getElementById("d2")
-		modal.close()
+	function controleDialog3(){
+		swal("Parabéns", "Seu Pedido esta finalizado =)", "success");
+	}
+
+	function controleDialog4(){
+		swal("Parabéns", "Seu Pedido esta cancelado !!", "error");
 	}
 
 </script>
@@ -220,22 +197,36 @@ p{
 	text-align: center;
 }
 
-.popup .icon{
-	margin:5px 0px;
-	width: 50px;
-	height: 50px;
-	border: 2px solid #FF3333;
-	text-align: center;
-	display: inline-block;
-	border-radius: 50%;
-	line-height: 60px;
+.popup .icon {
+    margin: 5px 0px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #FF3333;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 60px;
+    animation: spin 2s linear infinite; /* Adiciona a animação apenas ao ícone */
 }
+
+
 
 .popup .icon2{
 	margin:5px 0px;
 	width: 50px;
 	height: 50px;
 	border: 2px solid #34f234;
+	text-align: center;
+	display: inline-block;
+	border-radius: 50%;
+	line-height: 60px;
+}
+
+.popup .icon3{
+	margin:5px 0px;
+	width: 50px;
+	height: 50px;
+	border: 2px solid #0000CD;
 	text-align: center;
 	display: inline-block;
 	border-radius: 50%;
