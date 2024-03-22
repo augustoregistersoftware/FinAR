@@ -126,6 +126,7 @@ function goEdit(id) {
     }
 }
 
+
 function goAtiva(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
     var myUrl = baseUrl + 'localizacao/ativa/' + id;
