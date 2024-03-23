@@ -106,7 +106,7 @@ class Produto extends CI_Controller {
 		if(isset($_FILES["file"]) && !empty($_FILES["file"])){
 			move_uploaded_file($_FILES['file']['tmp_name'], 'imagens/' .$_FILES['file']['name']);
 			$this->produtos_model->inserte_documento($data_foto);
-			redirect("produto");
+			redirect("produto?aviso=sucesso");
 		}else{
 			echo"<p style='color: #f00;'>Erro/p>";
 		}
@@ -150,7 +150,7 @@ class Produto extends CI_Controller {
 		$produto_info['estoque_minimo'] = $_POST['estoque_minimo'];
 		$this->produtos_model->update_produto($id,$produto_info);
 
-		redirect("produto");
+		redirect("produto?aviso=updt");
 	}
 
 	public function form_update_localizacao($id)
