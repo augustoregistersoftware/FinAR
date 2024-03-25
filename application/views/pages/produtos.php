@@ -55,7 +55,7 @@
                     <td style="color: #e81515;">R$ <?= number_format($produtos['preco_venda'],2,",",".")?></td>
                     <?php if($produtos['estoque_atual'] <= $produtos['estoque_minimo']) : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?>
-                        <p style="color: red;">Produto Solicitado para Compra</p>
+                        <p style="color: red;">Produto Indicado a fazer compra</p>
                     <?php else : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
                     <?php endif; ?>
@@ -146,7 +146,7 @@ function goAtiva(id) {
         dangerMode: true,
     }).then((willDelete) => {
         if (willDelete) {
-            swal("Feito, Produto Desativado !", {
+            swal("Feito, Produto Ativado !", {
                 icon: "success",
             }).then(() => {
                 var baseUrl = '<?php echo base_url(); ?>'; 
@@ -246,6 +246,125 @@ function goEdit(id) {
         // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
         if (avisoParam === 'updt') {
             aviso2();
+        }
+    });
+
+
+    function aviso3() {
+        swal("Sucesso!", "Empresa do Produto Alterada", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'updt_empresa') {
+            aviso3();
+        }
+    });
+
+
+    function aviso4() {
+        swal("Sucesso!", "Fornecedor do Produto Alterada", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'updt_fornecedor') {
+            aviso4();
+        }
+    });
+
+    function aviso5() {
+        swal("Sucesso!", "Localização do Produto Alterada", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'updt_localizacao') {
+            aviso5();
+        }
+    });
+
+
+    function aviso6() {
+        swal("Sucesso!", "Foto do Produto Excluida", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'del_foto') {
+            aviso6();
         }
     });
 </script>

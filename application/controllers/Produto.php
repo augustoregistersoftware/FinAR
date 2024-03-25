@@ -197,7 +197,7 @@ class Produto extends CI_Controller {
 		$produto_info['id_localizacao'] = $_POST['localizacao'];
 		$this->produtos_model->update_localizacao($id,$produto_info);
 
-		redirect("produto");
+		redirect("produto?aviso=updt_localizacao");
 	}
 
 	public function update_fornecedor($id)
@@ -205,7 +205,7 @@ class Produto extends CI_Controller {
 		$produto_info['id_fornecedor'] = $_POST['fornecedor'];
 		$this->produtos_model->update_fornecedor($id,$produto_info);
 
-		redirect("produto");
+		redirect("produto?aviso=updt_fornecedor");
 	}
 
 	public function update_empresa($id)
@@ -213,7 +213,7 @@ class Produto extends CI_Controller {
 		$produto_info['id_empresa'] = $_POST['empresa'];
 		$this->produtos_model->update_empresa($id,$produto_info);
 
-		redirect("produto");
+		redirect("produto?aviso=updt_empresa");
 	}
 
 	public function inativa($id)
@@ -237,7 +237,7 @@ class Produto extends CI_Controller {
 	{
 		$this->produtos_model->delete_foto($id);
 
-		redirect("produto");
+		redirect("produto?aviso=del_foto");
 	}
 
 }

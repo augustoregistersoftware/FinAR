@@ -39,6 +39,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         new DataTable('#documentos')
     </script>
@@ -76,15 +77,22 @@
 <!-- Fim Da Modal -->
 
 <script>
-
 function goDelete(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/delete_foto/' + id;
-    if (confirm("Deseja realmente Deletar essa Foto?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    swal({
+        title: "Deseja Realmente Deletar Essa Foto?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            var baseUrl = '<?php echo base_url(); ?>'; 
+            var myUrl = baseUrl + 'produto/delete_foto/' + id;
+                window.location.href = myUrl;
+        } else {
+            return false;
+        }
+    })
 }
 
 </script>
