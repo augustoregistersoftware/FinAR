@@ -144,7 +144,7 @@ function goDocumentos(id) {
 	}
 
 	function controleDialog2(){
-		swal("Opss...", "Seu Produto esta com estoque abaixo =(", "warning");
+		swal("Oops...", "Seu Pedido esta atrasado =(", "warning");
 	}
 
 	function controleDialog3(){
