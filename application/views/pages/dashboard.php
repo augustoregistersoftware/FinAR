@@ -144,23 +144,24 @@
 	<table class="table table-bordered table-hover">
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
+      google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
-
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Produtos', 'Estoque'],
-		  <?php foreach ($produtos_grafico as $produtos_grafico) : ?>
+          <?php foreach ($produtos_grafico as $produtos_grafico) : ?>
           ['<?php echo $produtos_grafico['descricao']?>',  <?php echo $produtos_grafico['estoque_atual']?>],
-		  <?php endforeach;?>
+          <?php endforeach;?>
         ]);
 
-        var options = {
-          title: 'Estoque dos Produtos Entre Empresas'
-        };
+      var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Estoque Produto Agrupado',
+        pieStartAngle: 100,
+      };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
       }
     </script>
@@ -171,17 +172,6 @@
 	</body>
 </main>
 
-<script>
-	function goDelete(id){
-		var myUrl = 'games/delete/' + id
-		if(confirm("Deseja realmente deletar?")){
-			window.location.href =myUrl;
-		}else{
-			return false;
-		}
-
-	}
-</script>
 
 <script>
 	function abrirGraficoEstoque(){

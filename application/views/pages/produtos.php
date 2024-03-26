@@ -83,6 +83,9 @@
                 <?php endforeach;?>
             </tbody>
         </table>
+        <div class="flash" id="flash">
+            <i title="Dica de Cadastro" class="fas fa-rocket"></i>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -190,6 +193,15 @@ function goEdit(id) {
 	function controleDialog2(){
 		swal("Opss...", "Seu Produto esta com estoque abaixo =(", "warning");
 	}
+
+    const flash = document.getElementById('flash');
+    flash.addEventListener('click', () => {
+        ajuda();
+    });
+
+    function ajuda(){
+        swal("Here's the title!", "...and here's the text!");
+    }
     // Na sua função de visualização
     function aviso() {
         swal("Sucesso!", "Produto Cadastrado", "success");
@@ -369,6 +381,62 @@ function goEdit(id) {
     });
 </script>
 
+<style>
 
+.flash {
+    width: 60px; /* Largura da div */
+    height: 60px; /* Altura da div */
+    background-color: blue; /* Cor de fundo da div */
+    border-radius: 50%; /* Torna a div redonda */
+    position: fixed; /* Posição fixa */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center; /* Para centralizar o ícone */
+    align-items: center; /* Para centralizar o ícone */
+    cursor: pointer; /* Mostrar o cursor como um ponteiro */
+}
+
+.flash i {
+    font-size: 2.5em; /* Tamanho do ícone */
+    color: white; /* Cor do ícone */
+}
+
+.modal {
+    display: none; /* Esconder a modal por padrão */
+    position: fixed; /* Posição fixa */
+    z-index: 1; /* Posicionar a modal sobre o conteúdo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
 
 
