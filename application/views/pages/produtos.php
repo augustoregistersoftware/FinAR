@@ -83,6 +83,10 @@
                 <?php endforeach;?>
             </tbody>
         </table>
+        <div class="toggle-switch">
+            <input type="checkbox" id="toggle-rocket" class="toggle-input" onclick="toggleRocket()" checked>
+            <label for="toggle-rocket" class="toggle-label"></label>
+        </div>
         <div class="flash" id="flash">
             <i title="Dica de Cadastro" class="fas fa-rocket"></i>
         </div>
@@ -132,6 +136,14 @@ function goInativa(id) {
         }
     });
     
+}
+
+let rocketVisible = true;
+
+function toggleRocket() {
+    const rocket = document.getElementById('flash');
+    rocketVisible = !rocketVisible;
+    rocket.style.display = rocketVisible ? 'block' : 'none';
 }
 
 function goHistorico(id) {
@@ -400,41 +412,51 @@ function goEdit(id) {
 .flash i {
     font-size: 2.5em; /* Tamanho do ícone */
     color: white; /* Cor do ícone */
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center; /* Para centralizar o ícone */
 }
 
-.modal {
-    display: none; /* Esconder a modal por padrão */
-    position: fixed; /* Posição fixa */
-    z-index: 1; /* Posicionar a modal sobre o conteúdo */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-.modal-content {
-    background-color: white;
-    margin: 20% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
+.toggle-input {
+  display: none;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.toggle-label::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: #2196F3;
+}
+
+.toggle-input:checked + .toggle-label::after {
+  transform: translateX(26px);
 }
 
 </style>
