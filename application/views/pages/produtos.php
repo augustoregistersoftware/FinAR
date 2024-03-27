@@ -89,6 +89,7 @@
         </div>
         <div class="flash" id="flash">
             <i title="Dica de Cadastro" class="fas fa-rocket"></i>
+            <div class="notification-badge"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -459,6 +460,6 @@ function goEdit(id) {
   transform: translateX(26px);
 }
 
+
+
 </style>
-
-

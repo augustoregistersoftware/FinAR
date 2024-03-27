@@ -86,6 +86,11 @@
                 <?php endforeach;?>
             </tbody>
         </table>
+        <div class="flash" id="flash">
+            <i title="Dica de Cadastro" class="fas fa-rocket"></i>
+            <div class="notification-badge"><span>2</span></div>
+            <div class="notification-badge"></div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -156,3 +161,99 @@ function goDocumentos(id) {
 	}
 </script>
 
+<style>
+
+.flash {
+    width: 60px; /* Largura da div */
+    height: 60px; /* Altura da div */
+    background-color: blue; /* Cor de fundo da div */
+    border-radius: 50%; /* Torna a div redonda */
+    position: fixed; /* Posição fixa */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center; /* Para centralizar o ícone */
+    align-items: center; /* Para centralizar o ícone */
+    cursor: pointer; /* Mostrar o cursor como um ponteiro */
+}
+
+.flash i {
+    font-size: 2.5em; /* Tamanho do ícone */
+    color: white; /* Cor do ícone */
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center; /* Para centralizar o ícone */
+    animation: pulse 1s infinite;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+
+.toggle-label::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: #2196F3;
+}
+
+.toggle-input:checked + .toggle-label::after {
+  transform: translateX(26px);
+}
+
+
+
+
+.flash .notification-badge {
+    position: absolute;
+    top: -5px; /* Ajuste para meio em cima */
+    right: 0; /* Ajuste para meio em cima */
+    width: 20px;
+    height: 20px;
+    background-color: red; /* Cor vermelha */
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flash .notification-badge span {
+    color: white; /* Cor do número */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+</style>
