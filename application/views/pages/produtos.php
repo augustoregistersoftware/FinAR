@@ -212,7 +212,7 @@ function goEdit(id) {
     });
 
     function ajuda(){
-        swal("Here's the title!", "...and here's the text!");
+        swal("Dica Para Montagem do seu Produto ;)", "DESCRIÇÃO: deixe uma descrição efetiva para simbolizar oque o produto é, CODIO AUXILIAR: Escolha um codigo auxiliar no qual voce sabe que vai exatamente aquele produto e que seja unico em ambas as empresas pois por ele que voce ira consultar");
     }
     // Na sua função de visualização
     function aviso() {
