@@ -87,7 +87,7 @@
             </tbody>
         </table>
         <div class="flash" id="flash">
-            <i title="Dica de Cadastro" class="fas fa-rocket"></i>
+            <i title="Dica de Cadastro" class="fas fa-bell"></i>
             <div class="notification-badge"><span>2</span></div>
             <div class="notification-badge"></div>
         </div>
@@ -159,6 +159,36 @@ function goDocumentos(id) {
 	function controleDialog4(){
 		swal("Cancelado", "Seu Pedido esta cancelado !!", "error");
 	}
+
+    const flash = document.getElementById('flash');
+    flash.addEventListener('click', () => {
+        aviso();
+        toggleRocket();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Acessa a variável PHP $atrasado definida na view
+        var atrasado = <?php echo json_encode($atrasado); ?>;
+
+        if (atrasado && atrasado.atrasada > 0) {
+            // Faça algo se 'atrasada' for maior que zero
+        } else {
+            // Caso contrário, chame a função toggleRocket()
+            toggleRocket();
+        }
+    });
+
+    let rocketVisible = true;
+
+    function toggleRocket() {
+    const rocket = document.getElementById('flash');
+    rocketVisible = !rocketVisible;
+    rocket.style.display = rocketVisible ? 'block' : 'none';
+}
+
+    function aviso() {
+        swal("Aviso!!", "Você tem 2 pedidos atrasados por favor verifique com seu fornecedor!", "warning");
+    }
 </script>
 
 <style>
@@ -184,52 +214,6 @@ function goDocumentos(id) {
     justify-content: center; /* Para centralizar o ícone */
     animation: pulse 1s infinite;
 }
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.toggle-input {
-  display: none;
-}
-
-.toggle-label {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: background-color 0.3s;
-}
-
-.toggle-label::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.toggle-input:checked + .toggle-label {
-  background-color: #2196F3;
-}
-
-.toggle-input:checked + .toggle-label::after {
-  transform: translateX(26px);
-}
-
-
-
 
 .flash .notification-badge {
     position: absolute;

@@ -13,6 +13,7 @@ class Compra extends CI_Controller {
 	public function index()
 	{
 		$data["compra"] =  $this->compra_model->index();
+		$data["atrasado"] =  $this->compra_model->select_qtdd_atrasado();
 		$data["title"] = "Compra - FinAR";
 
 		$this->load->view('templates/header',$data);

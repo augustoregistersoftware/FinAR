@@ -40,6 +40,14 @@ class Compra_model extends CI_Model {
         WHERE fornecedor.id_empresa = '.$this->db->escape($id).'')->result_array();
     }
 
+    public function select_qtdd_atrasado()
+    {
+        return $this->db->query('SELECT COUNT(*) as atrasada
+        FROM solicitacao_compra
+        WHERE data_entrega < CURRENT_DATE()
+        AND status = "F"')->row_array();
+    }
+
     public function select_empresas()
     {
         return $this->db->query("SELECT
