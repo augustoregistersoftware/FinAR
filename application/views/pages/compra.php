@@ -1,5 +1,8 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Cadastros de Compras</h1>
         <div class="btn-group mr-2">
@@ -68,7 +71,7 @@
                     <td> 
                         <?php if($compra['status'] == 'F') : ?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
-                            <a title="Fechar Solicitação" href="javascript:goAtiva(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
+                            <a title="Fechar Solicitação" href="javascript:goFecha(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>    
                             <a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
 						<?php elseif($compra['status'] == 'C') : ?>
@@ -81,7 +84,6 @@
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>
 							<a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
                         <?php endif ; ?>
-                    </td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -100,6 +102,38 @@
         new DataTable('#compras')
     </script>
     
+    <div class="modal fade custom-modal" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg" role="document"> <!-- Adicione a classe modal-lg para aumentar a largura da modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Produtos Vinculados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cod Aux</th>
+                            <th>Preço Venda</th>
+                            <th>Estoque</th>
+                            <th>Qtd Comprada</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dados_grid">
+                        <!-- Os dados da grid serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 </main>
 
 
@@ -115,14 +149,23 @@ function goEdit(id) {
 }
 
 
-function goAtiva(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/ativa/' + id;
-    if (confirm("Deseja realmente ativar essa localizacao?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+function goFecha(id) {
+
+    swal({
+        title: "Deseja Realmente Fechar Esse Pedido?",
+        text: "Confira Tudo antes de fechar, essa ação tera grande impacto",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+            var myUrl = baseUrl + 'compra/fechar/' + id;
+            window.location.href = myUrl;
+        } else {
+            return false;
+        }
+    });
 }
 
 function goInativa(id) {
@@ -140,6 +183,36 @@ function goDocumentos(id) {
     var myUrl = baseUrl + 'localizacao/documentos/' + id;
     window.location.href = myUrl;
 }
+
+$(document).ready(function(){
+    $("body").on("click", ".btn.btn-primary.btn-sm.btn-primary", function(e){
+        e.preventDefault();
+        
+        var idDoPedido = $(this).attr("id");
+        
+        $.ajax({
+            url: "<?php echo site_url('compra/obter_dados');?>",
+            type: 'GET',
+            dataType: 'json',
+            data: { idDoPedido: idDoPedido }, 
+            success: function(data) {
+                var html = '';
+                $.each(data, function(key, item){
+                    html += '<tr>';
+                    html += '<td>'+item.id_produto+'</td>';
+                    html += '<td>'+item.descricao+'</td>';
+                    html += '<td>'+item.cod_aux+'</td>';
+                    html += '<th>R$'+parseFloat(item.preco_venda).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '<th>'+parseFloat(item.estoque_atual).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '<th>'+parseFloat(item.qtd_comprada).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '</tr>';
+                });
+                $("#dados_grid").html(html);
+                $("#myModal").modal('show'); 
+            }
+        });
+    });
+});
 
 </script>
 

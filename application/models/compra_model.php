@@ -30,14 +30,28 @@ class Compra_model extends CI_Model {
         ")->result_array();
     }
 
-    public function select_fornecedor_por_empresa($id)
+    public function select_qtd_id_produto($id)
     {
         return $this->db->query('SELECT
-        fornecedor.*,
-        empresa.nome_fantasia
-        FROM fornecedor
-        INNER JOIN empresa on empresa.id_empresa = fornecedor.id_empresa
-        WHERE fornecedor.id_empresa = '.$this->db->escape($id).'')->result_array();
+        id_produto,
+        quantidade
+        FROM produtos_compra
+        WHERE id_pedido = '.$this->db->escape($id).'')->row_array();
+    }
+
+    public function select_dados_produto($idDoPedido)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        produto.descricao,
+        produto.cod_aux,
+        produto.preco_venda,
+        produto.estoque_atual,
+        produtos_compra.quantidade as qtd_comprada
+        FROM produtos_compra
+        INNER JOIN produto on produto.id_produto = produtos_compra.id_produto
+        INNER JOIN solicitacao_compra on solicitacao_compra.id_solicitacao = produtos_compra.id_pedido
+        WHERE produtos_compra.id_pedido = '.$this->db->escape($idDoPedido).'')->result_array();
     }
 
     public function select_qtdd_atrasado()
@@ -98,22 +112,24 @@ class Compra_model extends CI_Model {
         return $this->db->delete("documentos_fornecedor");
     }
 
-    public function update_fornecedor_ativa($id,$fornecedor_info)
+    public function update_pedido_fecha($id,$status)
     {
-        $this->db->where("id_fornecedor",$id);
-        return $this->db->update("fornecedor",$fornecedor_info);
+        $this->db->where("id_solicitacao",$id);
+        return $this->db->update("solicitacao_compra",$status);
     }
 
-    public function update_fornecedor_inativa($id,$fornecedor_info)
+    public function updt_estoque_produto($id_produto,$qtde)
     {
-        $this->db->where("id_fornecedor",$id);
-        return $this->db->update("fornecedor",$fornecedor_info);
+        $sql = "UPDATE produto SET estoque_atual = estoque_atual + ? WHERE id_produto = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($qtde, $id_produto));
     }
 
     public function update_fornecedor($id,$fornecedor_info)
     {
-        $this->db->where("id_fornecedor",$id);
-        return $this->db->update("fornecedor",$fornecedor_info);
+        $this->db->where("id_produto",$id);
+        return $this->db->update("solicitacao_compra",$fornecedor_info);
     }
 
     public function inserte_documentos($fornecedor)

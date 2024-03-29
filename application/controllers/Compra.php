@@ -21,20 +21,9 @@ class Compra extends CI_Controller {
 		$this->load->view('pages/compra',$data);
 	}
 
-    public function fornecedor_empresa($id)
-	{
-		$data["fornecedor"] =  $this->fornecedor_model->select_fornecedor_por_empresa($id);
-		$data["empresa_fornecedor"] =  $this->fornecedor_model->select_empresas();
-		$data["title"] = "Fornecedor - FinAR";
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/fornecedor',$data);
-	}
-
 	public function obter_dados() {
-		$idDoFornecedor = $this->input->get('idDoFornecedor');
-        $dados = $this->fornecedor_model->obter_dados($idDoFornecedor);
+		$idDoPedido = $this->input->get('idDoPedido');
+        $dados = $this->compra_model->select_dados_produto($idDoPedido);
         echo json_encode($dados);
     }
 
@@ -115,6 +104,19 @@ class Compra extends CI_Controller {
 		$this->fornecedor_model->inserte_documentos($fornecedor);
 
 		redirect("fornecedor");
+	}
+
+	public function fechar($id)
+	{
+        $status["status"] = "T";
+		$dados_produto = $this->compra_model->select_qtd_id_produto($id);
+		$qtde['estoque_atual'] = $dados_produto['quantidade'];
+		$id_produto = $dados_produto['id_produto'];
+
+		$this->compra_model->update_pedido_fecha($id,$status);
+		$this->compra_model->updt_estoque_produto($id_produto,$qtde);
+
+		redirect("compra");
 	}
 
 	public function abir_documento($id)
