@@ -39,6 +39,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         new DataTable('#documentos')
     </script>
@@ -50,21 +51,31 @@
 function goAbrir(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
     var myUrl = baseUrl + 'fornecedor/abir_documento/' + id;
-    if (confirm("Deseja realmente Abrir esse documento?")) {
         window.location.href = myUrl;
-    } else {
-        return false;
-    }
 }
 
 function goDelete(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'fornecedor/delete_documento/' + id;
-    if (confirm("Deseja realmente Deletar esse documento?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+
+    swal({
+        title: "Deseja Realmente Deletar Esse Documento?",
+        text: "Essa Ação terá impacto em outras situações",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("Feito, Documento Deletado !", {
+                icon: "success",
+            }).then(() => {
+                var baseUrl = '<?php echo base_url(); ?>';
+                var myUrl = baseUrl + 'fornecedor/delete_documento/' + id;
+                window.location.href = myUrl;
+            });
+        } else {
+            return false;
+        }
+    });
+    
 }
 
 </script>

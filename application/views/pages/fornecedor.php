@@ -87,13 +87,14 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         new DataTable('#produtos');
     </script>
 
 <!-- Modal -->
 <div class="modal fade custom-modal" id="myModal" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document"> <!-- Adicione a classe modal-lg para aumentar a largura da modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Produtos Vinculados</h5>
@@ -123,6 +124,7 @@
         </div>
     </div>
 </div>
+
 </main>
 
 <script>
@@ -134,13 +136,22 @@ function goEmpresa(id) {
 }
 
 function goEdit(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
-    var myUrl = baseUrl + 'fornecedor/editar/' + id;
-    if (confirm("Deseja realmente Editar?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+
+    swal({
+        title: "Deseja Realmente Editar Esse Fornecedor?",
+        text: "Essa Ação terá impacto em outras situações",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+            var myUrl = baseUrl + 'fornecedor/editar/' + id;
+            window.location.href = myUrl;
+        } else {
+            return false;
+        }
+    });
 }
 
 function goDocumentos(id) {
@@ -150,23 +161,49 @@ function goDocumentos(id) {
 }
 
 function goInativa(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'fornecedor/inativa/' + id;
-    if (confirm("Deseja realmente inativar esse fornecedor?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    swal({
+        title: "Deseja Realmente Inativar Esse Fornecedor?",
+        text: "Essa Ação terá impacto em outras situações",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("Feito, Fornecedor Desativado !", {
+                icon: "success",
+            }).then(() => {
+                var baseUrl = '<?php echo base_url(); ?>';
+                var myUrl = baseUrl + 'fornecedor/inativa/' + id;
+                window.location.href = myUrl;
+            });
+        } else {
+            return false;
+        }
+    });
+    
 }
 
 function goAtiva(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'fornecedor/ativa/' + id;
-    if (confirm("Deseja realmente ativar esse fornecedor?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    swal({
+        title: "Deseja Realmente Ativar Esse Fornecedor?",
+        text: "Essa Ação terá impacto em outras situações",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("Feito, Fornecedor Ativado !", {
+                icon: "success",
+            }).then(() => {
+                var baseUrl = '<?php echo base_url(); ?>';
+                var myUrl = baseUrl + 'fornecedor/ativa/' + id;
+                window.location.href = myUrl;
+            });
+        } else {
+            return false;
+        }
+    });
+    
 }
 
 function goHistorico(id) {
@@ -204,5 +241,63 @@ $(document).ready(function(){
         });
     });
 });
+
+function aviso() {
+        swal("Sucesso!", "Fornecedor Alterado", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'updt') {
+            aviso();
+        }
+    });
+
+function aviso2() {
+        swal("Sucesso!", "Fornecedor Cadastrado", "success");
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+    // Função para limpar um parâmetro da URL
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'sucess') {
+            aviso2();
+        }
+    });    
 </script>
 

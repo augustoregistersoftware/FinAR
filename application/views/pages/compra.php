@@ -187,7 +187,8 @@ function goDocumentos(id) {
 }
 
     function aviso() {
-        swal("Aviso!!", "Você tem 2 pedidos atrasados por favor verifique com seu fornecedor!", "warning");
+        var atrasado = <?php echo json_encode($atrasado); ?>;
+        swal("Aviso!!", "Você tem" + atrasado.atrasada + "pedidos atrasados por favor verifique com seu fornecedor!", "warning");
     }
 </script>
 

@@ -79,7 +79,7 @@ class Fornecedor extends CI_Controller {
         $fornecedor_info["status"] = "T";
 		$this->fornecedor_model->inserte_fornecedor($fornecedor_info);
 
-		redirect("fornecedor");
+		redirect("fornecedor?aviso=sucess");
 	}
 
 	public function documentos($id)
@@ -168,7 +168,7 @@ class Fornecedor extends CI_Controller {
         $fornecedor_info["email"] = $_POST["email"];
 		$this->fornecedor_model->update_fornecedor($id,$fornecedor_info);
 
-		redirect("fornecedor");
+		redirect("fornecedor?aviso=updt");
 	}
 
 }
