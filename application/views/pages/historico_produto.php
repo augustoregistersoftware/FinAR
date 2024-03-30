@@ -25,7 +25,9 @@
                     <th><?= $historico['descricao']?></th>
                     <td><?= number_format($historico['Quantidade Anterior'],2,",",".")?></td>
                     <td><?= number_format($historico['Quantidade Atual'],2,",",".")?></td>
-                    <td><?= number_format($historico['Quantidade Movimentada'],2,",",".")?></td>
+                    <td class="<?= ($historico['Quantidade Movimentada'] < 0) ? 'text-danger' : (($historico['Quantidade Movimentada'] > 0) ? 'text-success' : '') ?>">
+                        <?= number_format($historico['Quantidade Movimentada'], 2, ",", ".") ?>
+                    </td>
                     <td><?= $historico['Data da Atualizacao']?>  <?= $historico['Hora da Atualizacao']?></td>
                     <td><?= $historico['Tipo da Operação']?></td>
                     <?php if($historico['Status Operação'] == 'Baixa De Estoque') : ?>
