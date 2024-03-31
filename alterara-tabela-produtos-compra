@@ -1,0 +1,1 @@
+ALTER TABLE `produtos_compra` ADD `quantidade_recebida` DECIMAL(18,4) NOT NULL AFTER `quantidade`;
