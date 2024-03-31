@@ -8,6 +8,8 @@ class Compra extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model("compra_model");
+		$this->load->model("fornecedor_model");
+		$this->load->model("produtos_model");
     }
 
 	public function index()
@@ -51,24 +53,22 @@ class Compra extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-    public function inserte()
+    public function inserte_compra_documentacao()
 	{
-        $fornecedor_info["nome"] = $_POST["nome_fornecedor"];
-        $fornecedor_info["cnpj"] = $_POST["cnpj"];
-        $fornecedor_info["cep"] = $_POST["cep"];
-        $fornecedor_info["endereco"] = $_POST["endereco"];
-        $fornecedor_info["bairro"] = $_POST["bairro"];
-        $fornecedor_info["complemento"] = $_POST["complemento"];
-        $fornecedor_info["cidade"] = $_POST["cidade"];
-        $fornecedor_info["numero"] = $_POST["numero"];
-        $fornecedor_info["ie"] = $_POST["ie"];
-        $fornecedor_info["telefone"] = $_POST["telefone"];
-        $fornecedor_info["email"] = $_POST["email"];
-        $fornecedor_info["id_empresa"] = $_POST["empresa"];
-        $fornecedor_info["status"] = "T";
-		$this->fornecedor_model->inserte_fornecedor($fornecedor_info);
+        $compra_info["nome"] = $_POST;
+		$produto_info['title'] = "Escolhas De Produto - FinAR";
+        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
+		#$this->compra_model->inserte_fornecedor($compra_info);
+		$this->montagem_produtos($produto_info);
+	}
 
-		redirect("fornecedor");
+	public function montagem_produtos($produto_info)
+	{
+		$this->load->view('templates/header',$produto_info);
+		$this->load->view('templates/nav-top',$produto_info);
+		$this->load->view('pages/cadastro_de_compra_produto',$produto_info);
+		$this->load->view('templates/footer',$produto_info);
+		$this->load->view('templates/js',$produto_info);
 	}
 
 	public function documentos($id)
@@ -83,14 +83,14 @@ class Compra extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-	public function new_documentos()
+	public function new_compra()
 	{
 		$data["fornecedor"] =  $this->fornecedor_model->index();
-		$data["title"] = "Cadastro De Documentos Fornecedor - FinAR";
+		$data["title"] = "Cadastro De Compra - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_documento_fornecedor',$data);
+		$this->load->view('pages/cadastro_de_compra_documentacao',$data);
 		$this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
