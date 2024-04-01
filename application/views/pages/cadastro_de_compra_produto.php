@@ -4,40 +4,41 @@
 
     </div>
 			<div class="col-md-12">		
-				<form action="<?= base_url() ?>fornecedor/inserte_documentos" method="post" enctype="multipart/form-data">
-
-				<form action="" method="post" enctype="multipart/form-data">
+				<form action="<?= base_url() ?>compra/inserte_compra_produto" method="post" enctype="multipart/form-data">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
             <main class="container">
                 <div class="row">
-                    <?php foreach($produto as $produto) : ?>
+                <?php foreach($produto as $produto) : ?>
                     <div class="col-md-4"> <!-- Dividindo em 3 colunas para ocupar 1/3 da largura -->
                         <div class="card">  
                             <div class="card-body">
-                                <h5 class="card-title">Nome do Produto</h5>
-                                <p class="card-text"><?= $produto['descricao']?></p>
-                                <p clas="card-text">Ultimo Custo: R$ <?= number_format($produto['custo'],2,",",".")?></p>
+                                <h5>Nome Do Produto</h5>
+                                <p class="card-text"><?= $produto['descricao'] ?></p>
+                                <p class="card-text">Último Custo: R$ <?= number_format($produto['custo'], 2, ",", ".") ?></p>
                                 <?php if($produto['estoque_atual'] <= $produto['estoque_minimo']) : ?>
-                                    <p class="card-text">Estoque: <?= number_format($produto['estoque_atual'],2,",",".")?> -- Estoque Minimo: <?= number_format($produto['estoque_minimo'],2,",",".")?></p>
-                                    <p style="color: red;">Produto Indicado a fazer compra</p>
+                                    <p class="card-text">Estoque: <?= number_format($produto['estoque_atual'], 2, ",", ".") ?> -- Estoque Mínimo: <?= number_format($produto['estoque_minimo'], 2, ",", ".") ?></p>
+                                    <p style="color: red;">Produto indicado a fazer compra</p>
                                 <?php else : ?>    
-                                    <p class="card-text">Estoque: <?= number_format($produto['estoque_atual'],2,",",".")?></p>
+                                    <p class="card-text">Estoque: <?= number_format($produto['estoque_atual'], 2, ",", ".") ?></p>
                                 <?php endif; ?>    
-                                <h6 class="card-text">Empresa: <?= $produto['razao_social']?></h6>
-                                <div class="form-group">
-                                    <label for="quantidade">Quantidade:</label>
-                                    <input type="number" class="form-control" id="quantidade" name="quantidade" value="1" min="1">
-                                </div>
-                                <input type="hidden" name="id_produto" value="ID_DO_PRODUTO">
-                                <button type="submit" class="btn btn-primary rounded-pill">
-                                    <i class="fas fa-shopping-cart"></i> <!-- Ícone do carrinho -->
-                                </button>
+                                <p class="card-text">Cod Aux: <?= $produto['cod_aux'] ?></p>
+                                <h6 class="card-text">Empresa: <?= $produto['razao_social'] ?></h6>
+                                <form action="<?= base_url() ?>compra/inserte_compra_produto" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
+                                    <div class="form-group">
+                                        <label for="quantidade">Quantidade:</label>
+                                        <input type="number" class="form-control" id="quantidade" name="quantidade" value="1" min="1">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-shopping-cart"></i> <!-- Ícone do carrinho -->
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <?php endforeach;?>
+            <?php endforeach; ?>
                 </div>
                 <div class="row mt-4"> <!-- Adicionando margem superior para separar os botões -->
                     <div class="col-md-6">

@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Compra extends CI_Controller {
+	
 
 	//Função Construct para trazer o carregamento da modal
     public function __construct()
@@ -55,11 +56,38 @@ class Compra extends CI_Controller {
 
     public function inserte_compra_documentacao()
 	{
-        $compra_info["nome"] = $_POST;
+        $compra_info["descricao"] = $_POST['descricao'];
+        $compra_info["data_pedido"] = $_POST['data_pedido'];
+        $compra_info["data_entrega"] = $_POST['data_entrega'];
+        $compra_info["id_fornecedor"] = $_POST['fornecedor'];
+		$compra_info["status"] = "T";
+		$arquivo_pdf = $_FILES['file'];
+        
 		$produto_info['title'] = "Escolhas De Produto - FinAR";
         $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
-		#$this->compra_model->inserte_fornecedor($compra_info);
+        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
+
+		$ultimo_id = $this->compra_model->inserte_compra_documentacao($compra_info);
+		$compra_arquivo["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
+        $compra_arquivo["id_compra"] = $ultimo_id;
+		$this->compra_model->inserte_compra_documento($compra_arquivo);
 		$this->montagem_produtos($produto_info);
+	}
+
+	public function inserte_compra_produto()
+	{
+		$compra_produto["id_produto"] = $_POST['id_produto'];
+		$compra_produto["quantidade"] = $_POST['quantidade'];
+		$ultimo_id = $this->compra_model->ultimo_id_select();
+		$valor_id = $ultimo_id['id_solicitacao'];
+		define('ID', $valor_id); // Note que alterei 'id' para 'ID' para seguir as convenções de nomenclatura de constantes em maiúsculas
+		$compra_produto["id_pedido"] = ID; // Aqui você usa a constante corretamente
+		$produto_info['title'] = "Escolhas De Produto - FinAR";
+		$produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
+		
+		$this->compra_model->inserte_compra_produto($compra_produto);
+		$this->montagem_produtos($produto_info);
+		
 	}
 
 	public function montagem_produtos($produto_info)

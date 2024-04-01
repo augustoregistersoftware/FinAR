@@ -106,6 +106,11 @@ class Compra_model extends CI_Model {
         WHERE id_documento_fornc = '.$this->db->escape($id).'')->row_array();
     }
 
+    public function ultimo_id_select()
+    {
+        return $this->db->query('SELECT id_solicitacao FROM solicitacao_compra ORDER BY id_solicitacao DESC LIMIT 1')->row_array();
+    }
+
     public function delete_documento($id)
     {
         $this->db->where("id_documento_fornc",$id);
@@ -132,13 +137,19 @@ class Compra_model extends CI_Model {
         return $this->db->update("solicitacao_compra",$fornecedor_info);
     }
 
-    public function inserte_documentos($fornecedor)
+    public function inserte_compra_documento($compra_arquivo)
     {
-        $this->db->insert("documentos_fornecedor", $fornecedor);
+        $this->db->insert("documentos_compra", $compra_arquivo);
     }
 
-    public function inserte_fornecedor($fornecedor_info)
+    public function inserte_compra_produto($compra_produto)
     {
-        $this->db->insert("fornecedor", $fornecedor_info);
+        $this->db->insert("produtos_compra", $compra_produto);
+    }
+
+    public function inserte_compra_documentacao($compra_info)
+    {
+        $this->db->insert("solicitacao_compra", $compra_info);
+        return $this->db->insert_id();
     }
 }
