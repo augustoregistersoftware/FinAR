@@ -6,6 +6,7 @@ class Compra_model extends CI_Model {
         return $this->db->query("SELECT
         solicitacao_compra.id_solicitacao,
         solicitacao_compra.descricao,
+        solicitacao_compra.valor_confirmado,
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_pedido, '%Y-%m-%d'), '%d/%m/%Y') as data_pedido,
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d'), '%d/%m/%Y') as data_entrega,
         solicitacao_compra.status,
@@ -48,7 +49,8 @@ class Compra_model extends CI_Model {
         produto.cod_aux,
         produto.custo,
         produto.estoque_atual,
-        produtos_compra.quantidade as qtd_comprada
+        produtos_compra.quantidade as qtd_comprada,
+        produtos_compra.quantidade_recebida as qtd_recebida
         FROM produtos_compra
         INNER JOIN produto on produto.id_produto = produtos_compra.id_produto
         INNER JOIN solicitacao_compra on solicitacao_compra.id_solicitacao = produtos_compra.id_pedido
@@ -158,12 +160,12 @@ class Compra_model extends CI_Model {
         return $this->db->query($sql, array($id,$id_pedido));
     }
 
-    public function encerrar($id,$pagamento)
+    public function encerrar($id,$pagamento,$subtotal)
     {
-        $sql = "UPDATE solicitacao_compra SET id_forma_pgto = ? WHERE id_solicitacao = ?";
+        $sql = "UPDATE solicitacao_compra SET id_forma_pgto = ?, valor_confirmado = ? WHERE id_solicitacao = ?";
     
         // Executa a query com os parâmetros
-        return $this->db->query($sql, array($pagamento,$id));
+        return $this->db->query($sql, array($pagamento,$subtotal,$id));
     }
 
     public function update_pedido_fecha($id,$status)

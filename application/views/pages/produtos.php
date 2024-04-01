@@ -53,9 +53,12 @@
                     <td><?= $produtos['cod_aux']?></td>
                     <td style="color: #e81515;">R$ <?= number_format($produtos['custo'], 2, ",", ".")?></td>
                     <td style="color: #e81515;">R$ <?= number_format($produtos['preco_venda'],2,",",".")?></td>
-                    <?php if($produtos['estoque_atual'] <= $produtos['estoque_minimo']) : ?>
+                    <?php if($produtos['estoque_atual'] <= $produtos['estoque_minimo'] and $produtos['qtde_em_compra'] == 0) : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?>
                         <p style="color: red;">Produto Indicado a fazer compra</p>
+                    <?php elseif($produtos['qtde_em_compra'] > 0) : ?>   
+                        <td><?= number_format($produtos['estoque_atual'],2,",",".")?>
+                        <p style="color: red;">Esse Produto foi pedido</p> 
                     <?php else : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
                     <?php endif; ?>

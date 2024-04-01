@@ -6,6 +6,9 @@ class Produtos_model extends CI_Model {
         return $this->db->query("SELECT
         produto.*,
         localizacao.nome as nome_localizacao,
+        (SELECT COUNT(*) FROM
+         produtos_compra
+         WHERE produtos_compra.id_produto = produto.id_produto) as qtde_em_compra,
         fornecedor.nome as nome_fornecedor,
         empresa.razao_social
         FROM produto
@@ -56,6 +59,9 @@ class Produtos_model extends CI_Model {
         return $this->db->query('SELECT
         produto.*,
         localizacao.nome as nome_localizacao,
+        (SELECT COUNT(*) FROM
+         produtos_compra
+         WHERE produtos_compra.id_produto = produto.id_produto) as qtde_em_compra,
         fornecedor.nome as nome_fornecedor,
         empresa.razao_social
         FROM produto

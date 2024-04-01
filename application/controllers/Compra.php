@@ -56,6 +56,7 @@ class Compra extends CI_Controller {
 
     public function inserte_compra_documentacao()
 	{
+
         $compra_info["descricao"] = $_POST['descricao'];
         $compra_info["data_pedido"] = $_POST['data_pedido'];
         $compra_info["data_entrega"] = $_POST['data_entrega'];
@@ -104,8 +105,9 @@ class Compra extends CI_Controller {
 		$produtos_compra['title'] = "Produtos Da Compra - FinAR";
 		$ultimo_id = $this->compra_model->ultimo_id_select();
 		$id = $ultimo_id['id_solicitacao'];
-		$produtos_compra['produtos_compra'] = $this->compra_model->select_produtos_compra($id);
-		$produtos_compra['produtos_compra_subtotal'] = $this->compra_model->subtotal($id);
+		define('ID',$id);
+		$produtos_compra['produtos_compra'] = $this->compra_model->select_produtos_compra(ID);
+		$produtos_compra['produtos_compra_subtotal'] = $this->compra_model->subtotal(ID);
 		$produtos_compra['forma_pagto'] = $this->compra_model->select_formas_pagto();
 
 		$this->load->view('templates/header',$produtos_compra);
@@ -119,9 +121,11 @@ class Compra extends CI_Controller {
 	{
 		$ultimo_id = $this->compra_model->ultimo_id_select();
 		$id = $ultimo_id['id_solicitacao'];
+		define('ID',$id);
 		$pagamento = $_POST['pagamento'];
+		$subtotal = $_POST['subtotal'];
 
-		$this->compra_model->encerrar($id,$pagamento);
+		$this->compra_model->encerrar(ID,$pagamento,$subtotal);
 		redirect('compra');
 	}
 
@@ -129,8 +133,9 @@ class Compra extends CI_Controller {
 	{
 		$ultimo_id = $this->compra_model->ultimo_id_select();
 		$id_pedido = $ultimo_id['id_solicitacao'];
+		define('ID',$id_pedido);
 
-		$this->compra_model->remover_item($id,$id_pedido);
+		$this->compra_model->remover_item($id,ID);
 		$this->finaliza();
 	}
 

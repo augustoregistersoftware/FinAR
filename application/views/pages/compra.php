@@ -20,7 +20,8 @@
                     <th>Descrição</th>
                     <th>Data Do Pedido</th>
                     <th>Data Da Entrega</th>
-                    <th>Valor</th>
+                    <th>Valor Dos Produtos</th>
+                    <th>Valor Total Conferido</th>
                     <th>Pagamento/Banco</th>
                     <th>Status</th>
                     <th>Fornecedor</th>
@@ -49,10 +50,11 @@
 						<td><?= $compra['data_entrega']?></td>
 					<?php endif; ?>
                     <th>R$ <?= number_format($compra['valor'],2,",",".")?></th>
+                    <th>R$ <?= number_format($compra['valor_confirmado'],2,",",".")?></th>
 					<?php if($compra['nome_pagamento'] == 'Pix') : ?>
 						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\pix_logo_icon_248846.png"></td>
 					<?php elseif($compra['nome_pagamento'] == 'Boleto') : ?>
-						<td>><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\barcode_icon_138897.png"</td>
+						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\barcode_icon_138897.png"</td>
 					<?php elseif($compra['nome_pagamento'] == 'Cartão') : ?>
 						<td><?= $compra['nome_pagamento']?>/<?= $compra['nome_banco']?> <img src="\finar\imagens\1495815230-jd11_84589.png"></td>
 					<?php elseif($compra['nome_pagamento'] == 'Cheque') : ?>
@@ -121,6 +123,7 @@
                             <th>Custo</th>
                             <th>Estoque</th>
                             <th>Qtd Comprada</th>
+                            <th>Qtd Recebida</th>
                         </tr>
                     </thead>
                     <tbody id="dados_grid">
@@ -205,6 +208,7 @@ $(document).ready(function(){
                     html += '<th>R$'+parseFloat(item.custo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '<th>'+parseFloat(item.estoque_atual).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '<th>'+parseFloat(item.qtd_comprada).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '<th>'+parseFloat(item.qtd_recebida).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '</tr>';
                 });
                 $("#dados_grid").html(html);
