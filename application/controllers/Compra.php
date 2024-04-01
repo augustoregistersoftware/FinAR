@@ -60,7 +60,7 @@ class Compra extends CI_Controller {
         $compra_info["data_pedido"] = $_POST['data_pedido'];
         $compra_info["data_entrega"] = $_POST['data_entrega'];
         $compra_info["id_fornecedor"] = $_POST['fornecedor'];
-		$compra_info["status"] = "T";
+		$compra_info["status"] = "F";
 		$arquivo_pdf = $_FILES['file'];
         
 		$produto_info['title'] = "Escolhas De Produto - FinAR";
@@ -99,6 +99,41 @@ class Compra extends CI_Controller {
 		$this->load->view('templates/js',$produto_info);
 	}
 
+	public function finaliza()
+	{
+		$produtos_compra['title'] = "Produtos Da Compra - FinAR";
+		$ultimo_id = $this->compra_model->ultimo_id_select();
+		$id = $ultimo_id['id_solicitacao'];
+		$produtos_compra['produtos_compra'] = $this->compra_model->select_produtos_compra($id);
+		$produtos_compra['produtos_compra_subtotal'] = $this->compra_model->subtotal($id);
+		$produtos_compra['forma_pagto'] = $this->compra_model->select_formas_pagto();
+
+		$this->load->view('templates/header',$produtos_compra);
+		$this->load->view('templates/nav-top',$produtos_compra);
+		$this->load->view('pages/finalizar_compra',$produtos_compra);
+		$this->load->view('templates/footer',$produtos_compra);
+		$this->load->view('templates/js',$produtos_compra);
+	}
+
+	public function encerrar()
+	{
+		$ultimo_id = $this->compra_model->ultimo_id_select();
+		$id = $ultimo_id['id_solicitacao'];
+		$pagamento = $_POST['pagamento'];
+
+		$this->compra_model->encerrar($id,$pagamento);
+		redirect('compra');
+	}
+
+	public function remover_item($id)
+	{
+		$ultimo_id = $this->compra_model->ultimo_id_select();
+		$id_pedido = $ultimo_id['id_solicitacao'];
+
+		$this->compra_model->remover_item($id,$id_pedido);
+		$this->finaliza();
+	}
+
 	public function documentos($id)
 	{
 		$data["documentos"] =  $this->fornecedor_model->select_documentos($id);
@@ -123,16 +158,6 @@ class Compra extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-	public function inserte_documentos()
-	{
-        $fornecedor["nome"] = $_POST["nome_documento"];
-        $fornecedor["id_fornecedor"] = $_POST["fornecedor"];
-        $arquivo_pdf = $_FILES['file'];
-        $fornecedor["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
-		$this->fornecedor_model->inserte_documentos($fornecedor);
-
-		redirect("fornecedor");
-	}
 
 	public function fechar($id)
 	{

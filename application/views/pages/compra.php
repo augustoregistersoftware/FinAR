@@ -118,7 +118,7 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Cod Aux</th>
-                            <th>Preço Venda</th>
+                            <th>Custo</th>
                             <th>Estoque</th>
                             <th>Qtd Comprada</th>
                         </tr>
@@ -202,7 +202,7 @@ $(document).ready(function(){
                     html += '<td>'+item.id_produto+'</td>';
                     html += '<td>'+item.descricao+'</td>';
                     html += '<td>'+item.cod_aux+'</td>';
-                    html += '<th>R$'+parseFloat(item.preco_venda).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '<th>R$'+parseFloat(item.custo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '<th>'+parseFloat(item.estoque_atual).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '<th>'+parseFloat(item.qtd_comprada).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
                     html += '</tr>';

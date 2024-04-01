@@ -43,7 +43,7 @@
                 <div class="row mt-4"> <!-- Adicionando margem superior para separar os botões -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <a href="<?= base_url() ?>" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Proximo</a>
+                            <a href="<?= base_url() ?>compra/finaliza" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Proximo</a>
                             <a href="<?= base_url() ?>compra" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
                         </div>			
                     </div>

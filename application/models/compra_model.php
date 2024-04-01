@@ -10,7 +10,7 @@ class Compra_model extends CI_Model {
         DATE_FORMAT(STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d'), '%d/%m/%Y') as data_entrega,
         solicitacao_compra.status,
         formas.nome as nome_pagamento,
-        produtos_compra.quantidade * produto.custo as valor,
+        SUM(produtos_compra.quantidade * produto.custo) as valor,
         banco.nome_banco as nome_banco,
         CASE 
             WHEN STR_TO_DATE(solicitacao_compra.data_entrega, '%Y-%m-%d') < CURRENT_DATE() AND solicitacao_compra.status = 'F' THEN 'Atrasado'
@@ -26,8 +26,9 @@ class Compra_model extends CI_Model {
         INNER JOIN formas ON formas.id_forma = forma_pagamento.nome
         INNER JOIN banco ON banco.id_banco = forma_pagamento.id_banco
         INNER JOIN produtos_compra ON produtos_compra.id_pedido = solicitacao_compra.id_solicitacao
-        INNER JOIN produto ON produto.id_produto = produtos_compra.id_produto;
-        ")->result_array();
+        INNER JOIN produto ON produto.id_produto = produtos_compra.id_produto
+        GROUP BY
+        solicitacao_compra.id_solicitacao;")->result_array();
     }
 
     public function select_qtd_id_produto($id)
@@ -45,7 +46,7 @@ class Compra_model extends CI_Model {
         produto.id_produto,
         produto.descricao,
         produto.cod_aux,
-        produto.preco_venda,
+        produto.custo,
         produto.estoque_atual,
         produtos_compra.quantidade as qtd_comprada
         FROM produtos_compra
@@ -98,6 +99,44 @@ class Compra_model extends CI_Model {
         WHERE id_fornecedor = '.$this->db->escape($id).'')->row_array();
     }
 
+    public function select_produtos_compra($id)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        produto.descricao,
+        produto.cod_aux,
+        produto.custo,
+        produto.estoque_atual,
+        produtos_compra.quantidade,
+        (produto.custo * produtos_compra.quantidade) as total
+        FROM produtos_compra
+        INNER JOIN produto on produto.id_produto = produtos_compra.id_produto
+        WHERE produtos_compra.id_pedido = ' .$this->db->escape($id). '')->result_array();
+    }
+
+    public function subtotal($id)
+    {
+        return $this->db->query('SELECT
+        SUM(produto.custo * produtos_compra.quantidade) as subtotal
+        FROM 
+            produtos_compra
+        INNER JOIN 
+            produto ON produto.id_produto = produtos_compra.id_produto
+        WHERE 
+            produtos_compra.id_pedido =  ' .$this->db->escape($id). '')->row_array();
+    }
+
+    public function select_formas_pagto()
+    {
+        return $this->db->query('SELECT
+        forma_pagamento.id_forma_pagto,
+        formas.nome,
+        banco.nome_banco
+        FROM forma_pagamento
+        INNER JOIN formas on formas.id_forma = forma_pagamento.nome
+        INNER JOIN banco on banco.id_banco = forma_pagamento.id_banco')->result_array();
+    }
+
     public function select_arquivo($id)
     {
         return $this->db->query('SELECT
@@ -111,10 +150,20 @@ class Compra_model extends CI_Model {
         return $this->db->query('SELECT id_solicitacao FROM solicitacao_compra ORDER BY id_solicitacao DESC LIMIT 1')->row_array();
     }
 
-    public function delete_documento($id)
+    public function remover_item($id,$id_pedido)
     {
-        $this->db->where("id_documento_fornc",$id);
-        return $this->db->delete("documentos_fornecedor");
+        $sql = "DELETE FROM produtos_compra WHERE id_produto = ? AND id_pedido = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($id,$id_pedido));
+    }
+
+    public function encerrar($id,$pagamento)
+    {
+        $sql = "UPDATE solicitacao_compra SET id_forma_pgto = ? WHERE id_solicitacao = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($pagamento,$id));
     }
 
     public function update_pedido_fecha($id,$status)
