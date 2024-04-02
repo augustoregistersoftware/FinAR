@@ -129,6 +129,26 @@ class Compra extends CI_Controller {
 		redirect('compra');
 	}
 
+	public function encerrar_fechar($id)
+	{
+		$id_pedido = $id;
+		$id_produto = $_POST['produto'];
+		$qtde_recebida = $_POST['qtde_recebida'];
+
+		$this->compra_model->updt_recebido_produto($id_pedido,$id_produto,$qtde_recebida);
+		$this->compra_model->updt_estoque_produto($id_produto,$qtde_recebida);
+		$this->fechar($id_pedido);
+	}
+
+	public function end($id)
+	{
+		$id = $id;
+		$status['status'] = 'T';
+		$this->compra_model->update_pedido_fecha($id,$status);
+
+		redirect("compra");
+	}
+
 	public function remover_item($id)
 	{
 		$ultimo_id = $this->compra_model->ultimo_id_select();
@@ -166,15 +186,16 @@ class Compra extends CI_Controller {
 
 	public function fechar($id)
 	{
-        $status["status"] = "T";
-		$dados_produto = $this->compra_model->select_qtd_id_produto($id);
-		$qtde['estoque_atual'] = $dados_produto['quantidade'];
-		$id_produto = $dados_produto['id_produto'];
+        $data["title"] = "Finalizar Pedido - FinAR";
+		$data["produtos"] = $this->compra_model->select_produtos_compra($id);
+		$data["produtos_condicao"] = $this->compra_model->select_produtos_compra_condicao($id);
+		$data["id_pedido"] = $id;
 
-		$this->compra_model->update_pedido_fecha($id,$status);
-		$this->compra_model->updt_estoque_produto($id_produto,$qtde);
-
-		redirect("compra");
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/fechar_compra',$data);
+		$this->load->view('templates/footer',$data);
+		$this->load->view('templates/js',$data);
 	}
 
 	public function abir_documento($id)

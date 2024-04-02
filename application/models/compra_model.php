@@ -110,10 +110,27 @@ class Compra_model extends CI_Model {
         produto.custo,
         produto.estoque_atual,
         produtos_compra.quantidade,
+        produtos_compra.quantidade_recebida,
         (produto.custo * produtos_compra.quantidade) as total
         FROM produtos_compra
         INNER JOIN produto on produto.id_produto = produtos_compra.id_produto
         WHERE produtos_compra.id_pedido = ' .$this->db->escape($id). '')->result_array();
+    }
+
+    public function select_produtos_compra_condicao($id)
+    {
+        return $this->db->query('SELECT
+        produto.id_produto,
+        produto.descricao,
+        produto.cod_aux,
+        produto.custo,
+        produto.estoque_atual,
+        produtos_compra.quantidade,
+        produtos_compra.quantidade_recebida,
+        (produto.custo * produtos_compra.quantidade) as total
+        FROM produtos_compra
+        INNER JOIN produto on produto.id_produto = produtos_compra.id_produto
+        WHERE produtos_compra.quantidade_recebida = 0 AND produtos_compra.id_pedido = ' .$this->db->escape($id). '')->result_array();
     }
 
     public function subtotal($id)
@@ -180,6 +197,14 @@ class Compra_model extends CI_Model {
     
         // Executa a query com os parâmetros
         return $this->db->query($sql, array($qtde, $id_produto));
+    }
+
+    public function updt_recebido_produto($id_pedido,$id_produto,$qtde_recebida)
+    {
+        $sql = "UPDATE produtos_compra SET quantidade_recebida = ? WHERE id_produto = ? AND id_pedido = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($qtde_recebida,$id_produto,$id_pedido));
     }
 
     public function update_fornecedor($id,$fornecedor_info)
