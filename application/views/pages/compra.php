@@ -75,16 +75,14 @@
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                             <a title="Fechar Solicitação" href="javascript:goFecha(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>    
-                            <a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
+                            <a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
 						<?php elseif($compra['status'] == 'C') : ?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
-                            <a title="Abrir Solicitação" href="javascript:goAtiva(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a> 	
                         <?php else :?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
-                            <a title="Abrir Solicitação" href="javascript:goInativa(<?= $compra['id_solicitacao']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-xmark"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>
-							<a title="Cancelar Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
+							<a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
                         <?php endif ; ?>
                 </tr>
                 <?php endforeach;?>
@@ -141,17 +139,6 @@
 
 
 <script>
-function goEdit(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
-    var myUrl = baseUrl + 'localizacao/editar/' + id;
-    if (confirm("Deseja realmente Editar?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
-}
-
-
 function goFecha(id) {
 
     swal({
@@ -171,14 +158,22 @@ function goFecha(id) {
     });
 }
 
-function goInativa(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/inativa/' + id;
-    if (confirm("Deseja realmente inativar essa localizacao?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+function goCancela(id) {
+    swal({
+        title: "Deseja Realmente Cancelar Esse Pedido?",
+        text: "Confira Tudo antes de cancelar, essa ação tera grande impacto",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+            var myUrl = baseUrl + 'compra/cancela/' + id;
+            window.location.href = myUrl;
+        } else {
+            return false;
+        }
+    });
 }
 
 function goDocumentos(id) {

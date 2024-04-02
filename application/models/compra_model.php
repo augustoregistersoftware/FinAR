@@ -93,12 +93,15 @@ class Compra_model extends CI_Model {
         WHERE documentos_fornecedor.id_fornecedor = '.$this->db->escape($id).'')->result_array();
     }
 
-    public function select_editar($id)
+    public function select_cancela($id)
     {
         return $this->db->query('SELECT
-        *
-        FROM fornecedor
-        WHERE id_fornecedor = '.$this->db->escape($id).'')->row_array();
+        id_produto,
+        quantidade_recebida
+        FROM
+        produtos_compra
+        WHERE
+        id_pedido = '.$this->db->escape($id).'')->result_array();
     }
 
     public function select_produtos_compra($id)
@@ -183,6 +186,22 @@ class Compra_model extends CI_Model {
     
         // Executa a query com os parâmetros
         return $this->db->query($sql, array($pagamento,$subtotal,$id));
+    }
+
+    public function update_cancela($quantidade_recebida,$id_produto)
+    {
+        $sql = "UPDATE produto SET estoque_atual = estoque_atual - ? WHERE id_produto = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($quantidade_recebida,$id_produto));
+    }
+
+    public function update_cancela_status($status,$id)
+    {
+        $sql = "UPDATE solicitacao_compra SET status =  ? WHERE id_solicitacao = ?";
+    
+        // Executa a query com os parâmetros
+        return $this->db->query($sql, array($status,$id));
     }
 
     public function update_pedido_fecha($id,$status)

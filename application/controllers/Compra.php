@@ -211,45 +211,24 @@ class Compra extends CI_Controller {
         }
     }
 
-	public function delete_documento($id)
+	public function cancela($id)
 	{
-		$this->fornecedor_model->delete_documento($id);
-
-		redirect("fornecedor");
+		$result_select = $this->compra_model->select_cancela($id);
+		$num_result_select = count($result_select);
+		$num_result_select_ = $num_result_select - 1;
+		#echo $result_select['id_produto'];
+		echo $num_result_select;
+		if ($result_select) {
+			for ($i = 0; $i < $num_result_select; $i++) { // Começa do índice 0
+				$id_pedido = $id;
+				$id_produto = $result_select[$i]['id_produto'];
+				$quantidade_recebida = $result_select[$i]['quantidade_recebida'];
+		
+				$this->compra_model->update_cancela($quantidade_recebida, $id_produto);
+			}
+			$status = "C";
+			$this->compra_model->update_cancela_status($status, $id);
+		}
+		redirect("compra");
 	}
-
-    public function ativa($id)
-	{
-        $fornecedor_info['status'] = "T";
-		$this->fornecedor_model->update_fornecedor_ativa($id,$fornecedor_info);
-
-		redirect("fornecedor");
-	}
-
-    public function inativa($id)
-	{
-        $fornecedor_info['status'] = "F";
-		$this->fornecedor_model->update_fornecedor_inativa($id,$fornecedor_info);
-
-		redirect("fornecedor");
-	}
-
-    public function update($id)
-	{
-        $fornecedor_info["nome"] = $_POST["nome_fornecedor"];
-        $fornecedor_info["cnpj"] = $_POST["cnpj"];
-        $fornecedor_info["cep"] = $_POST["cep"];
-        $fornecedor_info["endereco"] = $_POST["endereco"];
-        $fornecedor_info["bairro"] = $_POST["bairro"];
-        $fornecedor_info["complemento"] = $_POST["complemento"];
-        $fornecedor_info["cidade"] = $_POST["cidade"];
-        $fornecedor_info["numero"] = $_POST["numero"];
-        $fornecedor_info["ie"] = $_POST["ie"];
-        $fornecedor_info["telefone"] = $_POST["telefone"];
-        $fornecedor_info["email"] = $_POST["email"];
-		$this->fornecedor_model->update_fornecedor($id,$fornecedor_info);
-
-		redirect("fornecedor");
-	}
-
 }
