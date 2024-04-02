@@ -9,6 +9,7 @@
         <table class="row-border" id="localizacao">
             <thead>
                 <tr>
+                    <th>Situação</th>
                     <th>ID</th>
                     <th>Descrição</th>
                     <th>Codigo Auxiliar</th>
@@ -21,6 +22,12 @@
             <tbody>
                 <?php foreach($produtos as $produtos) : ?>   
                 <tr>
+                    <td>
+                <?php if($produtos['quantidade_recebida'] > 0) : ?>
+                    <a id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-success"><i class="fa-regular fa-thumbs-up"></i></a>
+                <?php else : ?>
+                    <a onclick="controleDialog2()" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-circle-exclamation"></i></a>
+                <?php endif; ?>    
                     <th><?= $produtos['id_produto']?></th>
                     <td><?= $produtos['descricao']?></td>
                     <td><?= $produtos['cod_aux']?></td>
@@ -87,4 +94,12 @@ function goDelete(id) {
         }
     });
 }
+
+function controleDialog(){
+    swal("Parabéns", "Seu Produto esta conferido", "success");
+	}
+
+	function controleDialog2(){
+		swal("Opss...", "Seu Produto não foi conferido", "warning");
+	}
 </script>

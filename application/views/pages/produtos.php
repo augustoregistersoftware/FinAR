@@ -56,10 +56,10 @@
                     <?php if($produtos['estoque_atual'] <= $produtos['estoque_minimo'] and $produtos['qtde_em_compra'] == 0) : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?>
                         <p style="color: red;">Produto Indicado a fazer compra</p>
-                    <?php elseif($produtos['qtde_em_compra'] > 0) : ?>   
+                    <?php elseif($produtos['qtde_em_compra'] > 0 and $produtos['estoque_atual'] <= $produtos['estoque_minimo'] ) : ?>   
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?>
                         <p style="color: red;">Esse Produto foi pedido</p> 
-                    <?php else : ?>
+                    <?php elseif($produtos['estoque_atual'] > $produtos['estoque_minimo']) : ?>
                         <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
                     <?php endif; ?>
                     <td><?= number_format($produtos['estoque_minimo'],2,",",".")?></th>
