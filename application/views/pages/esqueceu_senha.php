@@ -10,7 +10,7 @@
 <body>
     <div id="container">
         <div class="banner">
-            <img src="/finar/imagens/login.png" alt="imagem-login">
+            <img src="/finar/imagens/pasword.png" alt="imagem-login">
             <p style="color: #fff; font-weight: 400;">
                 Seja bem vindo ao FinAR, acesse e aproveite todo o conteúdo,
                 <br>somos uma equipe de profissionais empenhados em
