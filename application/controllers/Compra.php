@@ -65,8 +65,8 @@ class Compra extends CI_Controller {
 		$arquivo_pdf = $_FILES['file'];
         
 		$produto_info['title'] = "Escolhas De Produto - FinAR";
-        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
-        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
+        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id_ativo();
+        $produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id_ativo();
 
 		$ultimo_id = $this->compra_model->inserte_compra_documentacao($compra_info);
 		$compra_arquivo["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
@@ -84,7 +84,7 @@ class Compra extends CI_Controller {
 		define('ID', $valor_id); // Note que alterei 'id' para 'ID' para seguir as convenções de nomenclatura de constantes em maiúsculas
 		$compra_produto["id_pedido"] = ID; // Aqui você usa a constante corretamente
 		$produto_info['title'] = "Escolhas De Produto - FinAR";
-		$produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id();
+		$produto_info["produto"] = $this->produtos_model->select_produto_por_empresa_sem_id_ativo();
 		
 		$this->compra_model->inserte_compra_produto($compra_produto);
 		$this->montagem_produtos($produto_info);
