@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/finar/imagens/icone.png">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Recuperar senha - FinAR</title>
 </head>
 <body>
+<form action="<?= base_url() ?>login/esqueceu_senha/" method="post">
     <div id="container">
         <div class="banner">
             <img src="/finar/imagens/pasword.png" alt="imagem-login">
@@ -36,7 +38,7 @@
                     recuperar
                 </p>
 
-                <button>Obter o código</button>
+                <button type="submit">Obter o código</button>
             </div>
         </div>
     </div>
@@ -48,6 +50,25 @@
     </a>
 </body>
 </html>
+
+
+<script>
+    document.getElementById('cmail').addEventListener('change', function() {
+        var email = document.getElementById('email').value;
+        var cmail = this.value;
+
+        if (email === cmail) {
+            
+        } else {
+            this.value = "";
+            controleDialog();
+        }
+    });
+
+    function controleDialog(){
+		swal("Opss...", "Os e-mails não coincidem. O campo de confirmação de e-mail foi limpo.", "warning");
+	}
+</script>
 
 
 <style>

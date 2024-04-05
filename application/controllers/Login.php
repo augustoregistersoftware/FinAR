@@ -26,5 +26,18 @@ class Login extends CI_Controller {
 		$this->load->view('pages/esqueceu_senha',$data);
 	}
 
+	public function esqueceu_senha()
+	{
+		$apelido = $_POST['username'];
+		$email = $_POST['cmail'];
+		$subject = 'RECUPERAÇÃO DA SENHA';
+
+
+		$senhaa = $this->login_model->senha($email,$apelido);
+		$senha = $senhaa['senha'];
+		$this->login_model->enviarEmail($email,$subject,$senha);
+		redirect('login');
+	}
+
 
 }
