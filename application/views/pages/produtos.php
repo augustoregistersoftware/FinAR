@@ -115,7 +115,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table">
+            <table class="display compact" style="width:100%" id="pedidos">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -464,6 +464,7 @@ function goEdit(id) {
                     html += '</tr>';
                 });
                 $("#dados_grid").html(html);
+                new DataTable('#pedidos');
                 $("#myModal").modal('show'); 
             }
         });

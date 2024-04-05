@@ -105,7 +105,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table">
+            <table class="display compact" style="width:100%" id="produtos_vinculados">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -138,7 +138,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table">
+            <table class="display compact" style="width:100%" id="pedidos">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -273,6 +273,7 @@ $(document).ready(function(){
                     html += '</tr>';
                 });
                 $("#dados_grid").html(html);
+                new DataTable('#produtos_vinculados');
                 $("#myModal").modal('show'); 
             }
         });
@@ -310,6 +311,7 @@ $(document).ready(function(){
                     html += '</tr>';
                 });
                 $("#dados_grid2").html(html);
+                new DataTable('#pedidos');
                 $("#modal2").modal('show'); 
             }
         });

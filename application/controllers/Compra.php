@@ -161,12 +161,12 @@ class Compra extends CI_Controller {
 
 	public function documentos($id)
 	{
-		$data["documentos"] =  $this->fornecedor_model->select_documentos($id);
-		$data["title"] = "Documentos Fornecedor - FinAR";
+		$data["documentos"] =  $this->compra_model->select_todos_arquivos($id);
+		$data["title"] = "Documentos Compra - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/documentos_fornecedor',$data);
+		$this->load->view('pages/documentos_compra',$data);
 		$this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
