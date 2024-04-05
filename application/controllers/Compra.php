@@ -171,6 +171,13 @@ class Compra extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
+	public function delete_documento($id)
+	{
+		$this->compra_model->delete_documento($id);
+
+		redirect("compra");
+	}
+
 	public function new_compra()
 	{
 		$data["fornecedor"] =  $this->fornecedor_model->index();

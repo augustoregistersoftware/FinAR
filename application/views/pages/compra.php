@@ -262,6 +262,7 @@ $(document).ready(function(){
         var atrasado = <?php echo json_encode($atrasado); ?>;
         swal("Aviso!!", "Você tem" + atrasado.atrasada + "pedidos atrasados por favor verifique com seu fornecedor!", "warning");
     }
+;
 </script>
 
 <style>

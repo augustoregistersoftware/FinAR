@@ -246,4 +246,10 @@ class Compra_model extends CI_Model {
         $this->db->insert("solicitacao_compra", $compra_info);
         return $this->db->insert_id();
     }
+
+    public function delete_documento($id)
+    {
+        $this->db->where("id_documento_comp",$id);
+        return $this->db->delete("documentos_compra");
+    }
 }

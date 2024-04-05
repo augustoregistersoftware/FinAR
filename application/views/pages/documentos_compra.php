@@ -66,7 +66,7 @@ function goDelete(id) {
                 icon: "success",
             }).then(() => {
                 var baseUrl = '<?php echo base_url(); ?>';
-                var myUrl = baseUrl + 'fornecedor/delete_documento/' + id;
+                var myUrl = baseUrl + 'compra/delete_documento/' + id;
                 window.location.href = myUrl;
             });
         } else {
