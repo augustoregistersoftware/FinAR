@@ -24,7 +24,7 @@
 	</style>
 
 	<link rel="stylesheet" href="https://getbootstrap.com/docs/4.4/examples/dashboard/dashboard.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/criativo/imagens/icone.png">
+	<link rel="shortcut icon" type="image/x-icon" href="/finar/imagens/icone.png">
 	<script src="https://kit.fontawesome.com/2a33fe9a00.js" crossorigin="anonymous"></script>
 </head>
 <body>

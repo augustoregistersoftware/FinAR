@@ -15,6 +15,7 @@ class Login extends CI_Controller {
 		#$data["login"] =  $this->empresa_model->index();
 		$data["title"] = "Login - FinAR";
 
+		$this->output->cache(1440);
 		$this->load->view('pages/login',$data);
 	}
 
