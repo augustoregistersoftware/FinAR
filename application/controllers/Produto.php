@@ -21,6 +21,12 @@ class Produto extends CI_Controller {
 		$this->load->view('pages/produtos',$data);
 	}
 
+	public function obter_dados() {
+		$idDoProduto = $this->input->get('idDoProduto');
+        $dados = $this->produtos_model->select_pedido_compra($idDoProduto);
+        echo json_encode($dados);
+    }
+
     public function produto_empresa($id)
 	{
 		$data["produtos"] =  $this->produtos_model->select_produto_por_empresa($id);
