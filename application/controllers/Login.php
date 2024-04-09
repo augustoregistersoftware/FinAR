@@ -14,6 +14,7 @@ class Login extends CI_Controller {
 	{
 		#$data["login"] =  $this->empresa_model->index();
 		$data["title"] = "Login - FinAR";
+		$this->session->sess_destroy();
 
 		$this->load->view('pages/login',$data);
 	}
@@ -32,10 +33,23 @@ class Login extends CI_Controller {
 		$senha = $this->input->post('password');
 
 		$validate = $this->login_model->auth($email,$senha);
+		$validate_permission = $this->login_model->auth_permission($email,$senha);
+
+		$name = $validate_permission['nome'];
 		$validade_count = count($validate);
 
 		if ($validade_count > 0){
-			$username = $this->input->post('username');
+			$this->cookies($name);
+		}else{
+			$this->session->set_flashdata('warning','Acesso Negado!');
+			redirect("login");
+		}
+	}
+
+	public function cookies($name)
+	{
+		$username = $this->input->post('username');
+
 			$this->load->helper('cookie');
 			$username_cookie = array(
 				'name'   => 'username',
@@ -44,7 +58,8 @@ class Login extends CI_Controller {
 				'path'   => '/'
 			);
 
-			$checked = $this->input->post('remember_me');
+		$checked = $this->input->post('remember_me');
+
 			$this->load->helper('cookie');
 			$checked_cookie = array(
 				'name'   => 'checked',
@@ -54,12 +69,16 @@ class Login extends CI_Controller {
 			);
 			$this->input->set_cookie($username_cookie);
 			$this->input->set_cookie($checked_cookie);
-			redirect("dashboard");
-		}else{
-			redirect("login");
-		}
 
+			$this->session($name);
+	}
 
+	public function session($name)
+	{
+		$this->session->set_userdata('name',$name);
+		$this->session->set_userdata('log','logged');
+		$this->session->set_flashdata('suc','Login Efetuado!');
+		redirect("dashboard?aviso=sucesso");
 	}
 
 	public function esqueceu_senha()

@@ -32,14 +32,14 @@
                     <input type="text" name="username" id="username" placeholder="username" value="<?= $this->input->cookie('username') ?>">
                     <input type="password" name="password" id="password" placeholder="password">
 
-                    <label for="remember_me" style="display: inline-block; margin-right: 10px;">
-                        <input type="checkbox" id="remember_me" name="remember_me" style="transform: scale(0.8);" checked> Lembrar login
+                    <label for="remember_me" style="display: inline-block; margin-right: 10px; color: black;">
+                        <input type="checkbox" id="remember_me" name="remember_me" style="transform: scale(0.8);" checked > Lembrar login
                     </label>
                 <?php else: ?>
                     <input type="text" name="username" id="username" placeholder="username">
                     <input type="password" name="password" id="password" placeholder="password">
 
-                    <label for="remember_me" style="display: inline-block; margin-right: 10px;">
+                    <label for="remember_me" style="display: inline-block; margin-right: 10px; color: black;">
                         <input type="checkbox" id="remember_me" name="remember_me" style="transform: scale(0.8);" > Lembrar login
                     </label>
                 <?php endif; ?>

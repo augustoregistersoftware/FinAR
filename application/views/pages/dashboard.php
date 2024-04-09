@@ -1,4 +1,5 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">Dashboard</h1>
 		<div class="btn-group mr-2">
@@ -177,6 +178,32 @@
 	function abrirGraficoEstoque(){
 		document.getElementById("d1").setAttribute("open","");
 	}
+
+  function boas_vindas(){
+    Swal.fire("Seja Bem-Vindo,<?php echo $this->session->userdata('name'); ?> oque vamos fazer hoje?");
+}
+
+   // Função para limpar um parâmetro da URL
+   function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'sucesso') {
+          boas_vindas();
+        }
+    });
 </script>
 
 

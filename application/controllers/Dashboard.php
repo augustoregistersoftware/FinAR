@@ -24,13 +24,17 @@ class Dashboard extends CI_Controller {
 		$data["total_receber"] = $this->dashboard_model->select_total_receber();
 		$data["title"] = "Dashboard - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/dashboard',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		if($this->session->userdata('log')!="logged"){
+			redirect("login");
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/dashboard',$data);
+			$this->load->view('templates/footer',$data);
+			$this->load->view('templates/js',$data);
 
-
+			
+		}
 		
 	}
 

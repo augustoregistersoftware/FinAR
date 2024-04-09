@@ -19,6 +19,16 @@ class Login_model extends CI_Model {
         WHERE email = ".$this->db->escape($email)." AND senha = ".$this->db->escape($senha)."")->result_array();
     }
 
+    public function auth_permission($email,$senha)
+
+    {
+        return $this->db->query("SELECT
+        login.*,
+        permissoes_login.*
+        FROM login
+        INNER JOIN permissoes_login on permissoes_login.id_login = login.id_login
+        WHERE login.email = ".$this->db->escape($email)."  AND login.senha = ".$this->db->escape($senha)."")->row_array();
+    }
     public function enviarEmail($email,$subject,$senha) {
         $this->email->set_newline("\r\n");
         $this->email->from('registersoftwaresistemas@gmail.com', 'RegisterSoftware');
