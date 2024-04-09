@@ -180,7 +180,14 @@
 	}
 
   function boas_vindas(){
-    Swal.fire("Seja Bem-Vindo,<?php echo $this->session->userdata('name'); ?> oque vamos fazer hoje?");
+    Swal.fire({
+  title: "Olá,<?php echo $this->session->userdata('name'); ?>",
+  text: "Seja muito bem-vindo(a)! Hoje, vamos nos aventurar juntos em uma jornada cheia de possibilidades. Estou ansioso(a) para explorar, aprender e criar momentos inesquecíveis ao seu lado. Vamos fazer deste dia algo extraordinário!",
+  imageUrl: "https://ouch-cdn2.icons8.com/JlfQgQozPSgBq00v8E7N2L96CLHslRQofr_gnO39aRY/rs:fit:608:456/extend:false/wm:1:re:0:0:0.8/wmid:ouch/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzMx/LzM1MDcyODA3LTky/NmYtNGM5Mi1hZjQw/LTgyNmI0MjQ5MWJi/OS5zdmc.png",
+  imageWidth: 400,
+  imageHeight: 200,
+  imageAlt: "Custom image"
+});
 }
 
    // Função para limpar um parâmetro da URL

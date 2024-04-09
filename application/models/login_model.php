@@ -26,7 +26,7 @@ class Login_model extends CI_Model {
         login.*,
         permissoes_login.*
         FROM login
-        INNER JOIN permissoes_login on permissoes_login.id_login = login.id_login
+        LEFT JOIN permissoes_login on permissoes_login.id_login = login.id_login
         WHERE login.email = ".$this->db->escape($email)."  AND login.senha = ".$this->db->escape($senha)."")->row_array();
     }
     public function enviarEmail($email,$subject,$senha) {

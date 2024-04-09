@@ -15,9 +15,15 @@ class Empresa extends CI_Controller {
 		$data["empresa"] =  $this->empresa_model->index();
 		$data["title"] = "Empresa - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/empresa',$data);
+		if($this->session->userdata('company')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/empresa',$data);
+		}
 	}
 
     public function editar($id)
