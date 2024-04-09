@@ -27,10 +27,50 @@ class Login extends CI_Controller {
 		$this->load->view('pages/esqueceu_senha',$data);
 	}
 
+	public function auth()
+	{
+		$email = $this->input->post('username');
+		$senha = $this->input->post('password');
+
+		$validate = $this->login_model->auth($email,$senha);
+		$validade_count = count($validate);
+
+		if ($validade_count > 0){
+			$username = $this->input->post('username');
+			$this->load->helper('cookie');
+			$username_cookie = array(
+				'name'   => 'username',
+				'value'  => $username,
+				'expire' => '3600', 
+				'path'   => '/'
+			);
+
+			$checked = $this->input->post('remember_me');
+			$this->load->helper('cookie');
+			$checked_cookie = array(
+				'name'   => 'checked',
+				'value'  => $checked,
+				'expire' => '3600', 
+				'path'   => '/'
+			);
+			$this->input->set_cookie($username_cookie);
+			$this->input->set_cookie($checked_cookie);
+			redirect("dashboard");
+		}else{
+			redirect("login");
+		}
+
+
+	}
+
 	public function esqueceu_senha()
 	{
-		$apelido = $_POST['username'];
-		$email = $_POST['cmail'];
+		#$apelido = $_POST['username'];
+		#$email = $_POST['cmail'];
+
+		#mais seguro contra xss
+		$apelido = $this->input->post('username'); 
+		$email = $this->input->post('cmail'); 
 		$subject = 'RECUPERAÇÃO DA SENHA';
 
 

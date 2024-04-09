@@ -9,6 +9,7 @@
     <title>Login - FinAR</title>
 </head>
 <body>
+<form action="<?= base_url() ?>login/auth/" method="post">
     <div id="container">
         <div class="banner">
             <img src="/finar/imagens/clip-financial-report.gif" alt="imagem-login">
@@ -27,15 +28,27 @@
 
             <div class="box">
                 <h2>faça o seu login agora</h2>
-                <input type="text" name="username" id="username" placeholder="username">
-                <input type="password" name="password" id="password" placeholder="password">
+                <?php if($this->input->cookie('checked') == 'on'): ?>
+                    <input type="text" name="username" id="username" placeholder="username" value="<?= $this->input->cookie('username') ?>">
+                    <input type="password" name="password" id="password" placeholder="password">
+
+                    <label for="remember_me" style="display: inline-block; margin-right: 10px;">
+                        <input type="checkbox" id="remember_me" name="remember_me" style="transform: scale(0.8);" checked> Lembrar login
+                    </label>
+                <?php else: ?>
+                    <input type="text" name="username" id="username" placeholder="username">
+                    <input type="password" name="password" id="password" placeholder="password">
+
+                    <label for="remember_me" style="display: inline-block; margin-right: 10px;">
+                        <input type="checkbox" id="remember_me" name="remember_me" style="transform: scale(0.8);" > Lembrar login
+                    </label>
+                <?php endif; ?>
 
                 <a href="<?= base_url() ?>login/password/">
                     <p>Esqueceu a sua senha?</p>
                 </a>
                 
-                <button>Login</button>
-                
+                <button type="submit">Login</button>
             </div>
         </div>
     </div>

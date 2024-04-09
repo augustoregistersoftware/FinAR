@@ -11,6 +11,14 @@ class Login_model extends CI_Model {
         return $this->db->query("SELECT senha FROM login WHERE email = ".$this->db->escape($email)." AND nome = ".$this->db->escape($apelido)."")->row_array();
     }
 
+    public function auth($email,$senha)
+    {
+        return $this->db->query("SELECT
+        *
+        FROM login
+        WHERE email = ".$this->db->escape($email)." AND senha = ".$this->db->escape($senha)."")->result_array();
+    }
+
     public function enviarEmail($email,$subject,$senha) {
         $this->email->set_newline("\r\n");
         $this->email->from('registersoftwaresistemas@gmail.com', 'RegisterSoftware');
