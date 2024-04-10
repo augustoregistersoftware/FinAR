@@ -38,6 +38,12 @@ class Fornecedor extends CI_Controller {
         echo json_encode($dados);
     }
 
+	public function obter_dados_compra() {
+		$idDoFornecedor = $this->input->get('idDoFornecedor');
+        $dados = $this->fornecedor_model->select_pedido_compra($idDoFornecedor);
+        echo json_encode($dados);
+    }
+
     public function editar($id)
 	{
 		$data["fornecedor_editar"] =  $this->fornecedor_model->select_editar($id);

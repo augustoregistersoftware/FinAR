@@ -178,7 +178,7 @@ function goCancela(id) {
 
 function goDocumentos(id) {
     var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/documentos/' + id;
+    var myUrl = baseUrl + 'compra/documentos/' + id;
     window.location.href = myUrl;
 }
 
@@ -262,6 +262,7 @@ $(document).ready(function(){
         var atrasado = <?php echo json_encode($atrasado); ?>;
         swal("Aviso!!", "Você tem" + atrasado.atrasada + "pedidos atrasados por favor verifique com seu fornecedor!", "warning");
     }
+;
 </script>
 
 <style>

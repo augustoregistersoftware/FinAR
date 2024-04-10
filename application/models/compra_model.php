@@ -81,17 +81,6 @@ class Compra_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function select_documentos($id)
-    {
-        return $this->db->query('SELECT
-        documentos_fornecedor.id_documento_fornc,
-        documentos_fornecedor.nome,
-        documentos_fornecedor.arquivo,
-        fornecedor.nome as razao_social
-        FROM documentos_fornecedor
-        INNER JOIN fornecedor on fornecedor.id_fornecedor = documentos_fornecedor.id_fornecedor
-        WHERE documentos_fornecedor.id_fornecedor = '.$this->db->escape($id).'')->result_array();
-    }
 
     public function select_cancela($id)
     {
@@ -163,8 +152,18 @@ class Compra_model extends CI_Model {
     {
         return $this->db->query('SELECT
         arquivo
-        FROM documentos_fornecedor
-        WHERE id_documento_fornc = '.$this->db->escape($id).'')->row_array();
+        FROM documentos_compra
+        WHERE id_documento_comp= '.$this->db->escape($id).'')->row_array();
+    }
+
+    public function select_todos_arquivos($id)
+    {
+        return $this->db->query('SELECT
+        documentos_compra.*,
+        solicitacao_compra.descricao
+        FROM documentos_compra
+        INNER JOIN solicitacao_compra on solicitacao_compra.id_solicitacao = documentos_compra.id_compra
+        WHERE id_documento_comp = '.$this->db->escape($id).'')->result_array();
     }
 
     public function ultimo_id_select()
@@ -246,5 +245,11 @@ class Compra_model extends CI_Model {
     {
         $this->db->insert("solicitacao_compra", $compra_info);
         return $this->db->insert_id();
+    }
+
+    public function delete_documento($id)
+    {
+        $this->db->where("id_documento_comp",$id);
+        return $this->db->delete("documentos_compra");
     }
 }

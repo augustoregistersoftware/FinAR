@@ -71,13 +71,15 @@
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                         <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
-                        <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
+                        <!-- <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a> -->
+                        <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info fornecedor-link" data-toggle="modal" data-target="#modal2" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-shopping-cart"></i></a>
                     <?php else :?>
                         <a title="Ativar Fornecedor" href="javascript:goAtiva(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
                         <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
-                        <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
+                        <!-- <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a> -->
+                        <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info fornecedor-link" data-toggle="modal" data-target="#modal2" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-shopping-cart"></i></a>
                     <?php endif ; ?>    
                 </tr>
                 <?php endforeach;?>
@@ -103,7 +105,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table">
+            <table class="display compact" style="width:100%" id="produtos_vinculados">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -114,6 +116,41 @@
                         </tr>
                     </thead>
                     <tbody id="dados_grid">
+                        <!-- Os dados da grid serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade custom-modal" id="modal2" role="dialog">
+    <div class="modal-dialog modal-lg" role="document"> <!-- Adicione a classe modal-lg para aumentar a largura da modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pedido Vinculado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <table class="display compact" style="width:100%" id="pedidos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Data Pedido</th>
+                            <th>Data Entrega</th>
+                            <th>Situação</th>
+                            <th>Fornecedor</th>
+                            <th>Valor Confirmado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dados_grid2">
                         <!-- Os dados da grid serão inseridos aqui via JavaScript -->
                     </tbody>
                 </table>
@@ -236,7 +273,46 @@ $(document).ready(function(){
                     html += '</tr>';
                 });
                 $("#dados_grid").html(html);
+                new DataTable('#produtos_vinculados');
                 $("#myModal").modal('show'); 
+            }
+        });
+    });
+});
+
+$(document).ready(function(){
+    $("body").on("click", ".fornecedor-link", function(e){
+        e.preventDefault();
+        
+        var idDoFornecedor = $(this).attr("id");
+        
+        $.ajax({
+            url: "<?php echo site_url('fornecedor/obter_dados_compra');?>",
+            type: 'GET',
+            dataType: 'json',
+            data: { idDoFornecedor: idDoFornecedor }, 
+            success: function(data) {
+                var html = '';
+                $.each(data, function(key, item){
+                    html += '<tr>';
+                    html += '<td>'+item.id_solicitacao+'</td>';
+                    html += '<td>'+item.descricao+'</td>';
+                    html += '<td>'+item.data_pedido+'</td>';
+                    html += '<td>'+item.data_entrega+'</td>';
+                    if (item.status == 'F') {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff; padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>';
+                    } else if (item.status == 'C') {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #ea0000; color: #fff; padding: 8px 10px; margin-top: 5px;">Cancelado</span></td>';
+                    } else {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #03ab14; color: #fff; padding: 8px 10px; margin-top: 5px;">Fechado</span></td>';
+                    }
+                    html += '<td>'+item.nome_fornecedor+'</td>';
+                    html +=  '<th> R$'+parseFloat(item.valor_confirmado).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '</tr>';
+                });
+                $("#dados_grid2").html(html);
+                new DataTable('#pedidos');
+                $("#modal2").modal('show'); 
             }
         });
     });
