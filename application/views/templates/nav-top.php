@@ -27,7 +27,7 @@
             </a>
           </li>
 					<li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>usuarios">
+            <a class="nav-link" href="<?= base_url() ?>cadastro_login">
               <span data-feather="file"><img src="\finar\imagens\users_21945.png"></span>
               Usuarios
             </a>
