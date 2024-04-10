@@ -12,13 +12,30 @@ class Produto extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["produtos"] =  $this->produtos_model->index();
 		$data["empresa_produtos"] =  $this->produtos_model->select_empresas();
 		$data["title"] = "Produtos - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/produtos',$data);
+		if($this->session->userdata('product')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/produtos',$data);
+		}
+
+	
 	}
 
     public function produto_empresa($id)

@@ -12,13 +12,28 @@ class Fornecedor extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["fornecedor"] =  $this->fornecedor_model->index();
 		$data["empresa_fornecedor"] =  $this->fornecedor_model->select_empresas();
 		$data["title"] = "Fornecedor - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/fornecedor',$data);
+		if($this->session->userdata('supplier')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/fornecedor',$data);
+		}
 	}
 
     public function fornecedor_empresa($id)

@@ -15,14 +15,32 @@ class Compra extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+
+	public function load_page()
+	{
 		$data["compra"] =  $this->compra_model->index();
 		$data["atrasado"] =  $this->compra_model->select_qtdd_atrasado();
 		$data["title"] = "Compra - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/compra',$data);
+		if($this->session->userdata('shopp')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/compra',$data);
+		}
+		
 	}
+
 
 	public function obter_dados() {
 		$idDoPedido = $this->input->get('idDoPedido');
