@@ -80,7 +80,7 @@
                         <?php else :?>
                             <a title="Ativar Produto" href="javascript:goAtiva(<?= $produtos['id_produto']?>)" class="btn btn-primary btn-sm btn-success"><i class="fa-solid fa-check"></i></i></a>
                         <?php endif ; ?>    
-                        <a title="Editar Produto" href="javascript:goEdit(<?= $produtos['id_produto']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
+                        <a title="Editar Produto" href="javascript:goEditar(<?= $produtos['id_produto']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Historico Produto" href="javascript:goHistorico(<?= $produtos['id_produto']?>)" class="btn btn-primary btn-sm btn-primary"><i class="fa-solid fa-clock"></i></a>
                         <a title="Foto Produto" href="javascript:goFoto(<?= $produtos['id_produto']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-camera-retro"></i></a>
                         <!-- <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $produtos['id_produto']; ?>"><i class="fa-solid fa-shopping-cart"></i></a> -->
@@ -215,24 +215,25 @@ function goAtiva(id) {
     });
 }
 
+function goEditar(id) {
 
-function goEdit(id) {
     swal({
         title: "Deseja Realmente Editar Esse Produto?",
-        text: "",
+        text: "Essa Ação terá impacto em outras situações",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     }).then((willDelete) => {
         if (willDelete) {
-            var baseUrl = '<?php echo base_url(); ?>'; 
+            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
             var myUrl = baseUrl + 'produto/editar/' + id;
-                window.location.href = myUrl;
+            window.location.href = myUrl;
         } else {
             return false;
         }
-    })
+    });
 }
+
 </script>
 
 
