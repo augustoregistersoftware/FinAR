@@ -12,12 +12,28 @@ class Cadastro_login extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["cadastro_login"] =  $this->cadastro_login_model->index();
 		$data["title"] = "Cadastro De Login - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_login',$data);
+		if($this->session->userdata('user')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/cadastro_login',$data);
+		}
+		
 	}
 
     public function documentos($id)

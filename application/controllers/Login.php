@@ -62,7 +62,7 @@ class Login extends CI_Controller {
 			$username_cookie = array(
 				'name'   => 'username',
 				'value'  => $username,
-				'expire' => '3600', 
+				'expire' => '86400', 
 				'path'   => '/'
 			);
 
@@ -72,7 +72,7 @@ class Login extends CI_Controller {
 			$checked_cookie = array(
 				'name'   => 'checked',
 				'value'  => $checked,
-				'expire' => '3600', 
+				'expire' => '86400', 
 				'path'   => '/'
 			);
 			$this->input->set_cookie($username_cookie);
