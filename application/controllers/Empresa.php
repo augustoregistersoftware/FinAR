@@ -12,6 +12,15 @@ class Empresa extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["empresa"] =  $this->empresa_model->index();
 		$data["title"] = "Empresa - FinAR";
 

@@ -12,12 +12,28 @@ class Localizacao extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["localizacao"] =  $this->localizacao_model->index();
 		$data["title"] = "Localização - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/localizacao',$data);
+		if($this->session->userdata('location')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/localizacao',$data);
+		}
+		
 	}
 
     public function documentos($id)
