@@ -1,39 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Localizacao extends CI_Controller {
+class Cadastro_login extends CI_Controller {
 
 	//Função Construct para trazer o carregamento da modal
     public function __construct()
     {
 		parent::__construct();
-		$this->load->model("localizacao_model");
+		$this->load->model("cadastro_login_model");
     }
 
 	public function index()
 	{
-		if($this->session->userdata('log')!="logged"){
-			redirect('login');
-		}else{
-			$this->load_page();
-		}
-	}
+		$data["cadastro_login"] =  $this->cadastro_login_model->index();
+		$data["title"] = "Cadastro De Login - FinAR";
 
-	public function load_page()
-	{
-		$data["localizacao"] =  $this->localizacao_model->index();
-		$data["title"] = "Localização - FinAR";
-
-		if($this->session->userdata('location')!="T"){
-			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
-			$this->load->view('pages/pagina_bloqueio',$data);
-		}else{
-			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
-			$this->load->view('pages/localizacao',$data);
-		}
-		
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav-top',$data);
+		$this->load->view('pages/cadastro_login',$data);
 	}
 
     public function documentos($id)
