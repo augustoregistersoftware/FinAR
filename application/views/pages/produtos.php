@@ -2,9 +2,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
         <h1 class="h2">Cadastros de Produtos</h1>
         <div class="btn-group mr-2">
             <a href="<?= base_url() ?>produto/new_produto" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Produtos</a>
@@ -80,11 +77,11 @@
                         <?php else :?>
                             <a title="Ativar Produto" href="javascript:goAtiva(<?= $produtos['id_produto']?>)" class="btn btn-primary btn-sm btn-success"><i class="fa-solid fa-check"></i></i></a>
                         <?php endif ; ?>    
-                        <a title="Editar Produto" href="javascript:goEditar(<?= $produtos['id_produto']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
+                        <a title="Editar Produto" href="javascript:goEdit(<?= $produtos['id_produto']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Historico Produto" href="javascript:goHistorico(<?= $produtos['id_produto']?>)" class="btn btn-primary btn-sm btn-primary"><i class="fa-solid fa-clock"></i></a>
                         <a title="Foto Produto" href="javascript:goFoto(<?= $produtos['id_produto']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-camera-retro"></i></a>
-                        <!-- <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $produtos['id_produto']; ?>"><i class="fa-solid fa-shopping-cart"></i></a> -->
-                        <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $produtos['id_produto']; ?>"><i class="fa-solid fa-shopping-cart"></i></a>
+                        <a title="Pedido De Compra" href="javascript:goFoto(<?= $produtos['id_produto']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a>
+                    </td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -104,40 +101,6 @@
     <script>
         new DataTable('#produtos');
     </script>
-
-<div class="modal fade custom-modal" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg" role="document"> <!-- Adicione a classe modal-lg para aumentar a largura da modal -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Pedido Vinculado</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <table class="display compact" style="width:100%" id="pedidos">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Data Pedido</th>
-                            <th>Data Entrega</th>
-                            <th>Situação</th>
-                            <th>Fornecedor</th>
-                            <th>Valor Confirmado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dados_grid">
-                        <!-- Os dados da grid serão inseridos aqui via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
     
 </main>
 
@@ -215,25 +178,24 @@ function goAtiva(id) {
     });
 }
 
-function goEditar(id) {
 
+function goEdit(id) {
     swal({
         title: "Deseja Realmente Editar Esse Produto?",
-        text: "Essa Ação terá impacto em outras situações",
+        text: "",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     }).then((willDelete) => {
         if (willDelete) {
-            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+            var baseUrl = '<?php echo base_url(); ?>'; 
             var myUrl = baseUrl + 'produto/editar/' + id;
-            window.location.href = myUrl;
+                window.location.href = myUrl;
         } else {
             return false;
         }
-    });
+    })
 }
-
 </script>
 
 
@@ -433,44 +395,6 @@ function goEditar(id) {
             aviso6();
         }
     });
-
-    $(document).ready(function(){
-    $("body").on("click", ".btn.btn-info.btn-sm.btn-info", function(e){
-        e.preventDefault();
-        
-        var idDoProduto = $(this).attr("id");
-        
-        $.ajax({
-            url: "<?php echo site_url('produto/obter_dados');?>",
-            type: 'GET',
-            dataType: 'json',
-            data: { idDoProduto: idDoProduto }, 
-            success: function(data) {
-                var html = '';
-                $.each(data, function(key, item){
-                    html += '<tr>';
-                    html += '<td>'+item.id_solicitacao+'</td>';
-                    html += '<td>'+item.descricao+'</td>';
-                    html += '<td>'+item.data_pedido+'</td>';
-                    html += '<td>'+item.data_entrega+'</td>';
-                    if (item.status == 'F') {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff; padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>';
-                    } else if (item.status == 'C') {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #ea0000; color: #fff; padding: 8px 10px; margin-top: 5px;">Cancelado</span></td>';
-                    } else {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #03ab14; color: #fff; padding: 8px 10px; margin-top: 5px;">Fechado</span></td>';
-                    }
-                    html += '<td>'+item.nome_fornecedor+'</td>';
-                    html +=  '<th> R$'+parseFloat(item.valor_confirmado).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
-                    html += '</tr>';
-                });
-                $("#dados_grid").html(html);
-                new DataTable('#pedidos');
-                $("#myModal").modal('show'); 
-            }
-        });
-    });
-});
 </script>
 
 <style>
