@@ -1,5 +1,6 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('application/css/styles.css') ?>">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -472,72 +473,3 @@ function goEdit(id) {
 });
 </script>
 
-<style>
-
-.flash {
-    width: 60px; /* Largura da div */
-    height: 60px; /* Altura da div */
-    background-color: blue; /* Cor de fundo da div */
-    border-radius: 50%; /* Torna a div redonda */
-    position: fixed; /* Posição fixa */
-    bottom: 20px; /* Distância do fundo */
-    right: 20px; /* Distância da direita */
-    display: flex; /* Para centralizar o ícone */
-    justify-content: center; /* Para centralizar o ícone */
-    align-items: center; /* Para centralizar o ícone */
-    cursor: pointer; /* Mostrar o cursor como um ponteiro */
-}
-
-.flash i {
-    font-size: 2.5em; /* Tamanho do ícone */
-    color: white; /* Cor do ícone */
-    display: flex; /* Para centralizar o ícone */
-    justify-content: center; /* Para centralizar o ícone */
-}
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.toggle-input {
-  display: none;
-}
-
-.toggle-label {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: background-color 0.3s;
-}
-
-.toggle-label::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.toggle-input:checked + .toggle-label {
-  background-color: #2196F3;
-}
-
-.toggle-input:checked + .toggle-label::after {
-  transform: translateX(26px);
-}
-
-
-
-</style>

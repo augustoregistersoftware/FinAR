@@ -36,16 +36,11 @@ class Cadastro_login extends CI_Controller {
 		
 	}
 
-    public function documentos($id)
+    public function obter_senha()
 	{
-		$data["documentos"] =  $this->localizacao_model->select_documentos($id);
-		$data["title"] = "Documentos Localização - FinAR";
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/documentos_localizacao',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$idDoLogin = $this->input->get('id_login');
+		$dados =  $this->cadastro_login_model->select_senha($idDoLogin);
+		echo json_encode($dados);
 	}
 
     public function new_documentos()

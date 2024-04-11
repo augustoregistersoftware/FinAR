@@ -32,7 +32,8 @@
                     <td> 
                         <a title="Editar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Permissões Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-primary"><i class="fa-solid fa-key"></i></a>
-                        <a title="Deletar Login" href="javascript:goDocumentos(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a title="Senha" href="javascript:goValida(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
+                        <a title="Deletar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -40,7 +41,10 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="<?= base_url('application/js/script.js') ?>"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         new DataTable('#localizacao')
     </script>
@@ -58,30 +62,36 @@ function goEdit(id) {
     }
 }
 
-function goAtiva(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/ativa/' + id;
-    if (confirm("Deseja realmente ativar essa localizacao?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
+
+    function goInativa(id) {
+        var baseUrl = '<?php echo base_url(); ?>'; 
+        var myUrl = baseUrl + 'localizacao/inativa/' + id;
+        if (confirm("Deseja realmente inativar essa localizacao?")) {
+            window.location.href = myUrl;
+        } else {
+            return false;
+        }
     }
-}
 
-function goInativa(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/inativa/' + id;
-    if (confirm("Deseja realmente inativar essa localizacao?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    function senha(id_login){
+    $.ajax({ 
+        url: "<?php echo site_url('cadastro_login/obter_senha');?>",
+        type: 'GET',
+        dataType: 'json',
+        data: { id_login: id_login },
+        success: function(data) {
+            var dado = '';
+                $.each(data, function(key, item){
+                    dado = item.senha;
+                });
+                Swal.fire("Senha:",dado);
+            }
+    });
 }
-
-function goDocumentos(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'localizacao/documentos/' + id;
-    window.location.href = myUrl;
-}
-
 </script>
+
+<style>
+    body {
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    }
+</style>
