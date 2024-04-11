@@ -41,7 +41,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="<?= base_url('application/js/script.js') ?>"></script>
+    
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -63,31 +63,7 @@ function goEdit(id) {
 }
 
 
-    function goInativa(id) {
-        var baseUrl = '<?php echo base_url(); ?>'; 
-        var myUrl = baseUrl + 'localizacao/inativa/' + id;
-        if (confirm("Deseja realmente inativar essa localizacao?")) {
-            window.location.href = myUrl;
-        } else {
-            return false;
-        }
-    }
 
-    function senha(id_login){
-    $.ajax({ 
-        url: "<?php echo site_url('cadastro_login/obter_senha');?>",
-        type: 'GET',
-        dataType: 'json',
-        data: { id_login: id_login },
-        success: function(data) {
-            var dado = '';
-                $.each(data, function(key, item){
-                    dado = item.senha;
-                });
-                Swal.fire("Senha:",dado);
-            }
-    });
-}
 </script>
 
 <style>

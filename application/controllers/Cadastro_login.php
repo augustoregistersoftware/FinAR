@@ -31,6 +31,7 @@ class Cadastro_login extends CI_Controller {
 		}else{
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/nav-top',$data);
+			$this->load->view('js/script');
 			$this->load->view('pages/cadastro_login',$data);
 		}
 		
