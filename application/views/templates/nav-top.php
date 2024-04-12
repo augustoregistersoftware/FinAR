@@ -27,10 +27,18 @@
             </a>
           </li>
 					<li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>cadastro_login">
+            <a class="nav-link" href="#">
               <span data-feather="file"><img src="\finar\imagens\users_21945.png"></span>
-              Usuarios
+              Usuarios ▼
             </a>
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>cadastro_login">Cadastro De Usuario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<?= base_url()?>compra">Cadastro De Perfil</a>
+              </li>
+             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url() ?>clientes">

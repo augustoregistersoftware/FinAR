@@ -53,6 +53,7 @@ class Produto extends CI_Controller {
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
+		$this->load->view('js/script_produto');
 		$this->load->view('pages/produtos',$data);
 	}
 
