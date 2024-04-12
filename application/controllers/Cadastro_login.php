@@ -31,11 +31,17 @@ class Cadastro_login extends CI_Controller {
 		}else{
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/nav-top',$data);
-			$this->load->view('js/script');
+			$this->load->view('js/script_cadastro_login');
 			$this->load->view('pages/cadastro_login',$data);
 		}
 		
 	}
+
+	public function obter_dados() {
+		$idDoLogin = $this->input->get('idDoLogin');
+        $dados = $this->cadastro_login_model->select_perfil($idDoLogin);
+        echo json_encode($dados);
+    }
 
     public function obter_senha()
 	{

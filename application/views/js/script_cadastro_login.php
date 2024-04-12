@@ -54,6 +54,16 @@ function senha(id_login){
             }
     });
 }
+
+function goEdit(id) {
+    var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+    var myUrl = baseUrl + 'localizacao/editar/' + id;
+    if (confirm("Deseja realmente Editar?")) {
+        window.location.href = myUrl;
+    } else {
+        return false;
+    }
+}
 </script>
 
 

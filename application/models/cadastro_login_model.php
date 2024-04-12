@@ -20,5 +20,13 @@ class Cadastro_login_model extends CI_Model {
         WHERE id_login = " .$this->db->escape($idDoLogin). "")->result_array();
     }
 
+    public function select_perfil($id)
+    {
+        return $this->db->query("SELECT
+        * 
+        FROM permissoes_login
+        WHERE id_login =  " .$this->db->escape($id). "")->result_array();
+    }
+
 
 }

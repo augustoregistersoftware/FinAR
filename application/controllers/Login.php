@@ -16,6 +16,7 @@ class Login extends CI_Controller {
 		$data["title"] = "Login - FinAR";
 		$this->session->sess_destroy();
 
+		$this->load->view('js/script_login');
 		$this->load->view('pages/login',$data);
 	}
 
