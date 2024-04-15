@@ -97,7 +97,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         new DataTable('#compras')
     </script>
@@ -140,40 +140,64 @@
 
 <script>
 function goFecha(id) {
-
-    swal({
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
         title: "Deseja Realmente Fechar Esse Pedido?",
-        text: "Confira Tudo antes de fechar, essa ação tera grande impacto",
+        text: "Confira Tudo antes de fechar, essa ação tera grande impacto!",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
+        showCancelButton: true,
+        confirmButtonText: "Sim, Fechar!",
+        cancelButtonText: "Não, cancelar!",
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
             var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
             var myUrl = baseUrl + 'compra/fechar/' + id;
             window.location.href = myUrl;
-        } else {
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
             return false;
         }
-    });
+        });
+
+
 }
 
 function goCancela(id) {
-    swal({
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
         title: "Deseja Realmente Cancelar Esse Pedido?",
         text: "Confira Tudo antes de cancelar, essa ação tera grande impacto",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
+        showCancelButton: true,
+        confirmButtonText: "Sim, Fechar!",
+        cancelButtonText: "Não, cancelar!",
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
             var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
             var myUrl = baseUrl + 'compra/cancela/' + id;
             window.location.href = myUrl;
-        } else {
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
             return false;
         }
-    });
+        });
 }
 
 function goDocumentos(id) {
@@ -217,19 +241,35 @@ $(document).ready(function(){
 
 <script>
   function controleDialog(){
-    swal("Ebaa!!", "Seu Pedido esta normal =)", "info");
+    Swal.fire({
+        title: "Ebaa!!",
+        text: "Seu Pedido esta normal =)",
+        icon: "success"
+    });
 	}
 
 	function controleDialog2(){
-		swal("Oops...", "Seu Pedido esta atrasado =(", "warning");
+        Swal.fire({
+        title: "Oops...",
+        text: "Seu Pedido esta atrasado =(",
+        icon: "warning"
+    });
 	}
 
 	function controleDialog3(){
-		swal("Parabéns", "Seu Pedido esta finalizado =)", "success");
+        Swal.fire({
+        title: "Parabéns",
+        text: "Seu Pedido esta finalizado =)",
+        icon: "success"
+    });
 	}
 
 	function controleDialog4(){
-		swal("Cancelado", "Seu Pedido esta cancelado !!", "error");
+        Swal.fire({
+        title: "Cancelado",
+        text: "Seu Pedido esta cancelado !!",
+        icon: "error"
+    });
 	}
 
     const flash = document.getElementById('flash');

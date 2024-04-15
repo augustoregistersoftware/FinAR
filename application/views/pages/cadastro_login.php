@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
         <h1 class="h2">Cadastros de Usuarios</h1>
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>produto/new_produto" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Usuario</a>
+            <a href="<?= base_url() ?>cadastro_login/new_login" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Usuario</a>
             <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
         </div>
     </div>
