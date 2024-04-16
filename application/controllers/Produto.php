@@ -32,10 +32,7 @@ class Produto extends CI_Controller {
 		}else{
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/nav-top',$data);
-<<<<<<< HEAD
 			$this->load->view('js/script_produto');
-=======
->>>>>>> f7ba4e79aca16440ee40ede07342091367a9f934
 			$this->load->view('pages/produtos',$data);
 		}
 

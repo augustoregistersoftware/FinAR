@@ -151,7 +151,7 @@
   <div class="metric">
     <div class="icon icon-online">📦</div>
     <div class="metric-description">
-      <div>Compras Mercadoria</div>
+      <div>Compras Mercadoria - Fechada e Cancelada</div>
       <?php if($diferenca_compra['diferenca_percentual'] > 0) : ?>
         <div class="percentage positive">+<?= number_format($diferenca_compra['diferenca_percentual'],2,",",".")?>%</div>
         <div class="number"><?= $diferenca_compra['quantidade_hoje']?></div>
