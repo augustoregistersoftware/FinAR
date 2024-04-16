@@ -95,15 +95,17 @@ class Cadastro_login extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-    public function new()
+    public function new_login()
 	{	
-		$data['empresa'] = $this->localizacao_model->select_empresas();
+		$data['perfil'] = $this->cadastro_login_model->select_perfil_cadastro();
+		$data['empresas'] = $this->cadastro_login_model->select_empresa_cadastro();
 
-		$data["title"] = "Cadastrar Localização - FinAR";
+		$data["title"] = "Cadastrar Login - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_localizacao',$data);
+		$this->load->view('js/script_cadastrar_login');
+		$this->load->view('pages/cadastrar_login',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
