@@ -23,6 +23,8 @@ class Dashboard extends CI_Controller {
 		$data["total_cobranca"] = $this->dashboard_model->select_total_cobranca();
 		$data["total_compra"] = $this->dashboard_model->select_total_viagem();
 		$data["total_receber"] = $this->dashboard_model->select_total_receber();
+		$data["total_devendo"] = $this->dashboard_model->select_total_devendo();
+		$data["diferenca_compra"] = $this->dashboard_model->select_diferenca_compra();
 		$data["title"] = "Dashboard - FinAR";
 
 		if($this->session->userdata('log')!="logged"){

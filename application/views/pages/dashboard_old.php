@@ -2,101 +2,18 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">Dashboard</h1>
+    
 		<div class="btn-group mr-2">
 		
 		</div>
-	</div>
 
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2">Financeiro Por Empresa</h2>
+        <div class="info">
+            <p>Olá, <b><?php echo $this->session->userdata('name'); ?></b></p>
+            <small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small>
+        </div>
 </div>
 
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2">5 Ultimos Clientes Cadastrados</h2>
-	</div>
-
-	<div class="table-responsive">
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>CPF</th>
-					<th>CEP</th>
-					<th>Endereço</th>
-					<th>Numero</th>
-          <th>Bairro</th>
-          <th>Complemento</th>
-          <th>Telefone</th>
-          <th>Email</th>
-          <th>Empresa</th>
-				</tr>
-			</thead>
-			<tbody>
-      <?php foreach($clientes as $clientes) : ?>
-          <tr>
-            <td><?= $clientes['nome']?></td>
-            <td><?= $clientes['cpf']?></td>
-            <td><?= $clientes['cep']?></td>
-            <td><?= $clientes['endereco']?></td>
-            <td><?= $clientes['numero']?></td>
-            <td><?= $clientes['bairro']?></td>
-            <td><?= $clientes['complemento']?></td>
-            <td><?= $clientes['telefone']?></td>
-            <td><?= $clientes['email']?></td>
-            <th><?= $clientes['empresa']?></th>
-          </tr>
-        <?php endforeach;?>
-			</tbody>
-		</table>
-	</div>
-
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2">5 Ultimos Produtos Cadastrados</h2>
-	</div>
-
-	<div class="table-responsive">
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>Codigo Auxiliar</th>
-					<th>Codigo De Barras</th>
-					<th>Descrição</th>
-          <th>Quantidade em Estoque</th>
-          <th>Quantidade Minima</th>
-          <th>Custo</th>
-          <th>Empresa</th>
-				</tr>
-			</thead>
-			<tbody>
-      <?php foreach($produtos as $produtos) : ?>
-          <tr>
-            <td><?= $produtos['cod_aux']?></td>
-            <td><?= $produtos['cod_barras']?></td>
-            <td><?= $produtos['descricao']?></td>
-            <td><?= $produtos['estoque_atual']?></td>
-            <td><?= $produtos['estoque_minimo']?></td>
-			      <td style="color: green;">R$ <?= number_format($produtos['custo'],2,",",".")?></td>
-            <th><?= $produtos['razao_social']?></th>
-          </tr>
-        <?php endforeach;?>
-			</tbody>
-		</table>
-  
-	</div>
-
     <div class="cardBox">
-
-        <!-- Card de Lucro -->
-    <a href="<?= base_url() ?>dashboard" class="card-link">
-      <div class="card">
-          <img src="\finar\imagens\blueberry-online-meeting-via-group-call.gif" alt="Imagem de perfil" style="width: 100%; height: auto;">
-          <div class="cardName">Bem-Vindo, Augusto</div>
-          <p>Dashboard</p>
-      </div>
-      <div class="iconBx">
-          <ion-icon name="eye-outline"></ion-icon>
-      </div>
-    </a>
 
     <!-- Card de Cobranças -->
     <a href="<?= base_url() ?>cobranca" class="card-link">
@@ -105,6 +22,7 @@
             <div class="numbers"><?= $total_cobranca['quantidade']?></div>
 		<?php endforeach;?>
             <div class="cardName">Total de Cobranças</div>
+            <p>Esse mês</p>
         </div>
         <div class="iconBx">
             <ion-icon name="eye-outline"></ion-icon>
@@ -118,6 +36,7 @@
             <div class="numbers"><?= $total_compra['quantidade']?></div>
 		<?php endforeach;?>
             <div class="cardName">Total de Vendas</div>
+            <p>Esse mês</p>
         </div>
         <div class="iconBx">
             <ion-icon name="cart-outline"></ion-icon>
@@ -132,6 +51,21 @@
             <div class="numbers">R$ <?= number_format($total_receber['total_receber'],2,",",".")?></div>
 		<?php endforeach;?>
             <div class="cardName">Lucro De Todos os Bancos</div>
+            <p>Esse mês</p>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="cash-outline"></ion-icon>
+        </div>
+    </a>
+
+    <!-- Card de Despesa -->
+    <a href="<?= base_url() ?>bancos" class="card-link">
+        <div class="card">
+		<?php foreach($total_devendo as $total_devendo) : ?>
+            <div class="numbers">R$ <?= number_format($total_devendo['total_devendo'],2,",",".")?></div>
+		<?php endforeach;?>
+            <div class="cardName">Depesa De Todos os Bancos</div>
+            <p>Esse mês</p>
         </div>
         <div class="iconBx">
             <ion-icon name="cash-outline"></ion-icon>
@@ -139,45 +73,105 @@
     </a>
 </div>
 
+<h2>Métricas</h2>  
+<div class="dashboard">
+<div class="metrics-container">
+  <div class="metric">
+    <div class="icon icon-online">🛹</div>
+    <div class="metric-description">
+      <div>Pedidos Online</div>
+      <div class="percentage positive">+39%</div>
+      <div class="number">3849</div>
+      <div>últimas 24 horas</div>
+    </div>
+  </div>
+  <div class="metric">
+    <div class="icon icon-offline">&#x1F3E5;</div>
+    <div class="metric-description">
+      <div>Pedidos Offline</div>
+      <div class="percentage negative">-17%</div>
+      <div class="number">1100</div>
+      <div>últimas 24 horas</div>
+    </div>
+  </div>
+  <div class="metric">
+    <div class="icon icon-new">&#x1F465;</div>
+    <div class="metric-description">
+      <div>Novos Clientes</div>
+      <div class="percentage positive">+25%</div>
+      <div class="number">849</div>
+      <div>últimas 24 horas</div>
+    </div>
+  </div>
+</div>
+</div>
 
+<div class="container">
+<div class="table-container">
+    <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Código De Barras</th>
+                    <th>Código Auxiliar</th>
+                    <th>Custo</th>
+                    <th>Preço De Venda</th>
+                    <th>Estoque Atual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($produtos as $produtos) : ?>   
+                <tr>
+                    <th><?= $produtos['id_produto']?></th>
+                    <td><?= $produtos['descricao']?></td>
+                    <td><?= $produtos['cod_barras']?></td>
+                    <td><?= $produtos['cod_aux']?></td>
+                    <td style="color: #e81515;">R$ <?= number_format($produtos['custo'], 2, ",", ".")?></td>
+                    <td style="color: #e81515;">R$ <?= number_format($produtos['preco_venda'],2,",",".")?></td>
+                    <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
+                </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>    
+    </div>  
 
-	<div class="table-responsive" >
-	<table class="table table-bordered table-hover">
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Produtos', 'Estoque'],
-          <?php foreach ($produtos_grafico as $produtos_grafico) : ?>
-          ['<?php echo $produtos_grafico['descricao']?>',  <?php echo $produtos_grafico['estoque_atual']?>],
-          <?php endforeach;?>
-        ]);
-
-      var options = {
-        legend: 'none',
-        pieSliceText: 'label',
-        title: 'Estoque Produto Agrupado',
-        pieStartAngle: 100,
-      };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-      }
-    </script>
-	</table>
-	</div>
-	<body>
-	<div id="piechart" style="width: 900px; height: 500px;"></div>
-	</body>
+  
+<div class="container">
+<div class="table-container2">
+    <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Código De Barras</th>
+                    <th>Código Auxiliar</th>
+                    <th>Custo</th>
+                    <th>Preço De Venda</th>
+                    <th>Estoque Atual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($produto as $produto) : ?>   
+                <tr>
+                    <th><?= $produto['id_produto']?></th>
+                    <td><?= $produto['descricao']?></td>
+                    <td><?= $produto['cod_barras']?></td>
+                    <td><?= $produto['cod_aux']?></td>
+                    <td style="color: #e81515;">R$ <?= number_format($produto['custo'], 2, ",", ".")?></td>
+                    <td style="color: #e81515;">R$ <?= number_format($produto['preco_venda'],2,",",".")?></td>
+                    <td><?= number_format($produto['estoque_atual'],2,",",".")?></td>
+                </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>    
+    </div> 
 </main>
 
 
 <script>
-	function abrirGraficoEstoque(){
-		document.getElementById("d1").setAttribute("open","");
-	}
 
   function boas_vindas(){
     Swal.fire({
@@ -270,5 +264,114 @@
   color: var(--white);
 }
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+  }
+  .dashboard {
+    display: flex;
+    width: 100%; /* Usa o espaço total disponível */
+    margin: 0 auto; /* Centraliza o dashboard na tela */
+  }
+  .metrics-container {
+    text-align: center;
+    width: 350px; /* Largura dos cards de métricas */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  .metric {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  .metric:hover {
+    transform: translateY(-5px);
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+  }
+  .metric-description {
+    flex-grow: 1;
+    text-align: left;
+  }
+  .percentage {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .number {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .positive { color: #4CAF50; }
+  .negative { color: #F44336; }
+  .icon-online { background: #E8F5E9; color: #4CAF50; }
+  .icon-offline { background: #FFEBEE; color: #F44336; }
+  .icon-new { background: #E3F2FD; color: #2196F3; }
+  .main-content {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    padding-left: 20px;
+  }
+
+  .container {
+    display: flex; /* Utiliza o Flexbox para o layout */
+  }
+  .left-column {
+    flex: 150%; /* A coluna da esquerda ocupa 50% da largura do container */
+  }
+  .right-column {
+    flex: 150%; /* A coluna da direita ocupa os 50% restantes da largura do container */
+  }
+  table {
+    width: 80%; /* A tabela ocupa toda a largura da coluna */
+  }
+
+  .card-header {
+    padding-bottom: 10px; /* Ou outro valor menor */
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens ao início do contêiner flex */
+}
+
+
+  .table-container {
+    margin-top: 10px; /* Diminua o valor conforme necessário */
+    position: absolute;
+    margin-left: auto; /* Empurra o elemento para a direita */
+    margin-right: 0; 
+    margin-left: 100px; 
+    background-color: white; /* Define o fundo para branco */
+    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
+    top: 380px; /* Ajuste o valor de top para mover para cima */
+}
+
+.table-container2 {
+    margin-top: 10px; /* Diminua o valor conforme necessário */
+    position: absolute;
+    margin-left: auto; /* Empurra o elemento para a direita */
+    margin-right: 0; 
+    margin-left: 100px; 
+    background-color: white; /* Define o fundo para branco */
+    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
+    top: 580px; /* Ajuste o valor de top para mover para cima */
+}
 
 </style>

@@ -2,18 +2,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">Dashboard</h1>
-    
 		<div class="btn-group mr-2">
 		
 		</div>
 
-        <div class="info">
+    <div class="info">
             <p>Olá, <b><?php echo $this->session->userdata('name'); ?></b></p>
             <small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small>
         </div>
-</div>
-
-    <div class="cardBox">
+	</div>
+  <div class="cardBox">
 
     <!-- Card de Cobranças -->
     <a href="<?= base_url() ?>cobranca" class="card-link">
@@ -57,31 +55,124 @@
             <ion-icon name="cash-outline"></ion-icon>
         </div>
     </a>
+
+    <!-- Card de Despesa -->
+    <a href="<?= base_url() ?>bancos" class="card-link">
+        <div class="card">
+		<?php foreach($total_devendo as $total_devendo) : ?>
+            <div class="numbers">R$ <?= number_format($total_devendo['total_confirmado'],2,",",".")?></div>
+		<?php endforeach;?>
+            <div class="cardName">Depesa De Todos os Bancos</div>
+            <p>Esse mês</p>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="cash-outline"></ion-icon>
+        </div>
+    </a>
 </div>
 
-<h2>Métricas</h2>  
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="h2">5 Ultimos Clientes Cadastrados</h2>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>CEP</th>
+					<th>Endereço</th>
+					<th>Numero</th>
+          <th>Bairro</th>
+          <th>Complemento</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Empresa</th>
+				</tr>
+			</thead>
+			<tbody>
+      <?php foreach($clientes as $clientes) : ?>
+          <tr>
+            <td><?= $clientes['nome']?></td>
+            <td><?= $clientes['cpf']?></td>
+            <td><?= $clientes['cep']?></td>
+            <td><?= $clientes['endereco']?></td>
+            <td><?= $clientes['numero']?></td>
+            <td><?= $clientes['bairro']?></td>
+            <td><?= $clientes['complemento']?></td>
+            <td><?= $clientes['telefone']?></td>
+            <td><?= $clientes['email']?></td>
+            <th><?= $clientes['empresa']?></th>
+          </tr>
+        <?php endforeach;?>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="h2">5 Ultimos Produtos Cadastrados</h2>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Codigo Auxiliar</th>
+					<th>Codigo De Barras</th>
+					<th>Descrição</th>
+          <th>Quantidade em Estoque</th>
+          <th>Quantidade Minima</th>
+          <th>Custo</th>
+          <th>Empresa</th>
+				</tr>
+			</thead>
+			<tbody>
+      <?php foreach($produtos as $produtos) : ?>
+          <tr>
+            <td><?= $produtos['cod_aux']?></td>
+            <td><?= $produtos['cod_barras']?></td>
+            <td><?= $produtos['descricao']?></td>
+            <td><?= $produtos['estoque_atual']?></td>
+            <td><?= $produtos['estoque_minimo']?></td>
+			      <td style="color: green;">R$ <?= number_format($produtos['custo'],2,",",".")?></td>
+            <th><?= $produtos['razao_social']?></th>
+          </tr>
+        <?php endforeach;?>
+			</tbody>
+		</table>
+  
+	</div>
+
+  <h2>Métricas</h2>  
 <div class="dashboard">
 <div class="metrics-container">
   <div class="metric">
-    <div class="icon icon-online">&#x1F4E6;</div>
+    <div class="icon icon-online">📦</div>
     <div class="metric-description">
-      <div>Pedidos Online</div>
-      <div class="percentage positive">+39%</div>
-      <div class="number">3849</div>
+      <div>Compras Mercadoria</div>
+      <?php if($diferenca_compra['diferenca_percentual'] > 0) : ?>
+        <div class="percentage positive">+<?= number_format($diferenca_compra['diferenca_percentual'],2,",",".")?>%</div>
+        <div class="number"><?= $diferenca_compra['quantidade_hoje']?></div>
+      <?php else :?>
+        <div class="percentage negative"><?= number_format($diferenca_compra['diferenca_percentual'],2,",",".")?>%</div>
+        <div class="number"><?= $diferenca_compra['quantidade_hoje']?></div>
+      <?php endif ; ?>  
       <div>últimas 24 horas</div>
     </div>
   </div>
   <div class="metric">
-    <div class="icon icon-offline">&#x1F3E5;</div>
+    <div class="icon icon-offline">🛍️</div>
     <div class="metric-description">
-      <div>Pedidos Offline</div>
+      <div>Vendas</div>
       <div class="percentage negative">-17%</div>
       <div class="number">1100</div>
       <div>últimas 24 horas</div>
     </div>
   </div>
   <div class="metric">
-    <div class="icon icon-new">&#x1F465;</div>
+    <div class="icon icon-new">👥</div>
     <div class="metric-description">
       <div>Novos Clientes</div>
       <div class="percentage positive">+25%</div>
@@ -92,72 +183,77 @@
 </div>
 </div>
 
-<div class="container">
-<div class="table-container">
-    <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Código De Barras</th>
-                    <th>Código Auxiliar</th>
-                    <th>Custo</th>
-                    <th>Preço De Venda</th>
-                    <th>Estoque Atual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($produtos as $produtos) : ?>   
-                <tr>
-                    <th><?= $produtos['id_produto']?></th>
-                    <td><?= $produtos['descricao']?></td>
-                    <td><?= $produtos['cod_barras']?></td>
-                    <td><?= $produtos['cod_aux']?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produtos['custo'], 2, ",", ".")?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produtos['preco_venda'],2,",",".")?></td>
-                    <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
-                </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>    
-    </div>  
+<h2>Pagamentos</h2>  
+<div class="dashboard">
+  <div class="metrics-container">
+    <!-- métricas existentes -->
+    <div class="metric">
+      <div class="icon icon-new">ℹ️</div>
+      <div class="metric-description">
+        <div>Forma De Pagamento - Lucro e Despesa</div>
+        <div class="percentage positive">+50%</div>
+        <div class="number">1234</div>
+        <div>últimas 24 horas</div>
+      </div>
+    <!-- você pode adicionar mais métricas aqui -->
+  </div>
+    
+  </div>
+  <div class="metrics-container">
+    <!-- nova métrica aqui -->
+    
+    <div class="metric">
+      <div class="icon icon-new">ℹ️</div>
+      <div class="metric-description">
+        <div>Cobrança Paga</div>
+        <div class="percentage positive">+50%</div>
+        <div class="number">1234</div>
+        <div>últimas 24 horas</div>
+      </div>
+    </div>
+    <!-- você pode adicionar mais métricas aqui -->
+  </div>
+</div>
 
-  
-<div class="container">
-<div class="table-container2">
-    <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Código De Barras</th>
-                    <th>Código Auxiliar</th>
-                    <th>Custo</th>
-                    <th>Preço De Venda</th>
-                    <th>Estoque Atual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($produto as $produto) : ?>   
-                <tr>
-                    <th><?= $produto['id_produto']?></th>
-                    <td><?= $produto['descricao']?></td>
-                    <td><?= $produto['cod_barras']?></td>
-                    <td><?= $produto['cod_aux']?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produto['custo'], 2, ",", ".")?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produto['preco_venda'],2,",",".")?></td>
-                    <td><?= number_format($produto['estoque_atual'],2,",",".")?></td>
-                </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>    
-    </div> 
+    
+
+	<div class="table-responsive" >
+	<table class="table table-bordered table-hover">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Produtos', 'Estoque'],
+          <?php foreach ($produtos_grafico as $produtos_grafico) : ?>
+          ['<?php echo $produtos_grafico['descricao']?>',  <?php echo $produtos_grafico['estoque_atual']?>],
+          <?php endforeach;?>
+        ]);
+
+      var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Estoque Produto Agrupado',
+        pieStartAngle: 100,
+      };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+	</table>
+	</div>
+	<body>
+	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	</body>
 </main>
 
 
 <script>
+	function abrirGraficoEstoque(){
+		document.getElementById("d1").setAttribute("open","");
+	}
 
   function boas_vindas(){
     Swal.fire({
@@ -250,26 +346,26 @@
   color: var(--white);
 }
 
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-  }
-  .dashboard {
-    display: flex;
-    width: 100%; /* Usa o espaço total disponível */
-    margin: 0 auto; /* Centraliza o dashboard na tela */
-  }
-  .metrics-container {
-    text-align: center;
-    width: 350px; /* Largura dos cards de métricas */
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 10px;
-  }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+.dashboard {
+  display: flex;
+  justify-content: space-between; /* Espaço entre as colunas de métricas */
+}
+.metrics-container {
+  text-align: center;
+  width: calc(50% - 10px); /* Ajusta a largura para duas colunas */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 10px;
+}
   .metric {
     display: flex;
     align-items: center;
@@ -314,50 +410,5 @@ body {
     padding-left: 20px;
   }
 
-  .container {
-    display: flex; /* Utiliza o Flexbox para o layout */
-  }
-  .left-column {
-    flex: 150%; /* A coluna da esquerda ocupa 50% da largura do container */
-  }
-  .right-column {
-    flex: 150%; /* A coluna da direita ocupa os 50% restantes da largura do container */
-  }
-  table {
-    width: 80%; /* A tabela ocupa toda a largura da coluna */
-  }
-
-  .card-header {
-    padding-bottom: 10px; /* Ou outro valor menor */
-}
-
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alinha os itens ao início do contêiner flex */
-}
-
-
-  .table-container {
-    margin-top: 10px; /* Diminua o valor conforme necessário */
-    position: absolute;
-    margin-left: auto; /* Empurra o elemento para a direita */
-    margin-right: 0; 
-    margin-left: 100px; 
-    background-color: white; /* Define o fundo para branco */
-    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
-    top: 380px; /* Ajuste o valor de top para mover para cima */
-}
-
-.table-container2 {
-    margin-top: 10px; /* Diminua o valor conforme necessário */
-    position: absolute;
-    margin-left: auto; /* Empurra o elemento para a direita */
-    margin-right: 0; 
-    margin-left: 100px; 
-    background-color: white; /* Define o fundo para branco */
-    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
-    top: 580px; /* Ajuste o valor de top para mover para cima */
-}
 
 </style>
