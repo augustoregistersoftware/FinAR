@@ -18,6 +18,7 @@ class Dashboard extends CI_Controller {
 	{
 		$data["clientes"] =  $this->clientes_model->index();
 		$data["produtos"] =  $this->produtos_model->select_dashboard();
+		$data["produto"] =  $this->produtos_model->select_dashboard();
 		$data["produtos_grafico"] = $this->produtos_model->select_total();
 		$data["total_cobranca"] = $this->dashboard_model->select_total_cobranca();
 		$data["total_compra"] = $this->dashboard_model->select_total_viagem();
@@ -30,8 +31,7 @@ class Dashboard extends CI_Controller {
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/nav-top',$data);
 			$this->load->view('pages/dashboard',$data);
-			$this->load->view('templates/footer',$data);
-			$this->load->view('templates/js',$data);
+
 
 			
 		}
