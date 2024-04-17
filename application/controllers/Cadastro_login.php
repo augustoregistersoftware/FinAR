@@ -82,9 +82,10 @@ class Cadastro_login extends CI_Controller {
 
     public function inserte()
 	{
+		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
         $login_info["nome"] = $this->input->post('nome');
         $login_info["email"] = $this->input->post('email');
-        $login_info["senha"] = $this->input->post('senha_confirma');
+		$login_info["senha"] = openssl_encrypt($this->input->post('senha_confirma'), "AES-128-ECB", $senha_para_crip);
         $login_info["id_perfil"] = $this->input->post('perfil');
         $login_info["id_empresa"] = $this->input->post('empresa');
 		$this->cadastro_login_model->inserte_login($login_info);
