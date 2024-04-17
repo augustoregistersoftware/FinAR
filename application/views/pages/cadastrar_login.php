@@ -18,7 +18,7 @@
 					
 					<form action="<?= base_url() ?>empresa/update/<?= $empresa_editar['id_empresa'] ?>" method="post">
 				<?php else : ?>
-					<form action="<?= base_url() ?>empresa/inserte" method="post" enctype="multipart/form-data">
+					<form action="<?= base_url() ?>cadastro_login/inserte" method="post" enctype="multipart/form-data">
 				<?php endif; ?>
 
 				<form action="" method="post" enctype="multipart/form-data">
@@ -47,15 +47,17 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="senha_confirma">Confirme a Senha</label>
-							<input type="text" class="form-control" name="senha_confirma" id="senha_confirma" placeholder="Confirmar Senha" value="<?= isset($empresa_editar) ? $empresa_editar["razao_social"] : "" ?>">
+							<input type="text" class="form-control" name="senha_confirma" id="senha_confirma" placeholder="Confirmar Senha" value="<?= isset($empresa_editar) ? $empresa_editar["razao_social"] : "" ?>" required>
 						</div>
 					</div>
 
+					<?php if(isset($empresa_editar)) : ?>
 
-					<div class="col-md-6">
+					<?php else : ?>
+						<div class="col-md-6">
 						<div class="form-group">
-							<label for="empresa">Pefil</label>
-							<select name="empresa" id="empresa" class="form-control pesquisa__select col-12 selectCustom">
+							<label for="perfil">Pefil</label>
+							<select name="perfil" id="perfil" class="form-control pesquisa__select col-12 selectCustom">
 							<?php foreach($perfil as $perfil) : ?>
 							<option value="<?= $perfil["id_permissao"] ?>"><?php echo $perfil["nome_permissao"]; ?></option>
 							<?php endforeach;?>
@@ -73,8 +75,8 @@
 							</select>
 						</div>
 					</div>
-
-
+					<?php endif; ?>
+					
 					<div class="col-md-6">
 						<div class="form-group">
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>

@@ -36,7 +36,7 @@
                     <th><?= strtoupper($cadastro_login['nome_fantasia'])?></th>
                     <td> 
                         <a title="Editar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-pencil"></i></a>
-                        <a title="Permissões Login" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $cadastro_login['id_login']; ?>"><i class="fa-solid fa-key"></i></a>
+                        <a title="Permissões Login" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $cadastro_login['id_perfil']; ?>"><i class="fa-solid fa-key"></i></a>
                         <a title="Senha" href="javascript:goValida(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
                         <a title="Deletar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
                 </tr>
@@ -126,6 +126,39 @@
         });
     });
 });
+
+function aviso() {
+        Swal.fire({
+            title: "Parabens",
+            text: "Login Cadastrado",
+            icon: "success"
+        });
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }
+
+	    // Função para limpar um parâmetro da URL
+		function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'sucesso') {
+            aviso();
+        }
+    });
 </script>
 
 

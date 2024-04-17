@@ -50,37 +50,6 @@ class Cadastro_login extends CI_Controller {
 		echo json_encode($dados);
 	}
 
-    public function new_documentos()
-    {
-        $data["documentos_localizacao"] =  $this->localizacao_model->index();
-		$data["title"] = "Cadastro Localização - FinAR";
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_documento_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
-    }
-    
-    public function abir_documento($id)
-    {
-        $result_arquivo = $this->localizacao_model->select_arquivo($id);
-    
-        if ($result_arquivo) {
-            extract($result_arquivo);
-            header("Content-Type: application/pdf");
-            echo $result_arquivo["arquivo"];
-        } else {
-            echo "Arquivo não encontrado.";
-        }
-    }
-
-	public function delete_documento($id)
-	{
-		$this->localizacao_model->delete_documento($id);
-
-		redirect("localizacao");
-	}
     
     public function editar($id)
 	{
@@ -110,34 +79,19 @@ class Cadastro_login extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-    public function inserte_documentos()
-	{
-        $localizacao["nome_documento"] = $_POST["nome_documento"];
-        $localizacao["id_localizacao"] = $_POST["localizacao"];
-        $arquivo_pdf = $_FILES['file'];
-        $localizacao["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
-		$this->localizacao_model->inserte_documentos($localizacao);
-
-		redirect("localizacao");
-	}
 
     public function inserte()
 	{
-        $localizacao_info["nome"] = $_POST["nome_loc"];
-        $localizacao_info["id_empresa"] = $_POST["empresa"];
-        $localizacao_info["status"] = "T";
-		$this->localizacao_model->inserte_localizacao($localizacao_info);
+        $login_info["nome"] = $this->input->post('nome');
+        $login_info["email"] = $this->input->post('email');
+        $login_info["senha"] = $this->input->post('senha_confirma');
+        $login_info["id_perfil"] = $this->input->post('perfil');
+        $login_info["id_empresa"] = $this->input->post('empresa');
+		$this->cadastro_login_model->inserte_login($login_info);
 
-		redirect("localizacao");
+		redirect("cadastro_login?aviso=sucesso");
 	}
 
-    public function ativa($id)
-	{
-        $localizacao_info['status'] = "T";
-		$this->localizacao_model->update_localizacao_ativa($id,$localizacao_info);
-
-		redirect("localizacao");
-	}
 
     public function inativa($id)
 	{
