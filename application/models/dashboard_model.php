@@ -26,4 +26,33 @@ class Dashboard_model extends CI_Model {
         ")->result_array();
     }
 
+    public function select_total_devendo()
+    {
+        return $this->db->query("SELECT COALESCE(SUM(valor_confirmado), 0.00) AS total_confirmado
+        FROM solicitacao_compra
+        WHERE status = 'T';        
+        ")->result_array();
+    }
+
+    public function select_diferenca_compra()
+    {
+        return $this->db->query("SELECT
+        hoje.quantidade AS quantidade_hoje,
+        ontem.quantidade AS quantidade_ontem,
+        CASE
+            WHEN ontem.quantidade = 0 THEN
+                'Infinito'  -- Quando não há registros ontem, a diferença percentual é infinita.
+            ELSE
+                ROUND(((hoje.quantidade - ontem.quantidade) / ontem.quantidade) * 100, 2)
+        END AS diferenca_percentual
+    FROM
+        (SELECT COUNT(*) AS quantidade
+         FROM solicitacao_compra
+         WHERE DATE(data_pedido) = CURDATE()) AS hoje,
+        (SELECT COUNT(*) AS quantidade
+         FROM solicitacao_compra
+         WHERE DATE(data_pedido) = CURDATE() - INTERVAL 1 DAY) AS ontem;        
+        ")->row_array();
+    }
+
 }

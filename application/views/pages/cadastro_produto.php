@@ -142,10 +142,14 @@
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 function controleDialog(){
-	swal("Lembrete!", "O código auxiliar server para saber o relaciomento dos produtos entres as empresas", "info");
-	}
-
+	Swal.fire({
+		title: "Lembrete!",
+		text: "O código auxiliar server para saber o relaciomento dos produtos entres as empresas",
+		icon: "info"
+		});
+	};
 </script>

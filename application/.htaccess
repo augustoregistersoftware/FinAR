@@ -1,6 +1,14 @@
 <IfModule authz_core_module>
-    Require all denied
+    # Permitir acesso somente aos arquivos scripts.js e styles.css dentro de application/js e application/css, respectivamente
+    <FilesMatch "^(application\/js\/scripts\.js|application\/css\/styles\.css)$">
+        Require all granted
+    </FilesMatch>
 </IfModule>
 <IfModule !authz_core_module>
-    Deny from all
+    # Permitir acesso somente aos arquivos scripts.js e styles.css dentro de application/js e application/css, respectivamente
+    <FilesMatch "^(application\/js\/scripts\.js|application\/css\/styles\.css)$">
+        Order allow,deny
+        Allow from all
+    </FilesMatch>
 </IfModule>
+

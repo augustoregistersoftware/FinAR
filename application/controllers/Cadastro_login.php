@@ -12,57 +12,44 @@ class Cadastro_login extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('log')!="logged"){
+			redirect('login');
+		}else{
+			$this->load_page();
+		}
+	}
+
+	public function load_page()
+	{
 		$data["cadastro_login"] =  $this->cadastro_login_model->index();
 		$data["title"] = "Cadastro De Login - FinAR";
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_login',$data);
+		if($this->session->userdata('user')!="T"){
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('pages/pagina_bloqueio',$data);
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav-top',$data);
+			$this->load->view('js/script_cadastro_login');
+			$this->load->view('pages/cadastro_login',$data);
+		}
+		
 	}
 
-    public function documentos($id)
-	{
-		$data["documentos"] =  $this->localizacao_model->select_documentos($id);
-		$data["title"] = "Documentos Localização - FinAR";
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/documentos_localizacao',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
-	}
-
-    public function new_documentos()
-    {
-        $data["documentos_localizacao"] =  $this->localizacao_model->index();
-		$data["title"] = "Cadastro Localização - FinAR";
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_documento_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
-    }
-    
-    public function abir_documento($id)
-    {
-        $result_arquivo = $this->localizacao_model->select_arquivo($id);
-    
-        if ($result_arquivo) {
-            extract($result_arquivo);
-            header("Content-Type: application/pdf");
-            echo $result_arquivo["arquivo"];
-        } else {
-            echo "Arquivo não encontrado.";
-        }
+	public function obter_dados() {
+		$idDoLogin = $this->input->get('idDoLogin');
+        $dados = $this->cadastro_login_model->select_perfil($idDoLogin);
+        echo json_encode($dados);
     }
 
-	public function delete_documento($id)
+    public function obter_senha()
 	{
-		$this->localizacao_model->delete_documento($id);
-
-		redirect("localizacao");
+		$idDoLogin = $this->input->get('id_login');
+		$dados =  $this->cadastro_login_model->select_senha($idDoLogin);
+		echo json_encode($dados);
 	}
+
     
     public function editar($id)
 	{
@@ -77,47 +64,35 @@ class Cadastro_login extends CI_Controller {
 		$this->load->view('templates/js',$data);
 	}
 
-    public function new()
+    public function new_login()
 	{	
-		$data['empresa'] = $this->localizacao_model->select_empresas();
+		$data['perfil'] = $this->cadastro_login_model->select_perfil_cadastro();
+		$data['empresas'] = $this->cadastro_login_model->select_empresa_cadastro();
 
-		$data["title"] = "Cadastrar Localização - FinAR";
+		$data["title"] = "Cadastrar Login - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_localizacao',$data);
+		$this->load->view('js/script_cadastrar_login');
+		$this->load->view('pages/cadastrar_login',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}
 
-    public function inserte_documentos()
-	{
-        $localizacao["nome_documento"] = $_POST["nome_documento"];
-        $localizacao["id_localizacao"] = $_POST["localizacao"];
-        $arquivo_pdf = $_FILES['file'];
-        $localizacao["arquivo"] = file_get_contents($arquivo_pdf['tmp_name']);
-		$this->localizacao_model->inserte_documentos($localizacao);
-
-		redirect("localizacao");
-	}
 
     public function inserte()
 	{
-        $localizacao_info["nome"] = $_POST["nome_loc"];
-        $localizacao_info["id_empresa"] = $_POST["empresa"];
-        $localizacao_info["status"] = "T";
-		$this->localizacao_model->inserte_localizacao($localizacao_info);
+		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
+        $login_info["nome"] = $this->input->post('nome');
+        $login_info["email"] = $this->input->post('email');
+		$login_info["senha"] = openssl_encrypt($this->input->post('senha_confirma'), "AES-128-ECB", $senha_para_crip);
+        $login_info["id_perfil"] = $this->input->post('perfil');
+        $login_info["id_empresa"] = $this->input->post('empresa');
+		$this->cadastro_login_model->inserte_login($login_info);
 
-		redirect("localizacao");
+		redirect("cadastro_login?aviso=sucesso");
 	}
 
-    public function ativa($id)
-	{
-        $localizacao_info['status'] = "T";
-		$this->localizacao_model->update_localizacao_ativa($id,$localizacao_info);
-
-		redirect("localizacao");
-	}
 
     public function inativa($id)
 	{

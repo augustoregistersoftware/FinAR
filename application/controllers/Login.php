@@ -16,6 +16,7 @@ class Login extends CI_Controller {
 		$data["title"] = "Login - FinAR";
 		$this->session->sess_destroy();
 
+		$this->load->view('js/script_login');
 		$this->load->view('pages/login',$data);
 	}
 
@@ -44,17 +45,18 @@ class Login extends CI_Controller {
 		$localizacao = $validate_permission['localizacao'];
 		$financeiro = $validate_permission['financeiro'];
 		$empresa = $validate_permission['empresa'];
+		$perfil = $validate_permission['nome_permissao'];
 		$validade_count = count($validate);
 
 		if ($validade_count > 0){
-			$this->cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa);
+			$this->cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
 		}else{
 			$this->session->set_flashdata('warning','Acesso Negado!');
 			redirect("login");
 		}
 	}
 
-	public function cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa)
+	public function cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
 	{
 		$username = $this->input->post('username');
 
@@ -62,7 +64,7 @@ class Login extends CI_Controller {
 			$username_cookie = array(
 				'name'   => 'username',
 				'value'  => $username,
-				'expire' => '3600', 
+				'expire' => '86400', 
 				'path'   => '/'
 			);
 
@@ -72,16 +74,16 @@ class Login extends CI_Controller {
 			$checked_cookie = array(
 				'name'   => 'checked',
 				'value'  => $checked,
-				'expire' => '3600', 
+				'expire' => '86400', 
 				'path'   => '/'
 			);
 			$this->input->set_cookie($username_cookie);
 			$this->input->set_cookie($checked_cookie);
 
-			$this->session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa);
+			$this->session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
 	}
 
-	public function session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa)
+	public function session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
 	{
 		$this->session->set_userdata('name',$name);
 		$this->session->set_userdata('user',$usuario);
@@ -92,6 +94,7 @@ class Login extends CI_Controller {
 		$this->session->set_userdata('location',$localizacao);
 		$this->session->set_userdata('financial',$financeiro);
 		$this->session->set_userdata('company',$empresa);
+		$this->session->set_userdata('profile',$perfil);
 		$this->session->set_userdata('log','logged');
 		$this->session->set_flashdata('suc','Login Efetuado!');
 		redirect("dashboard?aviso=sucesso");

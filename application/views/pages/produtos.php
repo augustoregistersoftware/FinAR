@@ -1,5 +1,6 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('application/css/styles_produto.css') ?>">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -142,121 +143,46 @@
 </main>
 
 <script>
-
-function goEmpresa(id) {
-    var baseUrl = '<?php echo base_url(); ?>';
-    var myUrl = baseUrl + 'produto/produto_empresa/' + id;
-    window.location.href = myUrl;
-}
-
-function goFoto(id){
-	var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/fotos_produto/' + id;
-
-	window.location.href =myUrl;
-}
-
-function goInativa(id) {
-    swal({
-        title: "Deseja Realmente Inativar Esse Produto?",
-        text: "Essa Ação terá impacto em outras situações",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
-            swal("Feito, Produto Desativado !", {
-                icon: "success",
-            }).then(() => {
-                var baseUrl = '<?php echo base_url(); ?>';
-                var myUrl = baseUrl + 'produto/inativa/' + id;
-                window.location.href = myUrl;
-            });
-        } else {
-            return false;
-        }
+      $(document).ready(function(){
+    $("body").on("click", ".btn.btn-info.btn-sm.btn-info", function(e){
+        e.preventDefault();
+        
+        var idDoProduto = $(this).attr("id");
+        
+        $.ajax({
+            url: "<?php echo site_url('produto/obter_dados');?>",
+            type: 'GET',
+            dataType: 'json',
+            data: { idDoProduto: idDoProduto }, 
+            success: function(data) {
+                var html = '';
+                $.each(data, function(key, item){
+                    html += '<tr>';
+                    html += '<td>'+item.id_solicitacao+'</td>';
+                    html += '<td>'+item.descricao+'</td>';
+                    html += '<td>'+item.data_pedido+'</td>';
+                    html += '<td>'+item.data_entrega+'</td>';
+                    if (item.status == 'F') {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff; padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>';
+                    } else if (item.status == 'C') {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #ea0000; color: #fff; padding: 8px 10px; margin-top: 5px;">Cancelado</span></td>';
+                    } else {
+                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #03ab14; color: #fff; padding: 8px 10px; margin-top: 5px;">Fechado</span></td>';
+                    }
+                    html += '<td>'+item.nome_fornecedor+'</td>';
+                    html +=  '<th> R$'+parseFloat(item.valor_confirmado).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
+                    html += '</tr>';
+                });
+                $("#dados_grid").html(html);
+                new DataTable('#pedidos');
+                $("#myModal").modal('show'); 
+            }
+        });
     });
-    
-}
-
-let rocketVisible = true;
-
-function toggleRocket() {
-    const rocket = document.getElementById('flash');
-    rocketVisible = !rocketVisible;
-    rocket.style.display = rocketVisible ? 'block' : 'none';
-}
-
-function goHistorico(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'produto/historico_produto/' + id;
-    window.location.href = myUrl;
-}
-
-function goAtiva(id) {
-    swal({
-        title: "Deseja Realmente Ativar Esse Produto?",
-        text: "Essa Ação terá impacto em outras situações",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
-            swal("Feito, Produto Ativado !", {
-                icon: "success",
-            }).then(() => {
-                var baseUrl = '<?php echo base_url(); ?>'; 
-                var myUrl = baseUrl + 'produto/ativa/' + id;
-                window.location.href = myUrl;
-            });
-        } else {
-            return false;
-        }
-    });
-}
+});
 
 
-function goEdit(id) {
-    swal({
-        title: "Deseja Realmente Editar Esse Produto?",
-        text: "",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
-            var baseUrl = '<?php echo base_url(); ?>'; 
-            var myUrl = baseUrl + 'produto/editar/' + id;
-                window.location.href = myUrl;
-        } else {
-            return false;
-        }
-    })
-}
-</script>
-
-
-
-
-<script>
- function controleDialog(){
-    swal("Parabéns", "Seu Produto esta com estoque", "success");
-	}
-
-	function controleDialog2(){
-		swal("Opss...", "Seu Produto esta com estoque abaixo =(", "warning");
-	}
-
-    const flash = document.getElementById('flash');
-    flash.addEventListener('click', () => {
-        ajuda();
-    });
-
-    function ajuda(){
-        swal("Dica Para Montagem do seu Produto ;)", "DESCRIÇÃO: deixe uma descrição efetiva para simbolizar oque o produto é, CODIO AUXILIAR: Escolha um codigo auxiliar no qual voce sabe que vai exatamente aquele produto e que seja unico em ambas as empresas pois por ele que voce ira consultar");
-    }
-    // Na sua função de visualização
-    function aviso() {
+function aviso() {
         swal("Sucesso!", "Produto Cadastrado", "success");
         
         // Limpa o parâmetro 'aviso' da URL
@@ -433,111 +359,23 @@ function goEdit(id) {
         }
     });
 
-    $(document).ready(function(){
-    $("body").on("click", ".btn.btn-info.btn-sm.btn-info", function(e){
-        e.preventDefault();
-        
-        var idDoProduto = $(this).attr("id");
-        
-        $.ajax({
-            url: "<?php echo site_url('produto/obter_dados');?>",
-            type: 'GET',
-            dataType: 'json',
-            data: { idDoProduto: idDoProduto }, 
-            success: function(data) {
-                var html = '';
-                $.each(data, function(key, item){
-                    html += '<tr>';
-                    html += '<td>'+item.id_solicitacao+'</td>';
-                    html += '<td>'+item.descricao+'</td>';
-                    html += '<td>'+item.data_pedido+'</td>';
-                    html += '<td>'+item.data_entrega+'</td>';
-                    if (item.status == 'F') {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #f28b05; color: #fff; padding: 8px 10px; margin-top: 5px;">Em Aberto</span></td>';
-                    } else if (item.status == 'C') {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #ea0000; color: #fff; padding: 8px 10px; margin-top: 5px;">Cancelado</span></td>';
-                    } else {
-                        html += '<td><span class="badge badge-pill pull-right" style="background-color: #03ab14; color: #fff; padding: 8px 10px; margin-top: 5px;">Fechado</span></td>';
-                    }
-                    html += '<td>'+item.nome_fornecedor+'</td>';
-                    html +=  '<th> R$'+parseFloat(item.valor_confirmado).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+'</th>';
-                    html += '</tr>';
-                });
-                $("#dados_grid").html(html);
-                new DataTable('#pedidos');
-                $("#myModal").modal('show'); 
-            }
-        });
+
+
+    const flash = document.getElementById('flash');
+    flash.addEventListener('click', () => {
+        ajuda();
     });
-});
+
+    function ajuda(){
+        swal("Dica Para Montagem do seu Produto ;)", "DESCRIÇÃO: deixe uma descrição efetiva para simbolizar oque o produto é, CODIO AUXILIAR: Escolha um codigo auxiliar no qual voce sabe que vai exatamente aquele produto e que seja unico em ambas as empresas pois por ele que voce ira consultar");
+    }
+    // Na sua função de visualização
+
+
 </script>
 
-<style>
-
-.flash {
-    width: 60px; /* Largura da div */
-    height: 60px; /* Altura da div */
-    background-color: blue; /* Cor de fundo da div */
-    border-radius: 50%; /* Torna a div redonda */
-    position: fixed; /* Posição fixa */
-    bottom: 20px; /* Distância do fundo */
-    right: 20px; /* Distância da direita */
-    display: flex; /* Para centralizar o ícone */
-    justify-content: center; /* Para centralizar o ícone */
-    align-items: center; /* Para centralizar o ícone */
-    cursor: pointer; /* Mostrar o cursor como um ponteiro */
-}
-
-.flash i {
-    font-size: 2.5em; /* Tamanho do ícone */
-    color: white; /* Cor do ícone */
-    display: flex; /* Para centralizar o ícone */
-    justify-content: center; /* Para centralizar o ícone */
-}
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.toggle-input {
-  display: none;
-}
-
-.toggle-label {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: background-color 0.3s;
-}
-
-.toggle-label::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.toggle-input:checked + .toggle-label {
-  background-color: #2196F3;
-}
-
-.toggle-input:checked + .toggle-label::after {
-  transform: translateX(26px);
-}
 
 
 
-</style>
+
+
