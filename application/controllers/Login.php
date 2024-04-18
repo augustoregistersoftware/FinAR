@@ -30,8 +30,9 @@ class Login extends CI_Controller {
 
 	public function auth()
 	{
+		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
 		$email = $this->input->post('username');
-		$senha = $this->input->post('password');
+		$senha = openssl_encrypt($this->input->post('password'),"AES-128-ECB",$senha_para_crip);
 
 		$validate = $this->login_model->auth($email,$senha);
 		$validate_permission = $this->login_model->auth_permission($email,$senha);
