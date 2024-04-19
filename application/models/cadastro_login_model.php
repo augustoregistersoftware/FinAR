@@ -17,7 +17,7 @@ class Cadastro_login_model extends CI_Model {
         return $this->db->query("SELECT
         senha
         FROM login
-        WHERE id_login = " .$this->db->escape($idDoLogin). "")->result_array();
+        WHERE id_login = " .$this->db->escape($idDoLogin). "")->row_array();
     }
 
     public function select_perfil($id)

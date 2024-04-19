@@ -48,8 +48,8 @@ class Cadastro_login extends CI_Controller {
 		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
 		$idDoLogin = $this->input->get('id_login');
 		$dados =  $this->cadastro_login_model->select_senha($idDoLogin);
-		$dados_descrypt = openssl_decrypt($dados,"AES-128-ECB",$senha_para_crip);
-		echo json_encode($dados_descrypt);
+		$dados_decrypt = openssl_decrypt($dados['senha'],"AES-128-ECB",$senha_para_crip);
+		echo json_encode(array('senha' => $dados_decrypt));
 	}
 
     

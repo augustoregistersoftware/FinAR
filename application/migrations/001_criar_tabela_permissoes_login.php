@@ -35,6 +35,10 @@ class Migration_criar_tabela_permissoes_login extends CI_Migration {
                 'type' => 'CHAR',
                 'constraint' => '1',
             ),
+            'compra' => array(
+                'type' => 'CHAR',
+                'constraint' => '1',    
+            ),
             'localizacao' => array(
                 'type' => 'CHAR',
                 'constraint' => '1',
@@ -46,10 +50,6 @@ class Migration_criar_tabela_permissoes_login extends CI_Migration {
             'empresa' => array(
                 'type' => 'CHAR',
                 'constraint' => '1',
-            ),
-            'id_login' => array(
-                'type' => 'INT',
-                'constraint' => 11,
             ),
         ));
         $this->dbforge->add_key('id_permissao', TRUE);

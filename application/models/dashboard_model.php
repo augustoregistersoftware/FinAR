@@ -39,19 +39,19 @@ class Dashboard_model extends CI_Model {
         return $this->db->query("SELECT
         hoje.quantidade AS quantidade_hoje,
         ontem.quantidade AS quantidade_ontem,
-        CASE
-            WHEN ontem.quantidade = 0 THEN
-                'Infinito'  -- Quando não há registros ontem, a diferença percentual é infinita.
-            ELSE
-                ROUND(((hoje.quantidade - ontem.quantidade) / ontem.quantidade) * 100, 2)
-        END AS diferenca_percentual
+        ROUND(
+            IF(ontem.quantidade = 0,
+               100 * IF(hoje.quantidade > 0, 1, 0),  -- Se ontem = 0 e hoje > 0, 100%; se hoje = 0, 0%
+               ((hoje.quantidade - ontem.quantidade) / ontem.quantidade) * 100),
+            2
+        ) AS diferenca_percentual
     FROM
         (SELECT COUNT(*) AS quantidade
          FROM solicitacao_compra
          WHERE DATE(data_pedido) = CURDATE()) AS hoje,
         (SELECT COUNT(*) AS quantidade
          FROM solicitacao_compra
-         WHERE DATE(data_pedido) = CURDATE() - INTERVAL 1 DAY) AS ontem;        
+         WHERE DATE(data_pedido) = CURDATE() - INTERVAL 1 DAY) AS ontem;            
         ")->row_array();
     }
 

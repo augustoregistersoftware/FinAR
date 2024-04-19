@@ -2,11 +2,16 @@
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">FinAR <i class="fa-solid fa-money-bill"></i></a>
 	<div>
 	</div>
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="<?=base_url()?>login">Sair</a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fa-solid fa-gear"></i></a></a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Funções</a></li>
+            <li><a href="<?=base_url()?>login">Sair</a></li>
+        </ul>
     </li>
-  </ul>
+</ul>
 </nav>
 
 <div class="container-fluid">
@@ -122,5 +127,58 @@
 .nav-item:hover .sub-menu {
     display: block; /* Mostre o submenu quando o item pai for passado com o mouse */
 }
+
+/* Estilo base para a navbar e itens */
+.navbar-nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: block;
+    padding: 8px 12px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Escondendo o menu dropdown por padrão */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style: none;
+    width: 100%; /* Ajuste conforme necessário */
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: #333333;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f8f9fa;
+}
+
+/* Mostrando o menu dropdown quando o item pai está com hover */
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+
 
 </style>

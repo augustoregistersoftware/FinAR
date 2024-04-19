@@ -39,21 +39,18 @@ function goInativa(id) {
 
 
 
-function senha(id_login){
-    $.ajax({ 
-        url: "<?php echo site_url('cadastro_login/obter_senha');?>",
+function senha(id_login) {
+    $.ajax({
+        url: "<?php echo site_url('cadastro_login/obter_senha'); ?>",
         type: 'GET',
         dataType: 'json',
         data: { id_login: id_login },
         success: function(data) {
-            var dado = '';
-                $.each(data, function(key, item){
-                    dado = item.senha;
-                });
-                Swal.fire("Senha:",dado);
-            }
+            Swal.fire("Senha:", data.senha);
+        }
     });
 }
+
 
 function goEdit(id) {
     var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
