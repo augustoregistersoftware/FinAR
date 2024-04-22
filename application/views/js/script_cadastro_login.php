@@ -28,13 +28,21 @@ function goValida(id) {
 }
 
 function goInativa(id) {
-        var baseUrl = '<?php echo base_url(); ?>'; 
-        var myUrl = baseUrl + 'localizacao/inativa/' + id;
-        if (confirm("Deseja realmente inativar essa localizacao?")) {
+    Swal.fire({
+        title: "Deseja Deletar?",
+        text: "Após deletar o LOGIN não sera possivel recuperar",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, delete!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            var baseUrl = '<?php echo base_url(); ?>'; 
+            var myUrl = baseUrl + 'cadastro_login/deletar/' + id;
             window.location.href = myUrl;
-        } else {
-            return false;
         }
+        });
     }
 
 
@@ -53,7 +61,7 @@ function senha(id_login) {
 
 
 function goEdit(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
+    var baseUrl = '<?php echo base_url(); ?>';
     var myUrl = baseUrl + 'localizacao/editar/' + id;
     if (confirm("Deseja realmente Editar?")) {
         window.location.href = myUrl;
