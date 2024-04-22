@@ -14,7 +14,17 @@
 <form action="<?= base_url() ?>login/auth/" method="post">
     <div id="container">
         <div class="banner">
-            <img src="/finar/imagens/clip-financial-report.gif" alt="imagem-login">
+        <?php 
+            $mesAtual = date('m');
+            if ($mesAtual == '12') {
+                echo '<img src="/finar/imagens/login_natal.png" alt="imagem-login">';
+            } elseif($mesAtual == '01'){
+                echo '<img src="/finar/imagens/login_anoNovo.png" alt="imagem-login">';
+            }
+            else {
+                echo '<img src="/finar/imagens/login_photo.png" alt="imagem-login">';
+            }
+        ?>
             <p style="color: #fff; font-weight: 400;">
                 Seja bem vindo ao FinAR, acesse e aproveite todo o conteúdo,
                 <br>somos uma equipe de profissionais empenhados em
