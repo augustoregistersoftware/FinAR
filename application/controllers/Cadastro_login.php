@@ -96,12 +96,11 @@ class Cadastro_login extends CI_Controller {
 	}
 
 
-    public function inativa($id)
+    public function deletar($id)
 	{
-        $localizacao_info['status'] = "F";
-		$this->localizacao_model->update_localizacao_inativa($id,$localizacao_info);
+		$this->cadastro_login_model->deleta($id);
 
-		redirect("localizacao");
+		redirect("cadastro_login?aviso=delete");
 	}
 
     public function update($id)
