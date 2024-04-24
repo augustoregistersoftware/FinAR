@@ -40,9 +40,10 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="senha">Senha</label>
-							<input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="<?= isset($login_editar) ? $senha_decrypt : "" ?>">
+							<input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="<?php echo isset($login_editar) ? htmlspecialchars(openssl_decrypt($login_editar['senha'], 'AES-128-ECB', 'bNzLsJB3/H$dasrg654fg'), ENT_QUOTES, 'UTF-8') : ''; ?>">
 						</div>
 					</div>
+
 
 					<?php if(isset($login_editar)) : ?>
 						
