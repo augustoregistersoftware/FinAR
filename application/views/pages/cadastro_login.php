@@ -35,7 +35,7 @@
                     <th><?= strtoupper($cadastro_login['nome_permissao'])?></th>
                     <th><?= strtoupper($cadastro_login['nome_fantasia'])?></th>
                     <td> 
-                        <a title="Editar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-pencil"></i></a>
+                        <a title="Editar Login" href="javascript:goEdit(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-warning"><i class="fa-solid fa-pencil"></i></a>
                         <a title="Permissões Login" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $cadastro_login['id_perfil']; ?>"><i class="fa-solid fa-key"></i></a>
                         <a title="Senha" href="javascript:goValida(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
                         <a title="Deletar Login" href="javascript:goInativa(<?= $cadastro_login['id_login']?>)" class="btn btn-primary btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>

@@ -12,6 +12,18 @@ class Cadastro_login_model extends CI_Model {
         INNER JOIN permissoes_login on permissoes_login.id_permissao = login.id_perfil")->result_array();
     }
 
+    public function select_editar($id)
+    {
+        return $this->db->query('SELECT
+        login.*,
+        empresa.nome_fantasia,
+        permissoes_login.nome_permissao
+        FROM login
+        INNER JOIN empresa on empresa.id_empresa = login.id_empresa
+        INNER JOIN permissoes_login on permissoes_login.id_permissao = login.id_perfil
+        WHERE login.id_login = ' .$this->db->escape($id). '')->row_array();
+    }
+
     public function select_senha($idDoLogin)
     {
         return $this->db->query("SELECT

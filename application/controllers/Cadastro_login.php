@@ -55,13 +55,16 @@ class Cadastro_login extends CI_Controller {
     
     public function editar($id)
 	{
-		$data["localizacao_editar"] =  $this->localizacao_model->select_editar($id);
-		$data['empresa'] = $this->localizacao_model->select_empresas();
-		$data["title"] = "Editar Localizacao - FinAR";
+		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
+
+		$data["login_editar"] =  $this->cadastro_login_model->select_editar($id);
+		$senha =  $this->cadastro_login_model->select_editar($id);
+		$data["senha_decryp"] = openssl_decrypt($senha['senha'],"AES-128-ECB", $senha_para_crip);
+		$data["title"] = "Editar Login - FinAR";
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
-		$this->load->view('pages/cadastro_localizacao',$data);
+		$this->load->view('pages/cadastrar_login',$data);
         $this->load->view('templates/footer',$data);
 		$this->load->view('templates/js',$data);
 	}

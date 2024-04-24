@@ -1,6 +1,6 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	  <?php if(isset($empresa_editar)) : ?>
+	  <?php if(isset($login_editar)) : ?>
 					
 			<h1 class="h2">Alterar Login</h1>
 				<?php else : ?>
@@ -14,9 +14,9 @@
       </div>
 
 			<div class="col-md-12">
-			<?php if(isset($empresa_editar)) : ?>
+			<?php if(isset($login_editar)) : ?>
 					
-					<form action="<?= base_url() ?>empresa/update/<?= $empresa_editar['id_empresa'] ?>" method="post">
+					<form action="<?= base_url() ?>cadastro_login/editar/<?= $login_editar['id_login'] ?>" method="post">
 				<?php else : ?>
 					<form action="<?= base_url() ?>cadastro_login/inserte" method="post" enctype="multipart/form-data">
 				<?php endif; ?>
@@ -25,7 +25,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nome">Nome</label>
-							<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?= isset($empresa_editar) ? $empresa_editar["razao_social"] : "" ?>">
+							<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?= isset($login_editar) ? $login_editar["nome"] : "" ?>">
 						</div>
 					</div>
 
@@ -33,25 +33,29 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="email">E-mail<a id="btn_dialog" onclick="controleDialog()" class="btn btn-sm btn-warning"><i class="fa-solid fa-exclamation"></i></a></label>
-							<input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required value="<?= isset($produto_editar) ? $produto_editar["cod_aux"] : "" ?>">
+							<input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required value="<?= isset($login_editar) ? $login_editar["email"] : "" ?>">
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="senha">Senha</label>
-							<input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="<?= isset($empresa_editar) ? $empresa_editar["razao_social"] : "" ?>">
+							<input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="<?= isset($login_editar) ? $senha_decrypt : "" ?>">
 						</div>
 					</div>
 
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="senha_confirma">Confirme a Senha</label>
-							<input type="text" class="form-control" name="senha_confirma" id="senha_confirma" placeholder="Confirmar Senha" value="<?= isset($empresa_editar) ? $empresa_editar["razao_social"] : "" ?>" required>
+					<?php if(isset($login_editar)) : ?>
+						
+					<?php else : ?>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="senha_confirma">Confirme a Senha</label>
+								<input type="text" class="form-control" name="senha_confirma" id="senha_confirma" placeholder="Confirmar Senha" value="<?= isset($login_editar) ? $login_editar["senha"] : "" ?>" required>
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 
-					<?php if(isset($empresa_editar)) : ?>
+					<?php if(isset($login_editar)) : ?>
 
 					<?php else : ?>
 						<div class="col-md-6">
@@ -79,8 +83,15 @@
 					
 					<div class="col-md-6">
 						<div class="form-group">
+						<?php if(isset($login_editar)) : ?>
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Perfil</a>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Empresa</a>
+						<?php else : ?>
+							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
+						<?php endif; ?>	
 						</div>			
 					</div>
 				</form>

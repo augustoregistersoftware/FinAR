@@ -61,13 +61,21 @@ function senha(id_login) {
 
 
 function goEdit(id) {
-    var baseUrl = '<?php echo base_url(); ?>';
-    var myUrl = baseUrl + 'localizacao/editar/' + id;
-    if (confirm("Deseja realmente Editar?")) {
-        window.location.href = myUrl;
-    } else {
-        return false;
-    }
+    Swal.fire({
+        title: "Deseja Editar?",
+        text: "Após Editar o LOGIN não sera possivel recuperar",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, Edite!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            var baseUrl = '<?php echo base_url(); ?>';
+            var myUrl = baseUrl + 'cadastro_login/editar/' + id;
+            window.location.href = myUrl;
+        }
+        });
 }
 </script>
 
