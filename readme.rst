@@ -58,6 +58,8 @@ $db['default'] = array(
     ...
 );
 ```
+Usar a Migrations após subir o backup do banco
+Migrations/Index     - Versão 1.0 para subir a versão com a tabela de login
 
 
 
