@@ -40,7 +40,7 @@ Para executar este sistema em sua máquina local, você precisará do seguinte:
 
 Clone o repositório em seu servidor local ou de produção:
 
-```bash
+bash
 git clone https://github.com/seu-usuario/seu-projeto.git
 cd seu-projeto
 
