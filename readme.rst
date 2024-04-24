@@ -1,4 +1,6 @@
- *Sistema de Gestão Empresarial*
+#################################
+*Sistema de Gestão Empresarial*
+##################################
 
 Este sistema web é uma solução completa de gestão empresarial que inclui funcionalidades de dashboard, controle de compras, controle de estoque de produtos, gestão financeira e controle de permissões de login. O sistema é ideal para pequenas e médias empresas que necessitam de uma ferramenta robusta para otimizar seus processos internos e tomar decisões baseadas em dados.
 
@@ -57,9 +59,10 @@ $db['default'] = array(
     ...
 );
 
-######################
+
+##########################
 *Configuração do Sistema*
-######################
+##########################
 Configurações adicionais podem ser ajustadas em application/config/config.php.
 
 ######################
