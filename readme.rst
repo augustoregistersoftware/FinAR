@@ -1,70 +1,67 @@
-###################
-What is CodeIgniter
-###################
+# Sistema de Gestão Empresarial
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Este sistema web é uma solução completa de gestão empresarial que inclui funcionalidades de dashboard, controle de compras, controle de estoque de produtos, gestão financeira e controle de permissões de login. O sistema é ideal para pequenas e médias empresas que necessitam de uma ferramenta robusta para otimizar seus processos internos e tomar decisões baseadas em dados.
 
-*******************
-Release Information
-*******************
+## Funcionalidades
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+- **Dashboard**: Visualização de dados e métricas importantes em tempo real.
+- **Controle de Compras**: Gerenciamento completo do ciclo de compras, desde o pedido até a entrega.
+- **Controle de Estoque**: Sistema para gerenciar o estoque de produtos, incluindo entradas, saídas e inventário.
+- **Gestão Financeira**: Ferramentas para controle de fluxo de caixa, contas a pagar e receber.
+- **Controle de Permissões**: Sistema de login com diferentes níveis de permissões de acesso, garantindo a segurança das informações.
 
-**************************
-Changelog and New Features
-**************************
+OBS: Apenas algumas das diversas funcionalidade, apenas um breve resumo
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+## Tecnologias Utilizadas
 
-*******************
-Server Requirements
-*******************
+- **Backend**: PHP 7.8
+- **Framework**: CodeIgniter 3
+- **Banco de Dados**: MySQL
+- **Frontend**: HTML, CSS, JavaScript (com bibliotecas adicionais como jQuery e Bootstrap para a interface)
 
-PHP version 5.6 or newer is recommended.
+## Pré-requisitos
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+Para executar este sistema em sua máquina local, você precisará do seguinte:
 
-************
-Installation
-************
+- PHP 7.8+
+- MySQL
+- Servidor Web (Apache/Nginx)
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+## Instalação
 
-*******
-License
-*******
+Clone o repositório em seu servidor local ou de produção:
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+```bash
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
 
-*********
-Resources
-*********
+## Configuração do Banco de Dados
+$db['default'] = array(
+    'dsn'   => '',
+    'hostname' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'database' => 'finar',
+    'dbdriver' => 'mysqli',
+    ...
+);
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+##Configuração do Sistema
+Configurações adicionais podem ser ajustadas em application/config/config.php.
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+##Executando o Sistema
+Após a instalação e configuração, inicie seu servidor web e acesse o sistema pelo navegador para começar a utilizá-lo.
 
-***************
-Acknowledgement
-***************
+##Contribuindo
+Contribuições são sempre bem-vindas! Para contribuir, por favor, siga as instruções no arquivo CONTRIBUTING.md.
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+##Licença
+Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE.md para detalhes.
+
+##Suporte
+Para suporte, entre em contato através do e-mail augustovalenciano8@gmail.com
+
+Agradecimentos
+A todos que contribuíram para o projeto.
+À comunidade CodeIgniter por disponibilizar um framework tão flexível.
+
