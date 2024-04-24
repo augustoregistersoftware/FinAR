@@ -47,17 +47,11 @@ cd seu-projeto
 ################################
 *Configuração do Banco de Dados*
 ################################
-```php
-$db['default'] = array(
-    'dsn'   => '',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'database' => 'finar',
-    'dbdriver' => 'mysqli',
-    ...
-);
-```
+```python
+def hello_world():
+    print("Hello, world!")
+`` `
+
 
 
 ##########################
