@@ -31,12 +31,16 @@ class Compra extends CI_Controller {
 
 		if($this->session->userdata('shopp')!="T"){
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/pagina_bloqueio',$data);
+			$this->load->view('templates/footer');
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/compra',$data);
+			$this->load->view('templates/footer');
 		}
 		
 	}

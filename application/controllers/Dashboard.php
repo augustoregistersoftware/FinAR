@@ -10,6 +10,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model("produtos_model");
 		$this->load->model("clientes_model");
 		$this->load->model("dashboard_model");
+		$this->load->model("message_model");
 
 	    
     }
@@ -25,13 +26,16 @@ class Dashboard extends CI_Controller {
 		$data["total_receber"] = $this->dashboard_model->select_total_receber();
 		$data["total_devendo"] = $this->dashboard_model->select_total_devendo();
 		$data["diferenca_compra"] = $this->dashboard_model->select_diferenca_compra();
-		$data["title"] = "Dashboard - FinAR";
+		$id = $this->session->userdata('id');
+
+        $data["quantidade_messagem"] =  $this->message_model->quantidade_mensagem($id);
+        $data["listagem"] =  $this->message_model->conteudos_mensagem_listagem($id);
 
 		if($this->session->userdata('log')!="logged"){
 			redirect("login");
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/navbar');
+			$this->load->view('templates/navbar',$data);
 			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/dashboard',$data);
 			$this->load->view('templates/footer');

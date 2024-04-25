@@ -37,6 +37,7 @@ class Login extends CI_Controller {
 		$validate = $this->login_model->auth($email,$senha);
 		$validate_permission = $this->login_model->auth_permission($email,$senha);
 
+		$id = $validate_permission['id_login'];
 		$name = $validate_permission['nome'];
 		$usuario = $validate_permission['usuario'];
 		$cliente = $validate_permission['cliente'];
@@ -50,14 +51,14 @@ class Login extends CI_Controller {
 		$validade_count = count($validate);
 
 		if ($validade_count > 0){
-			$this->cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
+			$this->cookies($id,$name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
 		}else{
 			$this->session->set_flashdata('warning','Acesso Negado!');
 			redirect("login");
 		}
 	}
 
-	public function cookies($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
+	public function cookies($id,$name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
 	{
 		$username = $this->input->post('username');
 
@@ -81,11 +82,12 @@ class Login extends CI_Controller {
 			$this->input->set_cookie($username_cookie);
 			$this->input->set_cookie($checked_cookie);
 
-			$this->session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
+			$this->session($id,$name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil);
 	}
 
-	public function session($name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
+	public function session($id,$name,$usuario,$cliente,$produto,$fornecedor,$compra,$localizacao,$financeiro,$empresa,$perfil)
 	{
+		$this->session->set_userdata('id',$id);
 		$this->session->set_userdata('name',$name);
 		$this->session->set_userdata('user',$usuario);
 		$this->session->set_userdata('client',$cliente);
@@ -98,6 +100,7 @@ class Login extends CI_Controller {
 		$this->session->set_userdata('profile',$perfil);
 		$this->session->set_userdata('log','logged');
 		$this->session->set_flashdata('suc','Login Efetuado!');
+
 		redirect("dashboard?aviso=sucesso");
 	}
 

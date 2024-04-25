@@ -19,36 +19,41 @@
             </li>
           </ul>
         </div>
+        <?php if(isset($listagem)) : ?>
         <ul class="navbar-nav navbar-right">
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
               class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
               <span class="badge headerBadge1">
-                6 </span> </a>
+              <?= $quantidade_messagem['quantidade_messagem']?> </span> </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
               <div class="dropdown-header">
                 Messages
                 <div class="float-right">
-                  <a href="#">Mark All As Read</a>
+                  <a href="<?php base_url(); ?>/finar/messages/ciencia_mensagem/">Marcar Como Lidas</a>
                 </div>
-              </div>
+              </div>  
               <div class="dropdown-list-content dropdown-list-message">
+              <?php foreach($listagem as $listagem) : ?> 
                 <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">John
-                      Deo</span>
-                    <span class="time messege-text">Please check your mail !!</span>
-                    <span class="time">2 Min Ago</span>
+											text-white"><img alt="image" src="\finar\imagens\lagom-email.png" class="rounded-circle">
+                  </span> <span class="dropdown-item-desc"> <span class="message-user"><?= $listagem['nome']?></span>
+                    <span class="time messege-text"><?= $listagem['conteudo']?></span>
+                    <span class="time"><?= $listagem['tempo_passado']?> Ago</span>
                   </span>
+                  <?php endforeach;?>
                 </a>
               </div>
             </div>
           </li>
+          <?php else : ?>
+
+          <?php endif; ?>  
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="\finar\imagens\user.png"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="\finar\imagens\icone_u.png"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Olá,<?php echo $this->session->userdata('name'); ?>
-              <small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small></div>
+              <br><small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
               </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
@@ -122,6 +127,10 @@
 
             <li class="dropdown">
               <a href="<?= base_url() ?>empresa" class="nav-link"><i data-feather="hexagon"></i><span>Empresa</span></a>
+            </li>
+
+            <li class="dropdown">
+              <a href="<?= base_url() ?>mensagem" class="nav-link"><i data-feather="mail"></i><span>Mensagem</span></a>
             </li>
             
           </ul>

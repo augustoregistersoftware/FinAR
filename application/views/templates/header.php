@@ -6,10 +6,10 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Dashboard - FinAR</title>
+  <title>FinAR - Interprise</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?php echo base_url('public/assets/css/app.min.css');?>">
-  <link rel="shortcut icon" type="image/x-icon" href="/criativo/imagens/icone.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/finar/imagens/icone.png">
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo base_url('public/assets/css/style.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('public/assets/css/components.css');?>">
