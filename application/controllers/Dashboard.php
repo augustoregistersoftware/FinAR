@@ -31,8 +31,10 @@ class Dashboard extends CI_Controller {
 			redirect("login");
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar');
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/dashboard',$data);
+			$this->load->view('templates/footer');
 
 
 			

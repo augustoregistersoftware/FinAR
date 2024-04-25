@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+<!-- blank.html  21 Nov 2019 03:54:41 GMT -->
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title><?= $title ?></title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<style>
-		.bd-placeholder-img {
-			font-size: 1.125rem;
-			text-anchor: middle;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-
-		@media (min-width: 768px) {
-			.bd-placeholder-img-lg {
-				font-size: 3.5rem;
-			}
-		}
-	</style>
-
-	<link rel="stylesheet" href="https://getbootstrap.com/docs/4.4/examples/dashboard/dashboard.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/criativo/imagens/icone.png">
-	<script src="https://kit.fontawesome.com/2a33fe9a00.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Dashboard - FinAR</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="<?php echo base_url('public/assets/css/app.min.css');?>">
+  <link rel="shortcut icon" type="image/x-icon" href="/criativo/imagens/icone.png">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="<?php echo base_url('public/assets/css/style.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('public/assets/css/components.css');?>">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="<?php echo base_url('public/assets/css/custom.css');?>">
+  <link rel='shortcut icon' type='image/x-icon' href='<?php echo base_url('public/assets/img/favicon.ico');?>' />
 </head>
+
 <body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">

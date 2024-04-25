@@ -1,377 +1,624 @@
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1 class="h2">Dashboard</h1>
-    
-		<div class="btn-group mr-2">
-		
-		</div>
-
-        <div class="info">
-            <p>Olá, <b><?php echo $this->session->userdata('name'); ?></b></p>
-            <small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small>
-        </div>
-</div>
-
-    <div class="cardBox">
-
-    <!-- Card de Cobranças -->
-    <a href="<?= base_url() ?>cobranca" class="card-link">
-        <div class="card">
-		<?php foreach($total_cobranca as $total_cobranca) : ?>
-            <div class="numbers"><?= $total_cobranca['quantidade']?></div>
-		<?php endforeach;?>
-            <div class="cardName">Total de Cobranças</div>
-            <p>Esse mês</p>
-        </div>
-        <div class="iconBx">
-            <ion-icon name="eye-outline"></ion-icon>
-        </div>
-    </a>
-    
-    <!-- Card de Compras -->
-    <a href="<?= base_url() ?>solicitacao_compra" class="card-link">
-        <div class="card">
-		<?php foreach($total_compra as $total_compra) : ?>
-            <div class="numbers"><?= $total_compra['quantidade']?></div>
-		<?php endforeach;?>
-            <div class="cardName">Total de Vendas</div>
-            <p>Esse mês</p>
-        </div>
-        <div class="iconBx">
-            <ion-icon name="cart-outline"></ion-icon>
-        </div>
-    </a>
-
-
-    <!-- Card de Lucro -->
-    <a href="<?= base_url() ?>bancos" class="card-link">
-        <div class="card">
-		<?php foreach($total_receber as $total_receber) : ?>
-            <div class="numbers">R$ <?= number_format($total_receber['total_receber'],2,",",".")?></div>
-		<?php endforeach;?>
-            <div class="cardName">Lucro De Todos os Bancos</div>
-            <p>Esse mês</p>
-        </div>
-        <div class="iconBx">
-            <ion-icon name="cash-outline"></ion-icon>
-        </div>
-    </a>
-
-    <!-- Card de Despesa -->
-    <a href="<?= base_url() ?>bancos" class="card-link">
-        <div class="card">
-		<?php foreach($total_devendo as $total_devendo) : ?>
-            <div class="numbers">R$ <?= number_format($total_devendo['total_devendo'],2,",",".")?></div>
-		<?php endforeach;?>
-            <div class="cardName">Depesa De Todos os Bancos</div>
-            <p>Esse mês</p>
-        </div>
-        <div class="iconBx">
-            <ion-icon name="cash-outline"></ion-icon>
-        </div>
-    </a>
-</div>
-
-<h2>Métricas</h2>  
-<div class="dashboard">
-<div class="metrics-container">
-  <div class="metric">
-    <div class="icon icon-online">🛹</div>
-    <div class="metric-description">
-      <div>Pedidos Online</div>
-      <div class="percentage positive">+39%</div>
-      <div class="number">3849</div>
-      <div>últimas 24 horas</div>
-    </div>
-  </div>
-  <div class="metric">
-    <div class="icon icon-offline">&#x1F3E5;</div>
-    <div class="metric-description">
-      <div>Pedidos Offline</div>
-      <div class="percentage negative">-17%</div>
-      <div class="number">1100</div>
-      <div>últimas 24 horas</div>
-    </div>
-  </div>
-  <div class="metric">
-    <div class="icon icon-new">&#x1F465;</div>
-    <div class="metric-description">
-      <div>Novos Clientes</div>
-      <div class="percentage positive">+25%</div>
-      <div class="number">849</div>
-      <div>últimas 24 horas</div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="container">
-<div class="table-container">
-    <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Código De Barras</th>
-                    <th>Código Auxiliar</th>
-                    <th>Custo</th>
-                    <th>Preço De Venda</th>
-                    <th>Estoque Atual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($produtos as $produtos) : ?>   
-                <tr>
-                    <th><?= $produtos['id_produto']?></th>
-                    <td><?= $produtos['descricao']?></td>
-                    <td><?= $produtos['cod_barras']?></td>
-                    <td><?= $produtos['cod_aux']?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produtos['custo'], 2, ",", ".")?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produtos['preco_venda'],2,",",".")?></td>
-                    <td><?= number_format($produtos['estoque_atual'],2,",",".")?></td>
-                </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>    
-    </div>  
-
-  
-<div class="container">
-<div class="table-container2">
-    <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Código De Barras</th>
-                    <th>Código Auxiliar</th>
-                    <th>Custo</th>
-                    <th>Preço De Venda</th>
-                    <th>Estoque Atual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($produto as $produto) : ?>   
-                <tr>
-                    <th><?= $produto['id_produto']?></th>
-                    <td><?= $produto['descricao']?></td>
-                    <td><?= $produto['cod_barras']?></td>
-                    <td><?= $produto['cod_aux']?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produto['custo'], 2, ",", ".")?></td>
-                    <td style="color: #e81515;">R$ <?= number_format($produto['preco_venda'],2,",",".")?></td>
-                    <td><?= number_format($produto['estoque_atual'],2,",",".")?></td>
-                </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>    
-    </div> 
-</main>
-
-
-<script>
-
-  function boas_vindas(){
-    Swal.fire({
-  title: "Olá,<?php echo $this->session->userdata('name'); ?>",
-  text: "Seja muito bem-vindo(a)! Hoje, vamos nos aventurar juntos em uma jornada cheia de possibilidades. Estou ansioso(a) para explorar, aprender e criar momentos inesquecíveis ao seu lado. Vamos fazer deste dia algo extraordinário!",
-  imageUrl: "https://ouch-cdn2.icons8.com/JlfQgQozPSgBq00v8E7N2L96CLHslRQofr_gnO39aRY/rs:fit:608:456/extend:false/wm:1:re:0:0:0.8/wmid:ouch/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzMx/LzM1MDcyODA3LTky/NmYtNGM5Mi1hZjQw/LTgyNmI0MjQ5MWJi/OS5zdmc.png",
-  imageWidth: 400,
-  imageHeight: 200,
-  imageAlt: "Custom image"
-});
-}
-
-   // Função para limpar um parâmetro da URL
-   function limparParametroURL(nomeParametro) {
-        if (history.replaceState) {
-            // Obtém a URL atual sem os parâmetros de consulta
-            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
-
-            // Substitui a URL atual sem o parâmetro especificado
-            history.replaceState({}, document.title, novaURL);
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Verifica se o parâmetro 'aviso' está presente na URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const avisoParam = urlParams.get('aviso');
-
-        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
-        if (avisoParam === 'sucesso') {
-          boas_vindas();
-        }
-    });
-</script>
 
 
 
-<style>
-	/* ======================= Cards ====================== */
-
-.card-link {
-  text-decoration: none;
-  color: inherit;
-    /* Adicione quaisquer outros estilos necessários para manter a aparência do seu card */
-}
-.cardBox {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-}
-
-.cardBox .card {
-  position: relative;
-  background: var(--white);
-  padding: 30px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-}
-
-.cardBox .card .numbers {
-  position: relative;
-  font-weight: 500;
-  font-size: 2.5rem;
-  color: var(--blue);
-}
-
-.cardBox .card .cardName {
-  color: var(--black2);
-  font-size: 1.1rem;
-  margin-top: 5px;
-}
-
-.cardBox .card .iconBx {
-  font-size: 3.5rem;
-  color: var(--black2);
-}
-
-.cardBox .card:hover {
-  background: var(--blue);
-}
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx {
-  color: var(--white);
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-  }
-  .dashboard {
-    display: flex;
-    width: 100%; /* Usa o espaço total disponível */
-    margin: 0 auto; /* Centraliza o dashboard na tela */
-  }
-  .metrics-container {
-    text-align: center;
-    width: 350px; /* Largura dos cards de métricas */
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 10px;
-  }
-  .metric {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-  }
-  .metric:hover {
-    transform: translateY(-5px);
-  }
-  .icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-  }
-  .metric-description {
-    flex-grow: 1;
-    text-align: left;
-  }
-  .percentage {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  .number {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  .positive { color: #4CAF50; }
-  .negative { color: #F44336; }
-  .icon-online { background: #E8F5E9; color: #4CAF50; }
-  .icon-offline { background: #FFEBEE; color: #F44336; }
-  .icon-new { background: #E3F2FD; color: #2196F3; }
-  .main-content {
-    flex-grow: 1; /* Ocupa o espaço restante */
-    padding-left: 20px;
-  }
-
-  .container {
-    display: flex; /* Utiliza o Flexbox para o layout */
-  }
-  .left-column {
-    flex: 150%; /* A coluna da esquerda ocupa 50% da largura do container */
-  }
-  .right-column {
-    flex: 150%; /* A coluna da direita ocupa os 50% restantes da largura do container */
-  }
-  table {
-    width: 80%; /* A tabela ocupa toda a largura da coluna */
-  }
-
-  .card-header {
-    padding-bottom: 10px; /* Ou outro valor menor */
-}
-
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alinha os itens ao início do contêiner flex */
-}
-
-
-  .table-container {
-    margin-top: 10px; /* Diminua o valor conforme necessário */
-    position: absolute;
-    margin-left: auto; /* Empurra o elemento para a direita */
-    margin-right: 0; 
-    margin-left: 100px; 
-    background-color: white; /* Define o fundo para branco */
-    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
-    top: 380px; /* Ajuste o valor de top para mover para cima */
-}
-
-.table-container2 {
-    margin-top: 10px; /* Diminua o valor conforme necessário */
-    position: absolute;
-    margin-left: auto; /* Empurra o elemento para a direita */
-    margin-right: 0; 
-    margin-left: 100px; 
-    background-color: white; /* Define o fundo para branco */
-    border-radius: 20px; /* Isso adiciona bordas arredondadas com um raio de 8px */
-    top: 580px; /* Ajuste o valor de top para mover para cima */
-}
-
-</style>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="row ">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-15">New Booking</h5>
+                          <h2 class="mb-3 font-18">258</h2>
+                          <p class="mb-0"><span class="col-green">10%</span> Increase</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="assets/img/banner/1.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-15"> Customers</h5>
+                          <h2 class="mb-3 font-18">1,287</h2>
+                          <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="assets/img/banner/2.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-15">New Project</h5>
+                          <h2 class="mb-3 font-18">128</h2>
+                          <p class="mb-0"><span class="col-green">18%</span>
+                            Increase</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="assets/img/banner/3.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-15">Revenue</h5>
+                          <h2 class="mb-3 font-18">$48,697</h2>
+                          <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="assets/img/banner/4.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+              <div class="card ">
+                <div class="card-header">
+                  <h4>Revenue chart</h4>
+                  <div class="card-header-action">
+                    <div class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
+                      <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item has-icon"><i class="fas fa-eye"></i> View</a>
+                        <a href="#" class="dropdown-item has-icon"><i class="far fa-edit"></i> Edit</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon text-danger"><i class="far fa-trash-alt"></i>
+                          Delete</a>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">View All</a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <div id="chart1"></div>
+                      <div class="row mb-0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <div class="list-inline text-center">
+                            <div class="list-inline-item p-r-30"><i data-feather="arrow-up-circle"
+                                class="col-green"></i>
+                              <h5 class="m-b-0">$675</h5>
+                              <p class="text-muted font-14 m-b-0">Weekly Earnings</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <div class="list-inline text-center">
+                            <div class="list-inline-item p-r-30"><i data-feather="arrow-down-circle"
+                                class="col-orange"></i>
+                              <h5 class="m-b-0">$1,587</h5>
+                              <p class="text-muted font-14 m-b-0">Monthly Earnings</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <div class="list-inline text-center">
+                            <div class="list-inline-item p-r-30"><i data-feather="arrow-up-circle"
+                                class="col-green"></i>
+                              <h5 class="mb-0 m-b-0">$45,965</h5>
+                              <p class="text-muted font-14 m-b-0">Yearly Earnings</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="row mt-5">
+                        <div class="col-7 col-xl-7 mb-3">Total customers</div>
+                        <div class="col-5 col-xl-5 mb-3">
+                          <span class="text-big">8,257</span>
+                          <sup class="col-green">+09%</sup>
+                        </div>
+                        <div class="col-7 col-xl-7 mb-3">Total Income</div>
+                        <div class="col-5 col-xl-5 mb-3">
+                          <span class="text-big">$9,857</span>
+                          <sup class="text-danger">-18%</sup>
+                        </div>
+                        <div class="col-7 col-xl-7 mb-3">Project completed</div>
+                        <div class="col-5 col-xl-5 mb-3">
+                          <span class="text-big">28</span>
+                          <sup class="col-green">+16%</sup>
+                        </div>
+                        <div class="col-7 col-xl-7 mb-3">Total expense</div>
+                        <div class="col-5 col-xl-5 mb-3">
+                          <span class="text-big">$6,287</span>
+                          <sup class="col-green">+09%</sup>
+                        </div>
+                        <div class="col-7 col-xl-7 mb-3">New Customers</div>
+                        <div class="col-5 col-xl-5 mb-3">
+                          <span class="text-big">684</span>
+                          <sup class="col-green">+22%</sup>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Chart</h4>
+                </div>
+                <div class="card-body">
+                  <div id="chart4" class="chartsh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Chart</h4>
+                </div>
+                <div class="card-body">
+                  <div class="summary">
+                    <div class="summary-chart active" data-tab-group="summary-tab" id="summary-chart">
+                      <div id="chart3" class="chartsh"></div>
+                    </div>
+                    <div data-tab-group="summary-tab" id="summary-text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Chart</h4>
+                </div>
+                <div class="card-body">
+                  <div id="chart2" class="chartsh"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Assign Task Table</h4>
+                  <div class="card-header-form">
+                    <form>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                          <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <tr>
+                        <th class="text-center">
+                          <div class="custom-checkbox custom-checkbox-table custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                              class="custom-control-input" id="checkbox-all">
+                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </th>
+                        <th>Task Name</th>
+                        <th>Members</th>
+                        <th>Task Status</th>
+                        <th>Assigh Date</th>
+                        <th>Due Date</th>
+                        <th>Priority</th>
+                        <th>Action</th>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-1">
+                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Create a mobile app</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Wildan Ahdian"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Sarah Smith"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+4</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">50%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar bg-success" data-width="50%"></div>
+                          </div>
+                        </td>
+                        <td>2018-01-20</td>
+                        <td>2019-05-28</td>
+                        <td>
+                          <div class="badge badge-success">Low</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-2">
+                            <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Redesign homepage</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-1.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Wildan Ahdian"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+2</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">40%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar bg-danger" data-width="40%"></div>
+                          </div>
+                        </td>
+                        <td>2017-07-14</td>
+                        <td>2018-07-21</td>
+                        <td>
+                          <div class="badge badge-danger">High</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-3">
+                            <label for="checkbox-3" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Backup database</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-3.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Wildan Ahdian"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-4.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-5.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Sarah Smith"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+3</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">55%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar bg-purple" data-width="55%"></div>
+                          </div>
+                        </td>
+                        <td>2019-07-25</td>
+                        <td>2019-08-17</td>
+                        <td>
+                          <div class="badge badge-info">Average</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-4">
+                            <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Android App</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-7.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Sarah Smith"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+4</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">70%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar" data-width="70%"></div>
+                          </div>
+                        </td>
+                        <td>2018-04-15</td>
+                        <td>2019-07-19</td>
+                        <td>
+                          <div class="badge badge-success">Low</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-5">
+                            <label for="checkbox-5" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Logo Design</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Wildan Ahdian"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Sarah Smith"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+2</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">45%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar bg-cyan" data-width="45%"></div>
+                          </div>
+                        </td>
+                        <td>2017-02-24</td>
+                        <td>2018-09-06</td>
+                        <td>
+                          <div class="badge badge-danger">High</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                      <tr>
+                        <td class="p-0 text-center">
+                          <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                              id="checkbox-6">
+                            <label for="checkbox-6" class="custom-control-label">&nbsp;</label>
+                          </div>
+                        </td>
+                        <td>Ecommerce website</td>
+                        <td class="text-truncate">
+                          <ul class="list-unstyled order-list m-b-0 m-b-0">
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Wildan Ahdian"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="John Deo"></li>
+                            <li class="team-member team-member-sm"><img class="rounded-circle"
+                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                data-original-title="Sarah Smith"></li>
+                            <li class="avatar avatar-sm"><span class="badge badge-primary">+4</span></li>
+                          </ul>
+                        </td>
+                        <td class="align-middle">
+                          <div class="progress-text">30%</div>
+                          <div class="progress" data-height="6">
+                            <div class="progress-bar bg-orange" data-width="30%"></div>
+                          </div>
+                        </td>
+                        <td>2018-01-20</td>
+                        <td>2019-05-28</td>
+                        <td>
+                          <div class="badge badge-info">Average</div>
+                        </td>
+                        <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-12 col-xl-6">
+              <!-- Support tickets -->
+              <div class="card">
+                <div class="card-header">
+                  <h4>Support Ticket</h4>
+                  <form class="card-header-form">
+                    <input type="text" name="search" class="form-control" placeholder="Search">
+                  </form>
+                </div>
+                <div class="card-body">
+                  <div class="support-ticket media pb-1 mb-3">
+                    <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
+                    <div class="media-body ml-3">
+                      <div class="badge badge-pill badge-success mb-1 float-right">Feature</div>
+                      <span class="font-weight-bold">#89754</span>
+                      <a href="javascript:void(0)">Please add advance table</a>
+                      <p class="my-1">Hi, can you please add new table for advan...</p>
+                      <small class="text-muted">Created by <span class="font-weight-bold font-13">John
+                          Deo</span>
+                        &nbsp;&nbsp; - 1 day ago</small>
+                    </div>
+                  </div>
+                  <div class="support-ticket media pb-1 mb-3">
+                    <img src="assets/img/users/user-2.png" class="user-img mr-2" alt="">
+                    <div class="media-body ml-3">
+                      <div class="badge badge-pill badge-warning mb-1 float-right">Bug</div>
+                      <span class="font-weight-bold">#57854</span>
+                      <a href="javascript:void(0)">Select item not working</a>
+                      <p class="my-1">please check select item in advance form not work...</p>
+                      <small class="text-muted">Created by <span class="font-weight-bold font-13">Sarah
+                          Smith</span>
+                        &nbsp;&nbsp; - 2 day ago</small>
+                    </div>
+                  </div>
+                  <div class="support-ticket media pb-1 mb-3">
+                    <img src="assets/img/users/user-3.png" class="user-img mr-2" alt="">
+                    <div class="media-body ml-3">
+                      <div class="badge badge-pill badge-primary mb-1 float-right">Query</div>
+                      <span class="font-weight-bold">#85784</span>
+                      <a href="javascript:void(0)">Are you provide template in Angular?</a>
+                      <p class="my-1">can you provide template in latest angular 8.</p>
+                      <small class="text-muted">Created by <span class="font-weight-bold font-13">Ashton Cox</span>
+                        &nbsp;&nbsp; -2 day ago</small>
+                    </div>
+                  </div>
+                  <div class="support-ticket media pb-1 mb-3">
+                    <img src="assets/img/users/user-6.png" class="user-img mr-2" alt="">
+                    <div class="media-body ml-3">
+                      <div class="badge badge-pill badge-info mb-1 float-right">Enhancement</div>
+                      <span class="font-weight-bold">#25874</span>
+                      <a href="javascript:void(0)">About template page load speed</a>
+                      <p class="my-1">Hi, John, can you work on increase page speed of template...</p>
+                      <small class="text-muted">Created by <span class="font-weight-bold font-13">Hasan
+                          Basri</span>
+                        &nbsp;&nbsp; -3 day ago</small>
+                    </div>
+                  </div>
+                </div>
+                <a href="javascript:void(0)" class="card-footer card-link text-center small ">View
+                  All</a>
+              </div>
+              <!-- Support tickets -->
+            </div>
+            <div class="col-md-6 col-lg-12 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Projects Payments</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Client Name</th>
+                          <th>Date</th>
+                          <th>Payment Method</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>John Doe </td>
+                          <td>11-08-2018</td>
+                          <td>NEFT</td>
+                          <td>$258</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Cara Stevens
+                          </td>
+                          <td>15-07-2018</td>
+                          <td>PayPal</td>
+                          <td>$125</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>
+                            Airi Satou
+                          </td>
+                          <td>25-08-2018</td>
+                          <td>RTGS</td>
+                          <td>$287</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>
+                            Angelica Ramos
+                          </td>
+                          <td>01-05-2018</td>
+                          <td>CASH</td>
+                          <td>$170</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>
+                            Ashton Cox
+                          </td>
+                          <td>18-04-2018</td>
+                          <td>NEFT</td>
+                          <td>$970</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>
+                            John Deo
+                          </td>
+                          <td>22-11-2018</td>
+                          <td>PayPal</td>
+                          <td>$854</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>
+                            Hasan Basri
+                          </td>
+                          <td>07-09-2018</td>
+                          <td>Cash</td>
+                          <td>$128</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        

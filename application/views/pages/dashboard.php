@@ -6,10 +6,6 @@
 		
 		</div>
 
-    <div class="info">
-            <p>Olá, <b><?php echo $this->session->userdata('name'); ?></b></p>
-            <small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small>
-        </div>
 	</div>
   <div class="cardBox">
 
@@ -72,13 +68,20 @@
 </div>
 
 
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2">5 Ultimos Clientes Cadastrados</h2>
-	</div>
 
-	<div class="table-responsive">
-		<table class="table table-bordered table-hover">
-			<thead>
+  <div class="main-content">
+        <section class="section">
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>5 Ultimos Clientes Cadastrados</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-hover" id="tableExport2" style="width:100%;">
+                        <thead>
 				<tr>
 					<th>Nome</th>
 					<th>CPF</th>
@@ -107,17 +110,48 @@
             <th><?= $clientes['empresa']?></th>
           </tr>
         <?php endforeach;?>
-			</tbody>
-		</table>
-	</div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
 
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2">5 Ultimos Produtos Cadastrados</h2>
-	</div>
+  <script src="<?php echo base_url('public/assets/js/app.min.js');?>"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <script src="<?php echo base_url('public/assets/bundles/datatables/datatables.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/dataTables.buttons.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/buttons.flash.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/jszip.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/pdfmake.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/vfs_fonts.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/buttons.print.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/js/page/datatables.js');?>"></script>
+  <!-- Template JS File -->
+  <script src="<?php echo base_url('public/assets/js/scripts.js');?>"></script>
+  <!-- Custom JS File -->
+  <script src="<?php echo base_url('public/assets/js/custom.js');?>"></script>
 
-	<div class="table-responsive">
-		<table class="table table-bordered table-hover">
-			<thead>
+
+  
+
+  <div class="main-content">
+        <section class="section">
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>5 Ultimos Produtos Cadastrados</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                        <thead>
 				<tr>
 					<th>Codigo Auxiliar</th>
 					<th>Codigo De Barras</th>
@@ -140,8 +174,29 @@
             <th><?= $produtos['razao_social']?></th>
           </tr>
         <?php endforeach;?>
-			</tbody>
-		</table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+  <script src="<?php echo base_url('public/assets/js/app.min.js');?>"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <script src="<?php echo base_url('public/assets/bundles/datatables/datatables.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/dataTables.buttons.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/buttons.flash.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/jszip.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/pdfmake.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/vfs_fonts.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/bundles/datatables/export-tables/buttons.print.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/js/page/datatables.js');?>"></script>
+  <!-- Template JS File -->
+  <script src="<?php echo base_url('public/assets/js/scripts.js');?>"></script>
+  <!-- Custom JS File -->
+  <script src="<?php echo base_url('public/assets/js/custom.js');?>"></script>
   
 	</div>
 

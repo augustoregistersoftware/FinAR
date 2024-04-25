@@ -30,9 +30,11 @@ class Cadastro_login extends CI_Controller {
 			$this->load->view('pages/pagina_bloqueio',$data);
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('js/script_cadastro_login');
 			$this->load->view('pages/cadastro_login',$data);
+			$this->load->view('templates/footer');
 		}
 		
 	}
@@ -62,7 +64,8 @@ class Cadastro_login extends CI_Controller {
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav-top',$data);
 		$this->load->view('pages/cadastrar_login',$data);
-        $this->load->view('templates/footer',$data);
+        $this->load->view('templates/footer_old',$data);
+		$this->load->view('templates/footer');
 		$this->load->view('templates/js',$data);
 	}
 
@@ -74,11 +77,12 @@ class Cadastro_login extends CI_Controller {
 		$data["title"] = "Cadastrar Login - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('js/script_cadastrar_login');
 		$this->load->view('pages/cadastrar_login',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
+
 	}
 
 
