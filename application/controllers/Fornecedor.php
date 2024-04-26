@@ -31,8 +31,10 @@ class Fornecedor extends CI_Controller {
 			$this->load->view('pages/pagina_bloqueio',$data);
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/fornecedor',$data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -54,9 +56,12 @@ class Fornecedor extends CI_Controller {
 		$data["empresa_fornecedor"] =  $this->fornecedor_model->select_empresas();
 		$data["title"] = "Fornecedor - FinAR";
 
+
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/fornecedor',$data);
+		$this->load->view('templates/footer');
 	}
 
 
@@ -66,10 +71,10 @@ class Fornecedor extends CI_Controller {
 		$data["title"] = "Editar Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_fornecedor',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new()
@@ -78,10 +83,10 @@ class Fornecedor extends CI_Controller {
 		$data["empresa"] =  $this->fornecedor_model->select_empresas();
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_fornecedor',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function inserte()
@@ -110,10 +115,10 @@ class Fornecedor extends CI_Controller {
 		$data["title"] = "Documentos Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/documentos_fornecedor',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function new_documentos()
@@ -122,10 +127,10 @@ class Fornecedor extends CI_Controller {
 		$data["title"] = "Cadastro De Documentos Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_documento_fornecedor',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function inserte_documentos()

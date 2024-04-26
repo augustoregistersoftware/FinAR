@@ -30,8 +30,10 @@ class Localizacao extends CI_Controller {
 			$this->load->view('pages/pagina_bloqueio',$data);
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/localizacao',$data);
+			$this->load->view('templates/footer');
 		}
 		
 	}
@@ -42,10 +44,10 @@ class Localizacao extends CI_Controller {
 		$data["title"] = "Documentos Localização - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/documentos_localizacao',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new_documentos()
@@ -54,10 +56,10 @@ class Localizacao extends CI_Controller {
 		$data["title"] = "Cadastro Localização - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_documento_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
     }
     
     public function abir_documento($id)
@@ -85,25 +87,24 @@ class Localizacao extends CI_Controller {
 		$data["localizacao_editar"] =  $this->localizacao_model->select_editar($id);
 		$data['empresa'] = $this->localizacao_model->select_empresas();
 		$data["title"] = "Editar Localizacao - FinAR";
-
+		
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new()
 	{	
 		$data['empresa'] = $this->localizacao_model->select_empresas();
-
 		$data["title"] = "Cadastrar Localização - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function inserte_documentos()

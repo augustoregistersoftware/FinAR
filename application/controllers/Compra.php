@@ -39,6 +39,7 @@ class Compra extends CI_Controller {
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/navbar',$data);
 			$this->load->view('templates/sidebarsettings');
+			$this->load->view('js/script_compra');
 			$this->load->view('pages/compra',$data);
 			$this->load->view('templates/footer');
 		}
@@ -58,10 +59,10 @@ class Compra extends CI_Controller {
 		$data["title"] = "Editar Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_fornecedor',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new()
@@ -70,10 +71,10 @@ class Compra extends CI_Controller {
 		$data["empresa"] =  $this->fornecedor_model->select_empresas();
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_fornecedor',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function inserte_compra_documentacao()
@@ -116,10 +117,10 @@ class Compra extends CI_Controller {
 	public function montagem_produtos($produto_info)
 	{
 		$this->load->view('templates/header',$produto_info);
-		$this->load->view('templates/nav-top',$produto_info);
+		$this->load->view('templates/navbar',$produto_info);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_de_compra_produto',$produto_info);
-		$this->load->view('templates/footer',$produto_info);
-		$this->load->view('templates/js',$produto_info);
+		$this->load->view('templates/footer');
 	}
 
 	public function finaliza()
@@ -133,10 +134,10 @@ class Compra extends CI_Controller {
 		$produtos_compra['forma_pagto'] = $this->compra_model->select_formas_pagto();
 
 		$this->load->view('templates/header',$produtos_compra);
-		$this->load->view('templates/nav-top',$produtos_compra);
+		$this->load->view('templates/navbar',$produtos_compra);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/finalizar_compra',$produtos_compra);
-		$this->load->view('templates/footer',$produtos_compra);
-		$this->load->view('templates/js',$produtos_compra);
+		$this->load->view('templates/footer');
 	}
 
 	public function encerrar()
@@ -187,10 +188,10 @@ class Compra extends CI_Controller {
 		$data["title"] = "Documentos Fornecedor - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/documentos_fornecedor',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function new_compra()
@@ -199,10 +200,10 @@ class Compra extends CI_Controller {
 		$data["title"] = "Cadastro De Compra - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_de_compra_documentacao',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 
@@ -214,10 +215,10 @@ class Compra extends CI_Controller {
 		$data["id_pedido"] = $id;
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/fechar_compra',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function abir_documento($id)

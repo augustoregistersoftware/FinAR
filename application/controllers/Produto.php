@@ -56,9 +56,11 @@ class Produto extends CI_Controller {
 		$data["title"] = "Produtos - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('js/script_produto');
 		$this->load->view('pages/produtos',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new_produto()
@@ -69,10 +71,11 @@ class Produto extends CI_Controller {
 		$data["title"] = "Cadastro De Produtos - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_produto',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
+
 	}
 
 	public function new_foto()
@@ -81,10 +84,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Cadastro De Fotos Produtos - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_foto_produto',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function fotos_produto($id)
@@ -93,10 +96,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Cadastro De Fotos De Produtos - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/fotos_produto',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 
@@ -106,10 +109,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Historico De Produtos - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/historico_produto',$data);
-		$this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 
@@ -162,10 +165,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Editar Produto - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_produto',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function update($id)
@@ -189,10 +192,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Editar Localização Produto - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/atualizacao_produto_localizacao',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function form_update_fornecedor($id)
@@ -202,10 +205,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Editar Fornecedor Produto - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/atualizacao_produto_fornecedor',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function form_update_empresa($id)
@@ -215,10 +218,10 @@ class Produto extends CI_Controller {
 		$data["title"] = "Editar Empresa Produto - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/atualizacao_produto_empresa',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function update_localizacao($id)

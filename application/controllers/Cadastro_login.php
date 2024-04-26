@@ -64,11 +64,11 @@ class Cadastro_login extends CI_Controller {
 		$data["title"] = "Editar Login - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
+		$this->load->view('js/script_cadastrar_login');
 		$this->load->view('pages/cadastrar_login',$data);
-        $this->load->view('templates/footer_old',$data);
 		$this->load->view('templates/footer');
-		$this->load->view('templates/js',$data);
 	}
 
     public function new_login()

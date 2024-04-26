@@ -32,8 +32,10 @@ class Empresa extends CI_Controller {
 			$this->load->view('templates/footer');
 		}else{
 			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav-top',$data);
+			$this->load->view('templates/navbar',$data);
+			$this->load->view('templates/sidebarsettings');
 			$this->load->view('pages/empresa',$data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -43,10 +45,10 @@ class Empresa extends CI_Controller {
 		$data["title"] = "Editar Empresa - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_empresa',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function new()
@@ -54,10 +56,10 @@ class Empresa extends CI_Controller {
 		$data["title"] = "Cadastrar Empresa - FinAR";
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav-top',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
 		$this->load->view('pages/cadastro_empresa',$data);
-        $this->load->view('templates/footer',$data);
-		$this->load->view('templates/js',$data);
+		$this->load->view('templates/footer');
 	}
 
     public function inserte()

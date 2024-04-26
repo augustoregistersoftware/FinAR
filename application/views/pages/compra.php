@@ -1,18 +1,21 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('application/css/styles_produto.css') ?>">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Cadastros de Compras</h1>
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>compra/new_compra" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Compra</a>
-            <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
+            
         </div>
     </div>
 
     <div class="table-responsive">
         <table class="row-border" id="compras">
+        <a href="<?= base_url() ?>compra/new_compra" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Compra</a>
+        <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
             <thead>
                 <tr>
                     <th>Situação</th>
@@ -72,15 +75,15 @@
                     <th><?= strtoupper($compra['nome_fornecedor'])?></th>
                     <td> 
                         <?php if($compra['status'] == 'F') : ?>
-                            <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                            <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
                             <a title="Fechar Solicitação" href="javascript:goFecha(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>    
                             <a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
 						<?php elseif($compra['status'] == 'C') : ?>
-                            <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                            <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a> 	
                         <?php else :?>
-                            <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                            <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
                             <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>
 							<a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
                         <?php endif ; ?>
@@ -139,75 +142,9 @@
 
 
 <script>
-function goFecha(id) {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-        },
-        buttonsStyling: false
-        });
-        swalWithBootstrapButtons.fire({
-        title: "Deseja Realmente Fechar Esse Pedido?",
-        text: "Confira Tudo antes de fechar, essa ação tera grande impacto!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sim, Fechar!",
-        cancelButtonText: "Não, cancelar!",
-        reverseButtons: true
-        }).then((result) => {
-        if (result.isConfirmed) {
-            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
-            var myUrl = baseUrl + 'compra/fechar/' + id;
-            window.location.href = myUrl;
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            return false;
-        }
-        });
-
-
-}
-
-function goCancela(id) {
-
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-        },
-        buttonsStyling: false
-        });
-        swalWithBootstrapButtons.fire({
-        title: "Deseja Realmente Cancelar Esse Pedido?",
-        text: "Confira Tudo antes de cancelar, essa ação tera grande impacto",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sim, Fechar!",
-        cancelButtonText: "Não, cancelar!",
-        reverseButtons: true
-        }).then((result) => {
-        if (result.isConfirmed) {
-            var baseUrl = '<?php echo base_url(); ?>'; // Certifique-se de que base_url() está definido corretamente em seu código PHP
-            var myUrl = baseUrl + 'compra/cancela/' + id;
-            window.location.href = myUrl;
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            return false;
-        }
-        });
-}
-
-function goDocumentos(id) {
-    var baseUrl = '<?php echo base_url(); ?>'; 
-    var myUrl = baseUrl + 'compra/documentos/' + id;
-    window.location.href = myUrl;
-}
 
 $(document).ready(function(){
-    $("body").on("click", ".btn.btn-primary.btn-sm.btn-primary", function(e){
+    $("body").on("click", ".btn.btn-info.btn-sm.btn-info", function(e){
         e.preventDefault();
         
         var idDoPedido = $(this).attr("id");
@@ -236,41 +173,6 @@ $(document).ready(function(){
         });
     });
 });
-
-</script>
-
-<script>
-  function controleDialog(){
-    Swal.fire({
-        title: "Ebaa!!",
-        text: "Seu Pedido esta normal =)",
-        icon: "success"
-    });
-	}
-
-	function controleDialog2(){
-        Swal.fire({
-        title: "Oops...",
-        text: "Seu Pedido esta atrasado =(",
-        icon: "warning"
-    });
-	}
-
-	function controleDialog3(){
-        Swal.fire({
-        title: "Parabéns",
-        text: "Seu Pedido esta finalizado =)",
-        icon: "success"
-    });
-	}
-
-	function controleDialog4(){
-        Swal.fire({
-        title: "Cancelado",
-        text: "Seu Pedido esta cancelado !!",
-        icon: "error"
-    });
-	}
 
     const flash = document.getElementById('flash');
     flash.addEventListener('click', () => {
