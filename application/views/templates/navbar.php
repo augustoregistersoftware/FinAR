@@ -55,11 +55,11 @@
               <div class="dropdown-title">Olá,<?php echo $this->session->userdata('name'); ?>
               <br><small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
-              </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
-                Activities
+										fa-user"></i> Perfil
+              </a> <a href="<?= base_url() ?>mensagem"" class="dropdown-item has-icon"> <i class="fas fa-envelope"></i>
+                Mensagem
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-                Settings
+                Configuração
               </a>
               <div class="dropdown-divider"></div>
               <a href="<?= base_url() ?>login" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
@@ -127,11 +127,7 @@
 
             <li class="dropdown">
               <a href="<?= base_url() ?>empresa" class="nav-link"><i data-feather="hexagon"></i><span>Empresa</span></a>
-            </li>
-
-            <li class="dropdown">
-              <a href="<?= base_url() ?>mensagem" class="nav-link"><i data-feather="mail"></i><span>Mensagem</span></a>
-            </li>
+          </li>
             
           </ul>
         </aside>
