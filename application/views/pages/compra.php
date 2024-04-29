@@ -1,11 +1,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('application/css/styles_produto.css') ?>">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
         <h1 class="h2">Cadastros de Compras</h1>
         <div class="btn-group mr-2">
             
@@ -77,15 +73,15 @@
                         <?php if($compra['status'] == 'F') : ?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
                             <a title="Fechar Solicitação" href="javascript:goFecha(<?= $compra['id_solicitacao']?>)" class="btn btn-success btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
-                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>    
-                            <a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
+                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-sm btn-primary"><i class="fa-solid fa-file"></i></a>    
+                            <a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn  btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
 						<?php elseif($compra['status'] == 'C') : ?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
-                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a> 	
+                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-sm btn-primary"><i class="fa-solid fa-file"></i></a> 	
                         <?php else :?>
                             <a title="Produtos Vinculados" href="#" class="btn btn-info btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="<?php echo $compra['id_solicitacao']; ?>"><i class="fa-solid fa-box"></i></a>
-                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-file"></i></a>
-							<a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn btn-info btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
+                            <a title="Documentos Solicitação" href="javascript:goDocumentos(<?= $compra['id_solicitacao']?>)" class="btn btn-sm btn-primary"><i class="fa-solid fa-file"></i></a>
+							<a title="Cancelar Solicitação" href="javascript:goCancela(<?= $compra['id_solicitacao']?>)" class="btn  btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>    
                         <?php endif ; ?>
                 </tr>
                 <?php endforeach;?>

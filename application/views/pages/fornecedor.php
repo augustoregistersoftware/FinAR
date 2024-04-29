@@ -10,8 +10,7 @@
         <h1 class="h2">Cadastros de Fornecedor</h1>
         
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>fornecedor/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Fornecedor</a>
-            <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
+            
         </div>
     </div>
 
@@ -25,6 +24,8 @@
     </form>
 
     <div class="table-responsive">
+        <a href="<?= base_url() ?>fornecedor/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Fornecedor</a>
+        <a onclick="controleDialog()" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-file-excel"></i> Excel</a>
         <table class="row-border" id="produtos">
             <thead>
                 <tr>
@@ -70,14 +71,14 @@
                     <?php if($fornecedor['status'] == 'T') : ?>
                         <a title="Inativar Fornecedor" href="javascript:goInativa(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-danger"><i class="fa-solid fa-ban"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
-                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-box"></i></a>
                         <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
                         <!-- <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a> -->
                         <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info fornecedor-link" data-toggle="modal" data-target="#modal2" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-shopping-cart"></i></a>
                     <?php else :?>
                         <a title="Ativar Fornecedor" href="javascript:goAtiva(<?= $fornecedor['id_fornecedor']?>)" class="btn-sm btn-success"><i class="fa-solid fa-check"></i></a>
                         <a title="Editar Fornecedor" href="javascript:goEdit(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-warning btn-sm btn-info"><i class="fa-solid fa-pencil"></i></a>
-                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-bottle-water"></i></a>
+                        <a title="Produtos Vinculados" href="#" class="btn btn-primary btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-box"></i></a>
                         <a title="Documento Fornecedor" href="javascript:goDocumentos(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-dark btn-sm btn-dark"><i class="fa-solid fa-folder-open"></i></a>
                         <!-- <a title="Pedido de Compra" href="javascript:goPedido(<?= $fornecedor['id_fornecedor']?>)" class="btn btn-info btn-sm btn-info"><i class="fa-solid fa-shopping-cart"></i></a> -->
                         <a title="Pedido De Compra" href="#" class="btn btn-info btn-sm btn-info fornecedor-link" data-toggle="modal" data-target="#modal2" id="<?php echo $fornecedor['id_fornecedor']; ?>"><i class="fa-solid fa-shopping-cart"></i></a>

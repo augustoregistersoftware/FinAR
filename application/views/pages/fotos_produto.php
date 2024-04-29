@@ -1,13 +1,15 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Cadastros de Fotos Do Produto</h1>
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>produto/new_foto" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Foto</a>
+            
         </div>
     </div>
 
     <div class="table-responsive">
+    <a href="<?= base_url() ?>produto/new_foto" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Foto</a>
         <table class="row-border" id="documentos">
             <thead>
                 <tr>

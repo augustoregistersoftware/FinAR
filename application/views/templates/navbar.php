@@ -10,10 +10,6 @@
             <li>
               <form class="form-inline mr-auto">
                 <div class="search-element">
-                  <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
-                  <button class="btn" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
                 </div>
               </form>
             </li>
@@ -72,7 +68,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="\finar\imagens\icone.png" class="header-logo" /> <span
+            <a href="#"> <img alt="image" src="\finar\imagens\icone.png" class="header-logo" /> <span
                 class="logo-name">FinAR</span>
             </a>
           </div>

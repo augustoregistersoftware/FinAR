@@ -3,12 +3,13 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Cadastros de Documentos</h1>
         <div class="btn-group mr-2">
-            <a href="<?= base_url() ?>fornecedor/new_documentos" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Documento</a>
+            
         </div>
     </div>
 
     <div class="table-responsive">
         <table class="row-border" id="documentos">
+        <a href="<?= base_url() ?>fornecedor/new_documentos" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-square"></i> Documento</a>
             <thead>
                 <tr>
                     <th>ID</th>
