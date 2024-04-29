@@ -1,4 +1,5 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	  <?php if(isset($login_editar)) : ?>
 					
@@ -87,8 +88,8 @@
 						<?php if(isset($login_editar)) : ?>
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
-							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Perfil</a>
-							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Empresa</a>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Perfil</a>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Empresa</a>
 						<?php else : ?>
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>

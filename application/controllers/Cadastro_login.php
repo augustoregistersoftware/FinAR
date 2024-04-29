@@ -111,11 +111,13 @@ class Cadastro_login extends CI_Controller {
 
     public function update($id)
 	{
-        $localizacao_info['nome'] = $_POST['nome_loc'];
-		$localizacao_info['id_empresa'] = $_POST['empresa'];
-		$this->localizacao_model->update_localizacao($id,$localizacao_info);
+		$senha_para_crip = 'bNzLsJB3/H$dasrg654fg';
+        $cadastro_login_info['nome'] = $this->input->post('nome');
+		$cadastro_login_info['email'] = $this->input->post('email');
+		$cadastro_login_info['senha'] = openssl_encrypt($this->input->post('senha'), "AES-128-ECB", $senha_para_crip);
+		$this->cadastro_login_model->update_login($id,$cadastro_login_info);
 
-		redirect("localizacao");
+		redirect("cadastro_login?aviso=updt");
 	}
 
 }
