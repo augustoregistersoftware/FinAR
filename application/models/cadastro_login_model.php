@@ -59,6 +59,12 @@ class Cadastro_login_model extends CI_Model {
         $this->db->insert("login", $login_info);
     }
 
+    public function update_login($id,$cadastro_login_info)
+    {
+        $this->db->where("id_login",$id);
+        $this->db->update("login",$cadastro_login_info);
+    }
+
     public function deleta($id)
     {
         $this->db->where('id_login', $id);

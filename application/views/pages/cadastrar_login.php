@@ -17,7 +17,7 @@
 			<div class="col-md-12">
 			<?php if(isset($login_editar)) : ?>
 					
-					<form action="<?= base_url() ?>cadastro_login/editar/<?= $login_editar['id_login'] ?>" method="post">
+					<form action="<?= base_url() ?>cadastro_login/update/<?= $login_editar['id_login'] ?>" method="post">
 				<?php else : ?>
 					<form action="<?= base_url() ?>cadastro_login/inserte" method="post" enctype="multipart/form-data">
 				<?php endif; ?>
