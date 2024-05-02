@@ -52,7 +52,7 @@
               <br><small class="text-muted"><?php echo $this->session->userdata('profile'); ?></small></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Perfil
-              </a> <a href="<?= base_url() ?>mensagem"" class="dropdown-item has-icon"> <i class="fas fa-envelope"></i>
+              </a> <a href="<?= base_url() ?>messages/load_page"" class="dropdown-item has-icon"> <i class="fas fa-envelope"></i>
                 Mensagem
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                 Configuração

@@ -54,6 +54,16 @@ class Cadastro_login_model extends CI_Model {
         FROM empresa")->result_array();
     }
 
+    public function select_form_edit_empresa($id)
+    {
+        return $this->db->query("SELECT
+        login.id_login,
+        empresa.nome_fantasia
+        FROM login
+        INNER JOIN empresa ON empresa.id_empresa = login.id_empresa
+        WHERE login.id_login = ".$this->db->escape($id). "")->row_array();
+    }
+
     public function inserte_login($login_info)
     {
         $this->db->insert("login", $login_info);

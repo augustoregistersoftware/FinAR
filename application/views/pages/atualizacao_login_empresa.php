@@ -8,11 +8,11 @@
       </div>
 
 			<div class="col-md-12">
-					<form action="<?= base_url() ?>produto/update_empresa/<?= $produto_empresa_editar['id_produto'] ?>" method="post">
+					<form action="<?= base_url() ?>produto/update_empresa/<?= $login_empresa_editar['id_login'] ?>" method="post">
                 <div class="col-md-6">
 						<div class="form-group">
 							<label for="empresa_atual">Empresa Atual</label>
-							<input type="text" class="form-control" name="empresa_atual" id="empresa_atual" placeholder="Empresa" value="<?= isset($produto_empresa_editar) ? $produto_empresa_editar["nome_empresa"] : "" ?>" disabled>
+							<input type="text" class="form-control" name="empresa_atual" id="empresa_atual" placeholder="Empresa" value="<?= isset($login_empresa_editar) ? $login_empresa_editar["nome_fantasia"] : "" ?>" disabled>
 						</div>
 				</div>
 
@@ -30,7 +30,7 @@
 					<div class="col-md-6">
 						<div class="form-group">	
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
-							<a href="<?= base_url() ?>produto" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
+							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
 						</div>			
 					</div>
 				</form>

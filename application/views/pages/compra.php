@@ -198,7 +198,11 @@ $(document).ready(function(){
 
     function aviso() {
         var atrasado = <?php echo json_encode($atrasado); ?>;
-        swal("Aviso!!", "Você tem" + atrasado.atrasada + "pedidos atrasados por favor verifique com seu fornecedor!", "warning");
+        Swal.fire({
+        title: "Aviso!!",
+        text: "Você tem" + atrasado.atrasada +  "pedidos atrasados por favor verifique com seu fornecedor!",
+        icon: "warning"
+        });
     }
 ;
 </script>

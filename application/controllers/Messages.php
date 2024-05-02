@@ -26,4 +26,13 @@ class Messages extends CI_Controller {
 
         $this->message_model->ciencia_mensagem($id);
     }
+
+    public function load_page()
+    {
+        $this->load->view('templates/header');
+		$this->load->view('templates/navbar');
+		$this->load->view('templates/sidebarsettings');
+		$this->load->view('pages/messagem');
+		$this->load->view('templates/footer');
+    }
 }

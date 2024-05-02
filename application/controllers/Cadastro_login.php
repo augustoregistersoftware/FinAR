@@ -8,6 +8,7 @@ class Cadastro_login extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model("cadastro_login_model");
+		$this->load->model("produtos_model");
     }
 
 	public function index()
@@ -118,6 +119,18 @@ class Cadastro_login extends CI_Controller {
 		$this->cadastro_login_model->update_login($id,$cadastro_login_info);
 
 		redirect("cadastro_login?aviso=updt");
+	}
+
+	public function form_update_empresa($id)
+	{
+		$data["login_empresa_editar"] =  $this->cadastro_login_model->select_form_edit_empresa($id);
+		$data["empresa"] =  $this->produtos_model->select_empresas();
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
+		$this->load->view('pages/atualizacao_login_empresa',$data);
+		$this->load->view('templates/footer');
 	}
 
 }

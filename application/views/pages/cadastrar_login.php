@@ -89,7 +89,7 @@
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Perfil</a>
-							<a href="<?= base_url() ?>cadastro_login" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Empresa</a>
+							<a href="<?= base_url() ?>cadastro_login/form_update_empresa/<?= $login_editar['id_login'] ?>" class="btn btn-warning btn-xs"><i class="fas fa-pencil"></i> Empresa</a>
 						<?php else : ?>
 							<button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i> Save</button>
 							<a href="<?= base_url() ?>cadastro_login" class="btn btn-danger btn-xs"><i class="fas fa-times"></i> Cancel</a>
