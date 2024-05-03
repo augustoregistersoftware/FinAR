@@ -1,6 +1,6 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h1 class="h2">Alterar Empresa Login</h1>
+			<h1 class="h2">Alterar Perfil Login</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
           </div>
@@ -8,17 +8,17 @@
       </div>
 
 			<div class="col-md-12">
-					<form action="<?= base_url() ?>cadastro_login/update_empresa/<?= $login_empresa_editar['id_login'] ?>" method="post">
+					<form action="<?= base_url() ?>cadastro_login/update_perfil/<?= $login_empresa_editar['id_login'] ?>" method="post">
                 <div class="col-md-6">
 						<div class="form-group">
-							<label for="empresa_atual">Empresa Atual</label>
+							<label for="empresa_atual">Perfil Atual</label>
 							<input type="text" class="form-control" name="empresa_atual" id="empresa_atual" placeholder="Empresa" value="<?= isset($login_empresa_editar) ? $login_empresa_editar["nome_fantasia"] : "" ?>" disabled>
 						</div>
 				</div>
 
 					<div class="col-md-6">
 							<div class="form-group">
-							<label for="empresa">Empresas</label>
+							<label for="empresa">Perfis</label>
 								<select name="empresa" id="empresa" class="form-control pesquisa__select col-12 selectCustom">
 								<?php foreach($empresa as $empresa) : ?>
 								<option value="<?= $empresa["id_empresa"] ?>"><?php echo $empresa["razao_social"]; ?></option>

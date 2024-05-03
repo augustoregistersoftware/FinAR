@@ -64,6 +64,17 @@ class Cadastro_login_model extends CI_Model {
         WHERE login.id_login = ".$this->db->escape($id). "")->row_array();
     }
 
+    public function select_form_edit_perfil($id)
+    {
+        return $this->db->query("SELECT
+        permissoes_login.nome_permissao,
+        permissoes_login.id_permissao,
+        login.id_login
+        FROM permissoes_login
+        INNER JOIN login on login.id_perfil = permissoes_login.id_permissao
+        WHERE login.id_login = ".$this->db->escape($id). "")->row_array();
+    }
+
     public function inserte_login($login_info)
     {
         $this->db->insert("login", $login_info);
@@ -75,6 +86,11 @@ class Cadastro_login_model extends CI_Model {
         $this->db->update("login",$cadastro_login_info);
     }
 
+    public function update_empresa($id,$cadastro_login_info)
+    {
+        $this->db->where("id_login",$id);
+        $this->db->update("login",$cadastro_login_info);
+    }
     public function deleta($id)
     {
         $this->db->where('id_login', $id);

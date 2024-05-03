@@ -163,6 +163,17 @@ function avisoDelete() {
         limparParametroURL('aviso');
     }  
 
+    function avisoUpdateEmpresa() {
+        Swal.fire({
+            title: "Parabens",
+            text: "Empresa Alterada",
+            icon: "success"
+        });
+        
+        // Limpa o parâmetro 'aviso' da URL
+        limparParametroURL('aviso');
+    }  
+
 	    // Função para limpar um parâmetro da URL
 		function limparParametroURL(nomeParametro) {
         if (history.replaceState) {
@@ -224,6 +235,27 @@ function avisoDelete() {
         // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
         if (avisoParam === 'updt') {
             avisoUpdate();
+        }
+    });
+
+    function limparParametroURL(nomeParametro) {
+        if (history.replaceState) {
+            // Obtém a URL atual sem os parâmetros de consulta
+            const novaURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+            // Substitui a URL atual sem o parâmetro especificado
+            history.replaceState({}, document.title, novaURL);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o parâmetro 'aviso' está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const avisoParam = urlParams.get('aviso');
+
+        // Se o parâmetro 'aviso' for 'sucesso', exibe a modal
+        if (avisoParam === 'updt_empresa') {
+            avisoUpdateEmpresa();
         }
     });
 </script>

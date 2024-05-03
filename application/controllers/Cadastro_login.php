@@ -133,4 +133,24 @@ class Cadastro_login extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function form_update_perfil($id)
+	{
+		$data["login_empresa_editar"] =  $this->cadastro_login_model->select_form_edit_perfil($id);
+		$data["empresa"] =  $this->produtos_model->select_empresas();
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/navbar',$data);
+		$this->load->view('templates/sidebarsettings');
+		$this->load->view('pages/atualizacao_login_empresa',$data);
+		$this->load->view('templates/footer');
+	}
+
+	public function update_empresa($id)
+	{
+		$cadastro_login_info['id_empresa'] = $this->input->post('empresa');
+		$this->cadastro_login_model->update_empresa($id,$cadastro_login_info);
+
+		redirect("cadastro_login?aviso=updt_empresa");
+	}
+
 }
