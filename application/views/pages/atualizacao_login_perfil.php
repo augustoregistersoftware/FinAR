@@ -8,11 +8,11 @@
       </div>
 
 			<div class="col-md-12">
-					<form action="<?= base_url() ?>cadastro_login/update_perfil/<?= $login_empresa_editar['id_login'] ?>" method="post">
+					<form action="<?= base_url() ?>cadastro_login/update_perfil/<?= $login_perfil_editar['id_login'] ?>" method="post">
                 <div class="col-md-6">
 						<div class="form-group">
 							<label for="empresa_atual">Perfil Atual</label>
-							<input type="text" class="form-control" name="empresa_atual" id="empresa_atual" placeholder="Empresa" value="<?= isset($login_empresa_editar) ? $login_empresa_editar["nome_fantasia"] : "" ?>" disabled>
+							<input type="text" class="form-control" name="empresa_atual" id="empresa_atual" placeholder="Empresa" value="<?= isset($login_perfil_editar) ? $login_perfil_editar["nome_permissao"] : "" ?>" disabled>
 						</div>
 				</div>
 
@@ -20,8 +20,8 @@
 							<div class="form-group">
 							<label for="empresa">Perfis</label>
 								<select name="empresa" id="empresa" class="form-control pesquisa__select col-12 selectCustom">
-								<?php foreach($empresa as $empresa) : ?>
-								<option value="<?= $empresa["id_empresa"] ?>"><?php echo $empresa["razao_social"]; ?></option>
+								<?php foreach($perfil as $perfil) : ?>
+								<option value="<?= $perfil["id_permissao"] ?>"><?php echo $perfil["nome_permissao"]; ?></option>
 								<?php endforeach;?>
 								</select>
 							</div>

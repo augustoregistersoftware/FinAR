@@ -47,6 +47,13 @@ class Cadastro_login_model extends CI_Model {
         FROM permissoes_login")->result_array();
     }
 
+    public function select_perfil_cadastro_row()
+    {
+        return $this->db->query("SELECT
+        * 
+        FROM permissoes_login")->result_array();
+    }
+
     public function select_empresa_cadastro()
     {
         return $this->db->query("SELECT
@@ -64,11 +71,13 @@ class Cadastro_login_model extends CI_Model {
         WHERE login.id_login = ".$this->db->escape($id). "")->row_array();
     }
 
+
     public function select_form_edit_perfil($id)
     {
         return $this->db->query("SELECT
         permissoes_login.nome_permissao,
         permissoes_login.id_permissao,
+        permissoes_login.nome_permissao,
         login.id_login
         FROM permissoes_login
         INNER JOIN login on login.id_perfil = permissoes_login.id_permissao
