@@ -23,8 +23,8 @@
 							<div class="form-group">
 							<label for="localizacao">Colaborador</label>
 								<select name="localizacao" id="localizacao" class="form-control pesquisa__select col-12 selectCustom">
-								<?php foreach($localizacao as $localizacao) : ?>
-								<option value="<?= $localizacao["id_localizacao"] ?>"><?php echo $localizacao["nome"]; ?></option>
+								<?php foreach($login as $login) : ?>
+								<option value="<?= $login["id_login"] ?>"><?php echo $login["nome"]; ?></option>
 								<?php endforeach;?>
 								</select>
 							</div>
@@ -65,7 +65,7 @@
 	function ajuda() {
         Swal.fire({
         title: "Help",
-        text:  "pedidos atrasados por favor verifique com seu fornecedor!",
+        text:  "Aqui você podera enviar lembretes aos seus colaboradores para que não esqueçam!",
         icon: "info"
         });
     }

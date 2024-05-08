@@ -8,6 +8,7 @@ class Messages extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model("message_model");
+		$this->load->model("cadastro_login_model");
     }
 
 	public function index()
@@ -29,10 +30,12 @@ class Messages extends CI_Controller {
 
     public function load_page()
     {
+        $data["login"] =  $this->cadastro_login_model->index();
+
         $this->load->view('templates/header');
 		$this->load->view('templates/navbar');
 		$this->load->view('templates/sidebarsettings');
-		$this->load->view('pages/messagem');
+		$this->load->view('pages/messagem',$data);
 		$this->load->view('templates/footer');
     }
 }
