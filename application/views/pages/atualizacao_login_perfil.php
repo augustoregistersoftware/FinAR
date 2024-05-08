@@ -18,8 +18,8 @@
 
 					<div class="col-md-6">
 							<div class="form-group">
-							<label for="empresa">Perfis</label>
-								<select name="empresa" id="empresa" class="form-control pesquisa__select col-12 selectCustom">
+							<label for="perfil">Perfis</label>
+								<select name="perfil" id="perfil" class="form-control pesquisa__select col-12 selectCustom">
 								<?php foreach($perfil as $perfil) : ?>
 								<option value="<?= $perfil["id_permissao"] ?>"><?php echo $perfil["nome_permissao"]; ?></option>
 								<?php endforeach;?>
